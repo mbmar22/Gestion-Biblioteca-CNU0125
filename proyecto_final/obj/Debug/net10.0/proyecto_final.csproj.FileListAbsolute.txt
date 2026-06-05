@@ -12,3 +12,4 @@ C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\r
 C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.pdb
 C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.genruntimeconfig.cache
 C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\ref\proyecto_final.dll
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.sourcelink.json
