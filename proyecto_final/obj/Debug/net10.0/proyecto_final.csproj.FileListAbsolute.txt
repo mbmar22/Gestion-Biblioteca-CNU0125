@@ -1,0 +1,15 @@
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\bin\Debug\net10.0\proyecto_final.exe
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\bin\Debug\net10.0\proyecto_final.deps.json
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\bin\Debug\net10.0\proyecto_final.runtimeconfig.json
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\bin\Debug\net10.0\proyecto_final.dll
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\bin\Debug\net10.0\proyecto_final.pdb
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.dll
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\refint\proyecto_final.dll
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.pdb
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.genruntimeconfig.cache
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\ref\proyecto_final.dll
+C:\Users\Lenovo\Desktop\PROYECTO FINAL AVANCE\proyecto_final\obj\Debug\net10.0\proyecto_final.sourcelink.json
