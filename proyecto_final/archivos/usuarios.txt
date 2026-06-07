@@ -1,4 +1,4 @@
 Gretchen,67,Administrador,Activo
 CEAM,1104,Administrador,Inactivo
 Belen,1234,Administrador,Activo
-Silvia,1234,Usuario,Activo
+Silvia,1234,Administrador,Activo

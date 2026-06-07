@@ -53,6 +53,7 @@ class MENUS
                     CrearUsuario.CREAR_USUARIO();
                     break;
                 case 8:
+                    ManejarUsuario.MANEJAR_USUARIO();
                     break;
                 case 9:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
