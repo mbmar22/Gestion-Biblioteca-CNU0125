@@ -19,14 +19,14 @@ class CrearUsuario
                 Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
                 Console.ResetColor();
             }
-            else if (NOMBRE.All(char.IsDigit))
+            else if (!NOMBRE.Any(char.IsLetter))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede contener únicamente números.");
+                Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
                 Console.ResetColor();
             }
 
-        } while (String.IsNullOrWhiteSpace(NOMBRE) || NOMBRE.All(char.IsDigit));
+        } while (String.IsNullOrWhiteSpace(NOMBRE) || !NOMBRE.Any(char.IsLetter));
 
         String CLAVE;
         do
