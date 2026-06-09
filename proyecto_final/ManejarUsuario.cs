@@ -1,11 +1,11 @@
 class ManejarUsuario
 {
-    static String usuarios = ".//archivos//usuarios.txt";
+    static String usuarios = ".//archivos//usuarios.csv";
     public static void MANEJAR_USUARIO()
     {
         Console.WriteLine("        ──────────────────────────────────────────────────────────────");
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                     PANEL DE ADMINISTRACIÓN DE USUARIOS ");
+        Console.WriteLine("                     PANEL DE MODIFICACIÓN DE USUARIOS ");
         Console.ResetColor();
 
         if (! (File.Exists(usuarios)))
@@ -39,21 +39,30 @@ class ManejarUsuario
         String [] lineas = File.ReadAllLines(usuarios);
         bool ENCONTRADO = false;
         int CAMBIO;
-        String TIPO = "";
+        String ROL = "";
         String ESTADO = "";
 
         for (int i = 0; i < lineas.Length; i++)
         {
-            String[] datos = lineas[i].Split(',');
-            if (datos[0].ToLower() == BUSCADO.ToLower())
+            /* PARA EL MANEJO DE LAS LINEAS EN LOS ARREGLOS
+            datos[0] = nombre
+            datos[1] = apellido
+            datos[2] = usuario
+            datos[3] = contraseña
+            datos[4] = rol
+            datos[5] = estado
+            */
+            String[] datos = lineas[i].Split(';');
+            if (datos[2].ToLower() == BUSCADO.ToLower())
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("¡Usuario encontrado éxitosamente!");
                 Console.ResetColor();
                 Console.WriteLine(
-                "Usuario: " + datos[0] +
-                "\nRol: " + datos[2] +
-                "\nEstado: " + datos[3]
+                "Nombre: " + datos[0] + " " + datos[1] +
+                "\nUsuario: " + datos[2] +
+                "\nRol: " + datos[4] +
+                "\nEstado: " + datos[5]
                 );
                 Console.WriteLine("");
                 Console.WriteLine("Puedes realizar las siguientes acciones: ");
@@ -68,27 +77,27 @@ class ManejarUsuario
                 }
                 if (CAMBIO == 1)
                 {
-                    if (datos[2] == "Administrador")
+                    if (datos[4] == "Administrador")
                     {
-                        TIPO = "Usuario";
+                        ROL = "Usuario";
                     }
-                    else if (datos[2] == "Usuario")
+                    else if (datos[4] == "Usuario")
                     {
-                        TIPO = "Administrador";
+                        ROL = "Administrador";
                     }
-                    lineas[i] = datos[0] + "," + datos[1] + "," + TIPO + "," + datos[3];
+                    lineas[i] = $"{datos[0]};{datos[1]};{datos[2]};{datos[3]};{ROL};{datos[5]}";
                 }
                 else
                 {
-                    if (datos[3] == "Activo")
+                    if (datos[5] == "Activo")
                     {
                         ESTADO = "Inactivo";
                     }
-                    else if (datos[3] == "Inactivo")
+                    else if (datos[5] == "Inactivo")
                     {
                         ESTADO = "Activo";
                     }
-                    lineas[i] = datos[0] + "," + datos[1] + "," + datos[2] + "," + ESTADO;
+                    lineas[i] = $"{datos[0]};{datos[1]};{datos[2]};{datos[3]};{datos[4]};{ESTADO}";
                 }
 
                 ENCONTRADO = true;

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
-
-/* Esto es una prueba! */
-
+// hola
 class Program
 {
-    static String usuarios = ".//archivos//usuarios.txt";
+    static String usuarios = ".//archivos//usuarios.csv";
 
     public static void Main(String[] args)
     {
@@ -13,8 +11,9 @@ class Program
         if (ROL == "")
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("ERROR, acceso denegado.");
+            Console.WriteLine("ERROR. ACCESO DENEGADO.");
             Console.ResetColor();
+            Console.WriteLine("Ha superado el límite de intentos de inicio de sesión.");
             return;
         }
 
@@ -71,20 +70,29 @@ class Program
             string[] lineas = File.ReadAllLines(usuarios);
             foreach (string linea in lineas)
             {
-                string[] datos = linea.Split(',');
+                string[] datos = linea.Split(';');
+                /* PARA EL MANEJO DE LAS LINEAS EN LOS ARREGLOS
+                datos[0] = nombre
+                datos[1] = apellido
+                datos[2] = usuario
+                datos[3] = contraseña
+                datos[4] = rol
+                datos[5] = estado
+                */
 
-                if (datos[0] == usuario && datos[1] == clave && datos[3] == "Activo")
+                if (datos[2] == usuario && datos[3] == clave && datos[5] == "Activo")
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"¡Bienvenido a Math Library, {usuario}!");
+                    Console.WriteLine($"¡Bienvenido a Math Library, {datos[0]}!");
                     Console.ResetColor();
-                    return datos[2];
+                    return datos[4];
                 }
-                else if (datos[0] == usuario && datos[1] == clave && datos[3] == "Inactivo")
+                else if (datos[2] == usuario && datos[3] == clave && datos[5] == "Inactivo")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Querido/a {usuario}, tu usuario está inhabilitado, comunícate con el administrador.");
+                    Console.WriteLine($"Querido/a {datos[0]}, tu usuario está inhabilitado, comunícate con el administrador.");
                     Console.ResetColor();
+                    return "";
                 }
             }
         }

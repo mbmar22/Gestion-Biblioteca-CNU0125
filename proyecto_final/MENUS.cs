@@ -1,6 +1,6 @@
 class MENUS
 {
-    static String usuarios = ".//archivos//usuarios.txt";
+    static String usuarios = ".//archivos//usuarios.csv";
     public static void MENU_ADMIN()
     {
         int respuesta;
@@ -16,14 +16,16 @@ class MENUS
             Console.WriteLine("");
             Console.WriteLine(
                 "1. Ver todos los libros \n" +
-                "2. Registrar libros nuevos \n" +
-                "3. Cambiar status de los libros \n" +
-                "4. Prestar libros disponibles \n" +
-                "5. Devolver libros \n" +
-                "6. Buscar libros \n" +
-                "7. Crear Usuario \n" +
-                "8. Manejar usuarios \n" +
-                "9. Salir"
+                "2. Registrar libro nuevo \n" +
+                "3. Buscar libro \n" +
+                "4. Prestar un libro disponible \n" +
+                "5. Devolver libro prestado \n" +
+                "6. Modificar información del libro \n" +
+                "7. Registrar nuevo usuario \n" +
+                "8. Administrar usuarios \n" +
+                "9. Registrar nueva categoría \n" +
+                "10. Administrar categorías \n" +
+                "11. Salir"
             );
             Console.WriteLine("");
             Console.Write("Digite el número de la acción que desea realizar: ");
@@ -56,6 +58,10 @@ class MENUS
                     ManejarUsuario.MANEJAR_USUARIO();
                     break;
                 case 9:
+                    break;
+                case 10:
+                    break;
+                case 11:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("¡Hasta la próxima! Adiós.");
                     Console.ResetColor();
@@ -67,9 +73,7 @@ class MENUS
                 Console.ResetColor();
                     break;
             }
-
-
-        } while (respuesta != 9);
+        } while (respuesta != 11);
     }
     public static void MENU_USUARIO()
     {
@@ -84,11 +88,12 @@ class MENUS
                 "                       de gestión de biblioteca: ");
             Console.WriteLine("");
             Console.WriteLine(
-                    "1. Ver libros disponibles \n" +
-                    "2. Prestar libros disponibles \n" +
-                    "3. Devolver libros \n" +
-                    "4. Buscar libros \n" +
-                    "5. Salir"
+                    "1. Ver libros \n" +
+                    "2. Buscar libro\n" +
+                    "3. Prestar libro \n" +
+                    "4. Ver mi historial de préstamos \n" +
+                    "5. Cambiar contraseña \n" +
+                    "6. Salir"
                 );
             Console.WriteLine("");
             Console.Write("Digite el número de la acción que desea realizar: ");
@@ -111,6 +116,8 @@ class MENUS
                 case 4:
                     break;
                 case 5:
+                    break;
+                case 6:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("¡Hasta la próxima! Adiós.");
                     Console.ResetColor();
@@ -122,6 +129,6 @@ class MENUS
                     Console.ResetColor();
                     break;
             }
-        } while (respuesta != 5);
+        } while (respuesta != 6);
     }
 }
