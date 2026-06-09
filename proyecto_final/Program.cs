@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 
+/* Esto es una prueba! */
+
 class Program
 {
     static String usuarios = ".//archivos//usuarios.txt";
