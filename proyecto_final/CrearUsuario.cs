@@ -61,7 +61,7 @@ class CrearUsuario
         Console.WriteLine("Este es único y permanente. Puede contener");
         Console.WriteLine("letras, números y caracteres especiales.");
         Console.WriteLine("");
-
+        // validacion de nombre de usuario 
         String USERNAME;
         bool usuario_existente;
         do
