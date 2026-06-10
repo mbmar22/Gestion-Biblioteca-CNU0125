@@ -1,6 +1,8 @@
-﻿using System;
+﻿// Inicio de sesión al gestor de biblioteca.
+
+using System;
 using System.IO;
-// hola
+
 class Program
 {
     static String usuarios = ".//archivos//usuarios.csv";
