@@ -1,3 +1,4 @@
+// Creación de usuarios.
 class CrearUsuario
 {
     static String usuarios = ".//archivos//usuarios.csv";
