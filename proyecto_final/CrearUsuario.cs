@@ -83,6 +83,7 @@ class CrearUsuario
                 Console.ResetColor();
             }
             else
+            // validar que el nombre de usuario no este ocupado
             {
                 if (File.Exists(usuarios))
                 {
