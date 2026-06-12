@@ -17,7 +17,6 @@ class Program
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("ERROR. ACCESO DENEGADO.");
             Console.ResetColor();
-            Console.WriteLine("Ha superado el límite de intentos de inicio de sesión.");
             return;
         }
 
@@ -87,6 +86,14 @@ class Program
                     Console.ResetColor();
                     return "";
                 }
+            }
+            if (i < 2)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n¡ERROR! Usuario o contraseña incorrectos.");
+                Console.ResetColor();
+                Console.WriteLine($"Te quedan {2 - i} intento(s).");
+                Console.WriteLine("");
             }
         }
         return "";
