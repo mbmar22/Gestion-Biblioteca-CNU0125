@@ -2,6 +2,7 @@ class Decoraciones
 {
     public static void ENCABEZADO()
     {
+        Console.Clear();
         Console.WriteLine("                            ──  ⋆ ⋅ 📚 ⋅ ⋆  ──");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("                               MATH LIBRARY ");
@@ -45,6 +46,36 @@ class Decoraciones
         Console.WriteLine("El rol determina los permisos del usuario" +
         "\ndentro del sistema. El estado define si podrá acceder a él. Ambos datos");
         Console.WriteLine("podrán modificarse posteriormente desde el Panel de Administración.");
+        Console.WriteLine("");
+    }
+    public static void NOTA_LIBRO()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.Write("\nREGISTRO DEL LIBRO: ");
+        Console.ResetColor();
+        Console.WriteLine("El título y el autor son datos permanentes.");
+        Console.WriteLine("Verifique cuidadosamente la ortografía antes de continuar.");
+        Console.WriteLine("");
+    }
+
+    public static void NOTA_DESCRIPCION()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.Write("\nDESCRIPCIÓN DEL LIBRO: ");
+        Console.ResetColor();
+        Console.WriteLine("La descripción permite identificar mejor el contenido");
+        Console.WriteLine("de la obra y podrá modificarse posteriormente si es necesario.");
+        Console.WriteLine("");
+    }
+
+    public static void NOTA_ESTADO_LIBRO()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.Write("\nESTADO DEL LIBRO: ");
+        Console.ResetColor();
+        Console.WriteLine("Indica si el ejemplar se encuentra activo o inactivo.");
+        Console.WriteLine("Este dato podrá actualizarse posteriormente en caso de pérdida,");
+        Console.WriteLine("daño, recuperación o reposición del libro.");
         Console.WriteLine("");
     }
 }

@@ -7,7 +7,6 @@ class Program
 
     public static void Main(String[] args)
     {
-        Console.Clear();
         Decoraciones.ENCABEZADO();
         Console.WriteLine("Gestor de la biblioteca del centro de entrenamiento matemático Math For All");
         Console.WriteLine("        ──────────────────────────────────────────────────────────────"); 

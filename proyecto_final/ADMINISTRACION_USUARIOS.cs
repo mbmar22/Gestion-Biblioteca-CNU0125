@@ -9,6 +9,7 @@ class ADMINISTRACION_USUARIOS
         Decoraciones.ENCABEZADO();  
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.WriteLine("                        PANEL DE CREACIÓN DE USUARIOS");
+        Console.ResetColor();
         Console.WriteLine("");
 
         Decoraciones.NOTA_NOMBRES();

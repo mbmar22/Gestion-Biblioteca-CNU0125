@@ -41,6 +41,7 @@ class MENUS
                 case 1:
                     break;
                 case 2:
+                    REGISTRO_LIBROS.REGISTRAR();
                     break;
                 case 3:
                     break;
