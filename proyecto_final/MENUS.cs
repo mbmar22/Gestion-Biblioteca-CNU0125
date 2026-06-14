@@ -31,7 +31,7 @@ class MENUS
             while (!int.TryParse(Console.ReadLine(), out respuesta))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-9).");
+                Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-10).");
                 Console.ResetColor();
                 Console.Write("Digite el número de la acción que desea realizar: ");
             }
