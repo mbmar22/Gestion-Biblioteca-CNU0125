@@ -51,10 +51,10 @@ class MENUS
                 case 6:
                     break;
                 case 7:
-                    CrearUsuario.CREAR_USUARIO();
+                    ADMINISTRACION_USUARIOS.CREAR_USUARIO();
                     break;
                 case 8:
-                    ManejarUsuario.MANEJAR_USUARIO();
+                    ADMINISTRACION_USUARIOS.MANEJAR_USUARIO();
                     break;
                 case 9:
                     break;

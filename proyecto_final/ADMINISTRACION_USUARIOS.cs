@@ -1,4 +1,6 @@
-class CrearUsuario
+using System.Diagnostics.CodeAnalysis;
+
+class ADMINISTRACION_USUARIOS
 {
     static String usuarios = ".//archivos//usuarios.csv";
     public static void CREAR_USUARIO()
@@ -9,12 +11,7 @@ class CrearUsuario
         Console.WriteLine("                        PANEL DE CREACIÓN DE USUARIOS");
         Console.WriteLine("");
 
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.Write("SECCIÓN DE REGISTRO DE DATOS: ");
-        Console.ResetColor();
-        Console.WriteLine("El nombre y el apellido del usuario son datos " +
-        "\npermanentes y no podrán modificarse tras registrar al usuario.");
-        Console.WriteLine("");
+        Decoraciones.NOTA_NOMBRES();
 
         String NOMBRE;
         do
@@ -56,12 +53,7 @@ class CrearUsuario
             }
         } while (String.IsNullOrWhiteSpace(APELLIDO) || !APELLIDO.All(char.IsLetter));
 
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.Write("\nCREACIÓN DEL NOMBRE DE USUARIO: ");
-        Console.ResetColor();
-        Console.WriteLine("Este es único y permanente. Puede contener");
-        Console.WriteLine("letras, números y caracteres especiales.");
-        Console.WriteLine("");
+        Decoraciones.NOTA_USERNAME();
 
         String USERNAME;
         bool usuario_existente;
@@ -110,12 +102,8 @@ class CrearUsuario
 
         } while (String.IsNullOrWhiteSpace(USERNAME) || !USERNAME.Any(char.IsLetter) || usuario_existente);
 
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.Write("\nCONFIGURACIÓN DE SEGURIDAD: ");
-        Console.ResetColor();
-        Console.WriteLine("Utilice una contraseña para proteger su usuario.");
-        Console.WriteLine("Puede combinar letras, números y caracteres especiales.");
-        Console.WriteLine("");
+        Decoraciones.NOTA_CLAVE();
+
         String CLAVE;
         do
         {
@@ -131,19 +119,16 @@ class CrearUsuario
 
         } while (String.IsNullOrWhiteSpace(CLAVE));
 
+
+        Decoraciones.NOTA_ROLYESTADO();
         int respuesta;
         String ROL = "";
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.Write("\nASIGNACIÓN DE ROLES Y ESTADO: ");
-        Console.ResetColor();
-        Console.WriteLine("El rol determina los permisos del usuario" +
-        "\ndentro del sistema. El estado define si podrá acceder a él. Ambos datos");
-        Console.WriteLine("podrán modificarse posteriormente desde el Panel de Administración.");
-        Console.WriteLine("");
+        
         do
         {
             Console.WriteLine("¿Qué ROL tendrá este usuario?");
             Console.WriteLine("1. Administrador - 2. Usuario regular");
+            Console.WriteLine();
             Console.Write("Digite el número de la opción: ");
             while (! int.TryParse(Console.ReadLine(), out respuesta))
             {
@@ -173,6 +158,7 @@ class CrearUsuario
         {
             Console.WriteLine("¿Cuál será el ESTADO de este usuario?");
             Console.WriteLine("1. Activo  -  2. Inactivo");
+            Console.WriteLine("");
             Console.Write("Digite el número de la opción: ");
             while (! int.TryParse(Console.ReadLine(), out respuesta))
             {
@@ -197,14 +183,127 @@ class CrearUsuario
         } while (respuesta != 1 && respuesta != 2);
 
         String USUARIOS = NOMBRE + ";" + APELLIDO + ";" + USERNAME + ";" + CLAVE + ";" + ROL + ";" + ESTADO;
-        /* PARA EL MANEJO DE LAS LINEAS EN LOS ARREGLOS
-        datos[0] = nombre datos[1] = apellido
-        datos[2] = usuario datos[3] = contraseña
-        datos[4] = rol datos[5] = estado */
+
         File.AppendAllText(usuarios,USUARIOS + Environment.NewLine);
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("\n¡Usuario registrado con éxito!");
         Console.ResetColor();
         Console.WriteLine("Regresará al Panel de Administración.");
+    }
+    public static void MANEJAR_USUARIO()
+    {
+        Console.WriteLine("        ──────────────────────────────────────────────────────────────");
+        Decoraciones.ENCABEZADO();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine("                     PANEL DE MODIFICACIÓN DE USUARIOS ");
+        Console.WriteLine("");
+        Console.ResetColor();
+
+        if (! (File.Exists(usuarios)))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Archivo no encontrado.");
+            Console.ResetColor();
+            return;
+        }
+        String BUSCADO;
+        do
+        {
+            Console.Write("Ingrese el nombre del usuario al que desea acceder: ");
+            BUSCADO = Console.ReadLine();
+
+            if (String.IsNullOrWhiteSpace(BUSCADO))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
+                Console.ResetColor();
+            }
+            else if (!BUSCADO.Any(char.IsLetter))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
+                Console.ResetColor();
+            }
+
+        } while (String.IsNullOrWhiteSpace(BUSCADO) || !BUSCADO.Any(char.IsLetter));
+
+        String [] lineas = File.ReadAllLines(usuarios);
+        bool ENCONTRADO = false;
+        int CAMBIO;
+        String ROL = "";
+        String ESTADO = "";
+
+        for (int i = 0; i < lineas.Length; i++)
+        {
+
+            String[] datos = lineas[i].Split(';');
+            if (datos[2].ToLower() == BUSCADO.ToLower())
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("¡Usuario encontrado éxitosamente!");
+                Console.ResetColor();
+                Console.WriteLine(
+                "Nombre: " + datos[0] + " " + datos[1] +
+                "\nUsuario: " + datos[2] +
+                "\nRol: " + datos[4] +
+                "\nEstado: " + datos[5]
+                );
+                Console.WriteLine("");
+                Console.WriteLine("Puedes realizar las siguientes acciones: ");
+                Console.WriteLine("1. Cambiar rol  - 2. Cambiar estado");
+                Console.Write("Digite el número de la acción que desea realizar: ");
+                while ((!int.TryParse(Console.ReadLine(), out CAMBIO)) || (CAMBIO != 1 && CAMBIO != 2))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1 o 2).");
+                    Console.ResetColor();
+                    Console.Write("Digite el número de la acción que desea realizar: ");
+                }
+                if (CAMBIO == 1)
+                {
+                    if (datos[4] == "Administrador")
+                    {
+                        ROL = "Usuario";
+                    }
+                    else if (datos[4] == "Usuario")
+                    {
+                        ROL = "Administrador";
+                    }
+                    lineas[i] = $"{datos[0]};{datos[1]};{datos[2]};{datos[3]};{ROL};{datos[5]}";
+                }
+                else
+                {
+                    if (datos[5] == "Activo")
+                    {
+                        ESTADO = "Inactivo";
+                    }
+                    else if (datos[5] == "Inactivo")
+                    {
+                        ESTADO = "Activo";
+                    }
+                    lineas[i] = $"{datos[0]};{datos[1]};{datos[2]};{datos[3]};{datos[4]};{ESTADO}";
+                }
+
+                ENCONTRADO = true;
+                if (ENCONTRADO)
+                {
+                File.WriteAllLines(usuarios, lineas);
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n¡Cambios guardados con éxito!");
+                Console.ResetColor();
+                Console.WriteLine("Regresará al Panel de Administración.");
+                Console.WriteLine("");
+                }
+            }
+        }
+
+        if (ENCONTRADO == false)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("¡ ERROR ! No se ha encontrado el usuario.");
+            Console.ResetColor();
+            Console.WriteLine("Regresará al Panel de Administración.");
+            Console.WriteLine("");
+        }
     }
 }
