@@ -67,15 +67,4 @@ class Decoraciones
         Console.WriteLine("de la obra y podrá modificarse posteriormente si es necesario.");
         Console.WriteLine("");
     }
-
-    public static void NOTA_ESTADO_LIBRO()
-    {
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.Write("\nESTADO DEL LIBRO: ");
-        Console.ResetColor();
-        Console.WriteLine("Indica si el ejemplar se encuentra activo o inactivo.");
-        Console.WriteLine("Este dato podrá actualizarse posteriormente en caso de pérdida,");
-        Console.WriteLine("daño, recuperación o reposición del libro.");
-        Console.WriteLine("");
-    }
 }

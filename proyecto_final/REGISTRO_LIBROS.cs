@@ -13,6 +13,7 @@ class REGISTRO_LIBROS
         public String ingreso;
         public String estado;
         public String disponibilidad;
+
     }
 
     public static void REGISTRAR()
@@ -97,39 +98,13 @@ class REGISTRO_LIBROS
 
         // categoria del libro (PENDIENTE)
         
-        // estado del libro - se permite registrar un libro inactivo
-        Decoraciones.NOTA_ESTADO_LIBRO();
-        int respuesta;
-        do
-        {
-            Console.WriteLine("¿Cuál es el estado de este nuevo libro?");
-            Console.WriteLine("1. Activo (existente) - 2. Inactivo (perdido o dañado)");
-            Console.WriteLine();
-            Console.Write("Digite el número de la opción: ");
-            while (! int.TryParse(Console.ReadLine(), out respuesta))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Digite una opción válida (1 o 2).");
-                Console.ResetColor();
-            }
-            switch (respuesta)
-            {
-                case 1:
-                    LIBRO.estado = "Activo";
-                    break;
-                case 2:
-                    LIBRO.estado = "Inactivo";
-                    break;
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("¡ ERROR ! Digite una opción válida (1 o 2).");
-                    Console.ResetColor();
-                    break;
-            }
-        } while (respuesta != 1 && respuesta != 2);
+        // estado del libro - no se permite registrar un libro inactivo pq se puede modificar despues
+        
+        LIBRO.estado = "Activo";
 
         // disponibilidad del libro - al momento d registrarse siempre debe ser disponible pq el libro 
         // solo esta no disponible cuando se realiza un prestamo
+        
         LIBRO.disponibilidad = "Disponible";
         
         // ingreso del libro

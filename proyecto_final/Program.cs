@@ -36,19 +36,20 @@ class Program
         for (int i = 0; i < 3; i++)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"INTENTO {i+1} DE INICIO DE SESIÓN.");
+            Console.WriteLine($"INTENTO {i + 1} DE INICIO DE SESIÓN.");
             Console.ResetColor();
 
             Console.Write("Ingresa tu usuario: ");
-            while (string.IsNullOrWhiteSpace(usuario = Console.ReadLine()))
+            while (String.IsNullOrWhiteSpace(usuario = Console.ReadLine()))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
                 Console.ResetColor();
                 Console.Write("Ingresa tu usuario: ");
             }
+
             Console.Write("Ingresa tu contraseña: ");
-            while (string.IsNullOrWhiteSpace(clave = Console.ReadLine()))
+            while (String.IsNullOrWhiteSpace(clave = Console.ReadLine()))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
@@ -58,43 +59,65 @@ class Program
 
             if (!File.Exists(usuarios))
             {
-                Console.WriteLine("Este usuario no existe en este momento.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No existen usuarios registrados.");
+                Console.ResetColor();
                 return "";
             }
 
-            string[] lineas = File.ReadAllLines(usuarios);
-            foreach (string linea in lineas)
-            {
-                string[] datos = linea.Split(';');
-                /* PARA EL MANEJO DE LAS LINEAS EN LOS ARREGLOS
-                datos[0] = nombre    datos[1] = apellido
-                datos[2] = usuario   datos[3] = contraseña
-                datos[4] = rol       datos[5] = estado */
+            String[] lineas = File.ReadAllLines(usuarios);
 
-                if (datos[2] == usuario && datos[3] == clave && datos[5] == "Activo")
+            foreach (String linea in lineas)
+            {
+                if (String.IsNullOrWhiteSpace(linea))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"¡Bienvenido a Math Library, {datos[0]}!");
-                    Console.ResetColor();
-                    return datos[4];
+                    continue;
                 }
-                else if (datos[2] == usuario && datos[3] == clave && datos[5] == "Inactivo")
+
+                String[] datos = linea.Split(';');
+
+                if (datos.Length < 7)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Querido/a {datos[0]}, tu usuario está inhabilitado, comunícate con el administrador.");
-                    Console.ResetColor();
-                    return "";
+                    continue;
+                }
+
+                if (datos[3].Equals(usuario, StringComparison.OrdinalIgnoreCase)
+                    && datos[4] == clave)
+                {
+                    if (datos[6] == "Activo")
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"¡Bienvenido a Math Library, {datos[1]}!");
+                        Console.ResetColor();
+
+                        return datos[5];
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Querido/a {datos[1]}, tu usuario está inhabilitado, comunícate con el administrador.");
+                        Console.ResetColor();
+
+                        return "";
+                    }
                 }
             }
+
             if (i < 2)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n¡ERROR! Usuario o contraseña incorrectos.");
                 Console.ResetColor();
+
                 Console.WriteLine($"Te quedan {2 - i} intento(s).");
                 Console.WriteLine("");
             }
         }
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Has agotado los 3 intentos permitidos.");
+        Console.ResetColor();
+
         return "";
     }
 }
