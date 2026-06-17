@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
-// hola
+using System.Text;
+
+
 class Program
 {
     static String usuarios = ".//archivos//usuarios.csv";
@@ -49,7 +51,7 @@ class Program
             }
 
             Console.Write("Ingresa tu contraseña: ");
-            while (String.IsNullOrWhiteSpace(clave = Console.ReadLine()))
+            while (String.IsNullOrWhiteSpace(clave = ocultarClave()))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
@@ -120,4 +122,28 @@ class Program
 
         return "";
     }
+
+    static string ocultarClave()
+    {
+        StringBuilder claveO = new StringBuilder();
+        ConsoleKeyInfo password;
+
+        do
+        {
+            password = Console.ReadKey(true);
+            if (password.Key == ConsoleKey.Backspace && claveO.Length > 0)
+            {
+                claveO.Remove(claveO.Length - 1, 1);
+                Console.Write("\b \b");
+            }
+            else if (password.Key != ConsoleKey.Enter && password.Key != ConsoleKey.Backspace)
+            {
+                claveO.Append(password.KeyChar);
+                Console.Write("•");
+            }
+        } while (password.Key != ConsoleKey.Enter);
+
+        return claveO.ToString();
+    }
+
 }

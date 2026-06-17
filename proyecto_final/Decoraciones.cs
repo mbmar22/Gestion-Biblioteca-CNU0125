@@ -70,6 +70,7 @@ class Decoraciones
 
     public static void NOTA_CATEGORIAS()
     {
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.Write("\nREGISTRO DE CATEGORÍA: ");
         Console.ResetColor();
         Console.WriteLine("La categoría permitirá agrupar los libros por tema.\n");

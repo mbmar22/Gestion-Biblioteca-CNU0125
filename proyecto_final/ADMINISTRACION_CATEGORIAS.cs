@@ -18,14 +18,14 @@ class ADMINISTRACION_CATEGORIAS
         Console.ResetColor();
         Console.WriteLine();
 
-        CATEGORIA cat = new CATEGORIA();
+        CATEGORIA category = new CATEGORIA();
         if (File.Exists(categorias))
         {
-            cat.idCategoria = File.ReadAllLines(categorias).Length + 1;
+            category.idCategoria = File.ReadAllLines(categorias).Length + 1;
         }
         else
         {
-            cat.idCategoria = 1;
+            category.idCategoria = 1;
         }
 
         Decoraciones.NOTA_CATEGORIAS();
@@ -35,16 +35,16 @@ class ADMINISTRACION_CATEGORIAS
         do
         {
             Console.Write("Ingrese el nombre de la categoría: ");
-            cat.nombreCategoria = Console.ReadLine();
+            category.nombreCategoria = Console.ReadLine();
             categoria_existente = false;
 
-            if (String.IsNullOrWhiteSpace(cat.nombreCategoria))
+            if (String.IsNullOrWhiteSpace(category.nombreCategoria))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
                 Console.ResetColor();
             }
-            else if (!cat.nombreCategoria.All(char.IsLetter))
+            else if (!category.nombreCategoria.All(char.IsLetter))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("¡ ERROR ! No se aceptan caracteres especiales.");
@@ -59,8 +59,8 @@ class ADMINISTRACION_CATEGORIAS
                     {
                         string[] datos = linea.Split(';');
                         
-                        if (datos.Length >= 4 &&
-                        datos[1].Equals(cat.nombreCategoria, StringComparison.OrdinalIgnoreCase))
+                        if (datos.Length >= 1 &&
+                        datos[1].Equals(category.nombreCategoria, StringComparison.OrdinalIgnoreCase))
                         {
                             categoria_existente = true;
 
@@ -73,9 +73,9 @@ class ADMINISTRACION_CATEGORIAS
                     }
                 }
             }
-        } while (String.IsNullOrWhiteSpace(cat.nombreCategoria) || !cat.nombreCategoria.All(char.IsLetter) || categoria_existente);
+        } while (String.IsNullOrWhiteSpace(category.nombreCategoria) || !category.nombreCategoria.All(char.IsLetter) || categoria_existente);
 
-        String CATEGORIAS = cat.idCategoria + ";" + cat.nombreCategoria;
+        String CATEGORIAS = category.idCategoria + ";" + category.nombreCategoria;
         File.AppendAllText(categorias, CATEGORIAS + Environment.NewLine);
 
         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -97,3 +97,9 @@ Ahorita está como int por que para que se vaya sumando 1 a 1 el ID "categorias"
 
 // No era que no se permitían carácteres especiales (???).
 // Permite agregar categorias repetidas.
+
+/* Luego de que se agrega una categoría o un usuario, hay un cambio muy brusco cuando se regresa a la pantalla del menú. 
+Investigar sobre como hacer que por ejemplo la consola muestre algo como "Regresando al menú..." por 3 segundos o algo así, o alguna transición de regreso o no sé, algo.*/
+// Ver lo del sonido.
+
+// Por defecto el estado del usuario debe de ser activo.
