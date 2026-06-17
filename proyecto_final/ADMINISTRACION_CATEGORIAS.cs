@@ -30,10 +30,13 @@ class ADMINISTRACION_CATEGORIAS
 
         Decoraciones.NOTA_CATEGORIAS();
 
+        bool categoria_existente;
+
         do
         {
             Console.Write("Ingrese el nombre de la categoría: ");
             cat.nombreCategoria = Console.ReadLine();
+            categoria_existente = false;
 
             if (String.IsNullOrWhiteSpace(cat.nombreCategoria))
             {
@@ -47,7 +50,38 @@ class ADMINISTRACION_CATEGORIAS
                 Console.WriteLine("¡ ERROR ! No se aceptan caracteres especiales.");
                 Console.ResetColor();
             }
-        } while (String.IsNullOrWhiteSpace(cat.nombreCategoria) || !cat.nombreCategoria.All(char.IsLetter));
+            else
+            {
+                if (File.Exists(categorias))
+                {
+                    string[] lineas = File.ReadAllLines(categorias);
+                    foreach (string linea in lineas)
+                    {
+                        string[] datos = linea.Split(';');
+                        
+                        if (datos.Length >= 4 &&
+                        datos[1].Equals(cat.nombreCategoria, StringComparison.OrdinalIgnoreCase))
+                        {
+                            categoria_existente = true;
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("¡ ERROR ! Ese nombre de categoría ya existe.");
+                            Console.ResetColor();
+
+                            break;
+                        }
+                    }
+                }
+            }
+        } while (String.IsNullOrWhiteSpace(cat.nombreCategoria) || !cat.nombreCategoria.All(char.IsLetter) || categoria_existente);
+
+        String CATEGORIAS = cat.idCategoria + ";" + cat.nombreCategoria;
+        File.AppendAllText(categorias, CATEGORIAS + Environment.NewLine);
+
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine("\n¡Categoría registrada con éxito!");
+        Console.ResetColor();
+
     }
 }
 
@@ -57,3 +91,9 @@ class ADMINISTRACION_CATEGORIAS
 
 /* Encontrar la manera de cambiar idCategoria a string para podr añadirle letras al ID. 
 Ahorita está como int por que para que se vaya sumando 1 a 1 el ID "categorias" tiene que estar como int. */
+
+
+// Hacer tipo ejercicio de la tienda.
+
+// No era que no se permitían carácteres especiales (???).
+// Permite agregar categorias repetidas.
