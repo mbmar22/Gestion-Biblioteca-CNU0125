@@ -1,11 +1,13 @@
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 class REGISTRO_LIBROS
 {
 
     static String libros = ".//archivos//libros.csv";
     struct LIBROS
     {
-        public int ID;
+        public string ID;
         public String titulo;
         public String autor;
         public String descripcion;
@@ -27,13 +29,17 @@ class REGISTRO_LIBROS
         Console.WriteLine("");
 
         // asignacion de ID de libro (es un nuemro no m quise complicar, se puede cambiar depsues uwu)
+
+        int contadorId;
+
         if (File.Exists(libros))
         {
-            LIBRO.ID = File.ReadAllLines(libros).Length + 1;
+            contadorId = File.ReadAllLines(libros).Length + 1;
+            LIBRO.ID = ($"{contadorId}L");
         }
         else
         {
-            LIBRO.ID = 1;
+            contadorId = 1;
         }
 
         // titulo del libro
