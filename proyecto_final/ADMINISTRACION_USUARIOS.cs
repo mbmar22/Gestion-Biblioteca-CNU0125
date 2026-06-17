@@ -207,6 +207,7 @@ class ADMINISTRACION_USUARIOS
         Console.WriteLine("\n¡Usuario registrado con éxito!");
         Console.ResetColor();
         Console.WriteLine("Regresará al Panel de Administración.");
+        Decoraciones.cargando();
     }
         public static void MANEJAR_USUARIO()
     {
@@ -319,6 +320,7 @@ class ADMINISTRACION_USUARIOS
                 Console.WriteLine("\n¡Cambios guardados con éxito!");
                 Console.ResetColor();
                 Console.WriteLine("Regresará al Panel de Administración.");
+                Decoraciones.cargando();
                 Console.WriteLine("");
 
                 break;
@@ -331,6 +333,7 @@ class ADMINISTRACION_USUARIOS
             Console.WriteLine("¡ ERROR ! No se ha encontrado el usuario.");
             Console.ResetColor();
             Console.WriteLine("Regresará al Panel de Administración.");
+            Decoraciones.cargando();
             Console.WriteLine("");
         }
     }

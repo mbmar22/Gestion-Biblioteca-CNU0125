@@ -62,15 +62,12 @@ class MENUS
                     ADMINISTRACION_CATEGORIAS.CREAR_CATEGORIA();
                     break;
                 case 10:
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("¡Hasta la próxima! Adiós.");
-                    Console.ResetColor();
-                    Console.WriteLine("© Math Library 2026");
+                    Decoraciones.despedida();
                     break;
                 default:
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-9).");
-                Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-9).");
+                    Console.ResetColor();
                     break;
             }
         } while (respuesta != 10);
@@ -119,10 +116,7 @@ class MENUS
                 case 5:
                     break;
                 case 6:
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("¡Hasta la próxima! Adiós.");
-                    Console.ResetColor();
-                    Console.WriteLine("© Math Library 2026");
+                    Decoraciones.despedida();
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;

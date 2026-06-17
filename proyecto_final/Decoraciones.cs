@@ -1,4 +1,5 @@
 using System.Text;
+using System.Threading;
 class Decoraciones
 {
     public static void ENCABEZADO()
@@ -100,4 +101,26 @@ class Decoraciones
         return claveO.ToString();
     }
 
+    public static void despedida()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine("¡Hasta la próxima! Adiós.");
+        Console.ResetColor();
+        Console.WriteLine("© Math Library 2026");
+    }
+
+    public static void cargando()
+    {
+        Console.WriteLine("");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+
+        for (int i = 0; i < 6; i++) // 10 medias-segundos = 5 segundos
+        {
+            Thread.Sleep(500);
+            Console.Write(" . ");
+        }
+
+        Console.WriteLine();
+        Console.ResetColor();
+    }
 }

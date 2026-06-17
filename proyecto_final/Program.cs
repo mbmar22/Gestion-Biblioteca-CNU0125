@@ -89,8 +89,9 @@ class Program
                     if (datos[6] == "Activo")
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine($"¡Bienvenido a Math Library, {datos[1]}!");
+                        Console.WriteLine($"\n¡Bienvenido a Math Library, {datos[1]}!");
                         Console.ResetColor();
+                        Decoraciones.cargando();
 
                         return datos[5];
                     }

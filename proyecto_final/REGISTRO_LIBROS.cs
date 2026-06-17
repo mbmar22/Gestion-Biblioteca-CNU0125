@@ -28,10 +28,9 @@ class REGISTRO_LIBROS
         Console.ResetColor();
         Console.WriteLine("");
 
-        // asignacion de ID de libro (es un nuemro no m quise complicar, se puede cambiar depsues uwu)
 
         int contadorId;
-        // Añadí un montón de libros de prueba, hay que borrarlos, jaja.
+
         if (File.Exists(libros))
         {
             contadorId = File.ReadAllLines(libros).Length + 1;
@@ -88,15 +87,15 @@ class REGISTRO_LIBROS
             // validar que solo sean letras y espacios, ese .All con el => es
             // para evaluar cada uno sin tener k usar un foreach pq q pereza
 
-            else if (!LIBRO.autor.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            else if (!LIBRO.autor.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '.' || c == '\'' || c == '-'))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Solo se permiten letras y espacios.");
+                Console.WriteLine("¡ ERROR ! No se permiten números y ciertos caracteres especiales.");
                 Console.ResetColor();
             }
 
-        } while (String.IsNullOrWhiteSpace(LIBRO.autor) || !LIBRO.autor.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)));
-        
+        } while (String.IsNullOrWhiteSpace(LIBRO.autor) || !LIBRO.autor.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '.' ||  c == '\'' || c == '-'));
+         
         // descripcion del libro
         Decoraciones.NOTA_DESCRIPCION();
 
@@ -135,6 +134,7 @@ class REGISTRO_LIBROS
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("\n¡Libro registrado con éxito!");
         Console.ResetColor();
-        Console.WriteLine("Regresará al Panel de Administración.");    
+        Console.WriteLine("Regresará al Panel de Administración.");   
+        Decoraciones.cargando(); 
     }
 }

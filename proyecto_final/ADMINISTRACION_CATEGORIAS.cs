@@ -81,6 +81,7 @@ class ADMINISTRACION_CATEGORIAS
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("\n¡Categoría registrada con éxito!");
         Console.ResetColor();
+        Console.WriteLine("Regresará al panel de administración");
 
     }
 }
