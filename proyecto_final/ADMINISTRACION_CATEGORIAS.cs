@@ -1,4 +1,5 @@
 using System.Data.Common;
+using System.Security.Cryptography.X509Certificates;
 
 class ADMINISTRACION_CATEGORIAS
 {
@@ -6,26 +7,41 @@ class ADMINISTRACION_CATEGORIAS
 
     class CATEGORIA
     {
-        public int idCategoria { get; set; }
+        public string idCategoria { get; set; } = "ID Categoría";
         public string nombreCategoria {get ; set; } = "Categoría";
     }
 
     public static void CREAR_CATEGORIA()
     {
+        CATEGORIA category = new CATEGORIA();
         Console.WriteLine(" ───────────────────────────────────────────────────────────────────────── ");
         Decoraciones.ENCABEZADO();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.WriteLine("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
         Console.ResetColor();
         Console.WriteLine();
 
-        CATEGORIA category = new CATEGORIA();
+        int contadorIdC;
+
         if (File.Exists(categorias))
         {
-            category.idCategoria = File.ReadAllLines(categorias).Length + 1;
+            contadorIdC = File.ReadAllLines(categorias).Length + 1;
+            if (contadorIdC < 10)
+            {
+                category.idCategoria = ($"00{contadorIdC}C");
+            }
+            else if (contadorIdC >= 10 || contadorIdC <= 99)
+            {
+                category.idCategoria = ($"0{contadorIdC}C");
+            }
+            else
+            {
+                category.idCategoria = ($"{contadorIdC}C");
+            }
         }
         else
         {
-            category.idCategoria = 1;
+            contadorIdC = 1;
         }
 
         Decoraciones.NOTA_CATEGORIAS();
@@ -74,6 +90,17 @@ class ADMINISTRACION_CATEGORIAS
                 }
             }
         } while (String.IsNullOrWhiteSpace(category.nombreCategoria) || !category.nombreCategoria.All(char.IsLetter) || categoria_existente);
+
+
+        bool existe = File.Exists(categorias);
+
+        using (StreamWriter sw = new StreamWriter(categorias, true))
+        {
+            if (!existe)
+            {
+                sw.WriteLine("ID Categoría, Categoría");
+            }
+        }
 
         String CATEGORIAS = category.idCategoria + ";" + category.nombreCategoria;
         File.AppendAllText(categorias, CATEGORIAS + Environment.NewLine);

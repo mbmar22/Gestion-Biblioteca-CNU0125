@@ -28,29 +28,36 @@ class REGISTRO_LIBROS
         Console.ResetColor();
         Console.WriteLine("");
 
+<<<<<<< HEAD
 
         int contadorId;
 
+=======
+        // asignacion de ID de libro (es un nuemro no m quise complicar, se puede cambiar depsues uwu)
+        // el contador es otra cosa aparte.
+        int contadorIdL;
+        // Añadí un montón de libros de prueba, hay que borrarlos, jaja.
+>>>>>>> 8723dff (Contador categorías, progreso)
         if (File.Exists(libros))
         {
-            contadorId = File.ReadAllLines(libros).Length + 1;
-            if (contadorId < 10)
+            contadorIdL = File.ReadAllLines(libros).Length + 1;
+            if (contadorIdL < 10)
             {
-                LIBRO.ID = ($"00{contadorId}L");
+                LIBRO.ID = ($"00{contadorIdL}L");
             }
-            else if (contadorId >= 10 || contadorId <= 99)
+            else if (contadorIdL >= 10 || contadorIdL <= 99)
             {
-                LIBRO.ID = ($"0{contadorId}L");
+                LIBRO.ID = ($"0{contadorIdL}L");
             }
             else
             {
-                LIBRO.ID = ($"{contadorId}L");
+                LIBRO.ID = ($"{contadorIdL}L");
             }
 
         }
         else
         {
-            contadorId = 1;
+            contadorIdL = 1;
         }
 
         // titulo del libro
