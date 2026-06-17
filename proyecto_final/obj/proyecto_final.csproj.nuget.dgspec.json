@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\Desktop\\PROYECTO FINAL AVANCE\\proyecto_final\\proyecto_final.csproj": {}
+    "C:\\Users\\mb_gr\\CNU0125\\Proyecto Final\\proyecto_final\\proyecto_final.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\Desktop\\PROYECTO FINAL AVANCE\\proyecto_final\\proyecto_final.csproj": {
+    "C:\\Users\\mb_gr\\CNU0125\\Proyecto Final\\proyecto_final\\proyecto_final.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\PROYECTO FINAL AVANCE\\proyecto_final\\proyecto_final.csproj",
+        "projectUniqueName": "C:\\Users\\mb_gr\\CNU0125\\Proyecto Final\\proyecto_final\\proyecto_final.csproj",
         "projectName": "proyecto_final",
-        "projectPath": "C:\\Users\\Lenovo\\Desktop\\PROYECTO FINAL AVANCE\\proyecto_final\\proyecto_final.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\Desktop\\PROYECTO FINAL AVANCE\\proyecto_final\\obj\\",
+        "projectPath": "C:\\Users\\mb_gr\\CNU0125\\Proyecto Final\\proyecto_final\\proyecto_final.csproj",
+        "packagesPath": "C:\\Users\\mb_gr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mb_gr\\CNU0125\\Proyecto Final\\proyecto_final\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\mb_gr\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
