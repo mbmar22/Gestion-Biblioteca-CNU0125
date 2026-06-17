@@ -52,6 +52,7 @@ class ADMINISTRACION_CATEGORIAS
 }
 
 // Hacer que si ingresan la categoría en minúsculas o con alguna variación extraña como aVENtura se ponga todo en minúscula con la primera letra en mayúscula.
+// Probarloooo.
 
 
 /* Encontrar la manera de cambiar idCategoria a string para podr añadirle letras al ID. 
