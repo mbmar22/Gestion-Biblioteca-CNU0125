@@ -67,4 +67,12 @@ class Decoraciones
         Console.WriteLine("de la obra y podrá modificarse posteriormente si es necesario.");
         Console.WriteLine("");
     }
+
+    public static void NOTA_CATEGORIAS()
+    {
+        Console.Write("\nREGISTRO DE CATEGORÍA: ");
+        Console.ResetColor();
+        Console.WriteLine("La categoría permitirá agrupar los libros por tema.\n");
+    }
+
 }

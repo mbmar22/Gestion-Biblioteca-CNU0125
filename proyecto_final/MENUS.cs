@@ -59,6 +59,7 @@ class MENUS
                     ADMINISTRACION_USUARIOS.MANEJAR_USUARIO();
                     break;
                 case 9:
+                    ADMINISTRACION_CATEGORIAS.CREAR_CATEGORIA();
                     break;
                 case 10:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
