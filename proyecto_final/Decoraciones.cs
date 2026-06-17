@@ -1,3 +1,4 @@
+using System.Text;
 class Decoraciones
 {
     public static void ENCABEZADO()
@@ -74,6 +75,29 @@ class Decoraciones
         Console.Write("\nREGISTRO DE CATEGORÍA: ");
         Console.ResetColor();
         Console.WriteLine("La categoría permitirá agrupar los libros por tema.\n");
+    }
+
+    public static string ocultarClave()
+    {
+        StringBuilder claveO = new StringBuilder();
+        ConsoleKeyInfo password;
+
+        do
+        {
+            password = Console.ReadKey(true);
+            if (password.Key == ConsoleKey.Backspace && claveO.Length > 0)
+            {
+                claveO.Remove(claveO.Length - 1, 1);
+                Console.Write("\b \b");
+            }
+            else if (password.Key != ConsoleKey.Enter && password.Key != ConsoleKey.Backspace)
+            {
+                claveO.Append(password.KeyChar);
+                Console.Write("•");
+            }
+        } while (password.Key != ConsoleKey.Enter);
+
+        return claveO.ToString();
     }
 
 }
