@@ -31,11 +31,23 @@ class REGISTRO_LIBROS
         // asignacion de ID de libro (es un nuemro no m quise complicar, se puede cambiar depsues uwu)
 
         int contadorId;
-
+        // Añadí un montón de libros de prueba, hay que borrarlos, jaja.
         if (File.Exists(libros))
         {
             contadorId = File.ReadAllLines(libros).Length + 1;
-            LIBRO.ID = ($"{contadorId}L");
+            if (contadorId < 10)
+            {
+                LIBRO.ID = ($"00{contadorId}L");
+            }
+            else if (contadorId >= 10 || contadorId <= 99)
+            {
+                LIBRO.ID = ($"0{contadorId}L");
+            }
+            else
+            {
+                LIBRO.ID = ($"{contadorId}L");
+            }
+
         }
         else
         {
