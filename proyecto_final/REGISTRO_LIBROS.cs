@@ -29,12 +29,9 @@ class REGISTRO_LIBROS
         Console.ResetColor();
         Console.WriteLine("");
 
+         int contadorId;
 
-        int contadorId;
-
-        // (g) holis, el libro no se guardaba con ID entonces probe con esto, esa D existe para rellenar con 0 y pues el 3 es las cifras
-        
-
+        // asignación automática del ID del libro
         if (File.Exists(libros))
         {
             contadorId = File.ReadAllLines(libros).Length + 1;
