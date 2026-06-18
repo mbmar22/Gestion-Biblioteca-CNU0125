@@ -121,6 +121,7 @@ class Program
         Console.WriteLine("Has agotado los 3 intentos permitidos.");
         Console.ResetColor();
 
+        Console.Clear();
         return "";
     }
 

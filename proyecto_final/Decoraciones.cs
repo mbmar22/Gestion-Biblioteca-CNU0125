@@ -10,6 +10,14 @@ class Decoraciones
         Console.WriteLine("                               MATH LIBRARY ");
         Console.ResetColor();
     }
+
+    public static void ENCABEZADO2()
+    {
+        Console.WriteLine("                            ──  ⋆ ⋅ 📚 ⋅ ⋆  ──");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine("                               MATH LIBRARY ");
+        Console.ResetColor();
+    }
     public static void NOTA_NOMBRES()
     {
         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -43,7 +51,7 @@ class Decoraciones
     public static void NOTA_ROLYESTADO()
     {
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.Write("\nASIGNACIÓN DE ROLES Y ESTADO: ");
+        Console.Write("\nASIGNACIÓN DE ROLES: ");
         Console.ResetColor();
         Console.WriteLine("El rol determina los permisos del usuario" +
         "\ndentro del sistema. El estado define si podrá acceder a él. Ambos datos");
@@ -114,7 +122,7 @@ class Decoraciones
         Console.WriteLine("");
         Console.ForegroundColor = ConsoleColor.Cyan;
 
-        for (int i = 0; i < 6; i++) // 10 medias-segundos = 5 segundos
+        for (int i = 0; i < 6; i++) // 3 segundos
         {
             Thread.Sleep(500);
             Console.Write(" . ");
@@ -123,4 +131,7 @@ class Decoraciones
         Console.WriteLine();
         Console.ResetColor();
     }
+    
+
+
 }

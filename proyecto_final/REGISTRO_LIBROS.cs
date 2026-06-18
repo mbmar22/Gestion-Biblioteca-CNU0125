@@ -5,6 +5,7 @@ class REGISTRO_LIBROS
 {
 
     static String libros = ".//archivos//libros.csv";
+    static String categorias = ".//archivos//categorias.csv";
     struct LIBROS
     {
         public string ID;
@@ -31,27 +32,19 @@ class REGISTRO_LIBROS
 
         int contadorId;
 
+        // (g) holis, el libro no se guardaba con ID entonces probe con esto, esa D existe para rellenar con 0 y pues el 3 es las cifras
+        
+
         if (File.Exists(libros))
         {
             contadorId = File.ReadAllLines(libros).Length + 1;
-            if (contadorId < 10)
-            {
-                LIBRO.ID = ($"00{contadorId}L");
-            }
-            else if (contadorId >= 10 || contadorId <= 99)
-            {
-                LIBRO.ID = ($"0{contadorId}L");
-            }
-            else
-            {
-                LIBRO.ID = ($"{contadorId}L");
-            }
-
         }
         else
         {
             contadorId = 1;
         }
+
+        LIBRO.ID = $"{contadorId:D3}L";
 
         // titulo del libro
         Decoraciones.NOTA_LIBRO();
@@ -113,21 +106,103 @@ class REGISTRO_LIBROS
 
         } while (String.IsNullOrWhiteSpace(LIBRO.descripcion));
 
-        // categoria del libro (PENDIENTE)
+        Console.WriteLine();
+        // categoría del libro
+
+        String respuesta;
+        bool categoria_encontrada = false;
+
+        // leer archivo de categorias
+        String[] lineas = File.ReadAllLines(categorias);
+
+        do // ciclo para recorrer el archivo hasta que encuentre una categoria q exista
+        {
+            do // validacion d la respuesta
+            {
+                Console.WriteLine("Ingrese el nombre de la categoría o digite '1' para");
+                Console.Write("consultar las categorías existentes: ");
+
+                respuesta = Console.ReadLine();
+
+                if (String.IsNullOrWhiteSpace(respuesta))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
+                    Console.ResetColor();
+                }
+
+            } while (String.IsNullOrWhiteSpace(respuesta));
+
+            // mostrar categorías
+            if (respuesta == "1")
+            {
+
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("\n 𓂃🖋   CATEGORÍAS DISPONIBLES");
+                Console.ResetColor();
+
+                int contador = 0;
+
+                for (int i = 0; i < lineas.Length; i++)
+                {
+                    String[] datos = lineas[i].Split(';');
+
+                    if (datos.Length > 1)
+                    {
+                        Console.Write(datos[1].PadRight(20));
+                        contador++;
+
+                        if (contador % 3 == 0)
+                            Console.WriteLine();
+                    }
+                }
+
+                if (contador % 3 != 0)
+                    Console.WriteLine();
+
+                Console.WriteLine();
+                continue;
+            }
+
+            for (int i = 0; i < lineas.Length; i++)
+            {
+                String[] datos = lineas[i].Split(';');
+
+                if (datos.Length > 1)
+                {
+                    if (datos[1].Equals(respuesta, StringComparison.OrdinalIgnoreCase))
+                    {
+                        categoria_encontrada = true;
+                        LIBRO.categoria = datos[1];
+                        break;
+                    }
+                }
+            }
+
+            Console.WriteLine(); 
+
+            if (!categoria_encontrada)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! Categoría no encontrada.");
+                Console.ResetColor();
+            }
+
+        } while (!categoria_encontrada);
         
         // estado del libro - no se permite registrar un libro inactivo pq se puede modificar despues
         
         LIBRO.estado = "Activo";
 
         // disponibilidad del libro - al momento d registrarse siempre debe ser disponible pq el libro 
-        // solo esta no disponible cuando se realiza un prestamo
+        // solo esta "no disponible" cuando se realiza un prestamo
         
         LIBRO.disponibilidad = "Disponible";
         
         // ingreso del libro
         LIBRO.ingreso = DateTime.Now.ToString("dd/MM/yyyy");
 
-        String nuevo_libro = LIBRO.ID + ";" + LIBRO.titulo + ";" + LIBRO.autor + ";" + LIBRO.descripcion + ";" + LIBRO.disponibilidad + ";" + LIBRO.estado + ";" + LIBRO.ingreso;
+        String nuevo_libro = LIBRO.ID + ";" + LIBRO.titulo + ";" + LIBRO.autor + ";" + LIBRO.categoria + ";" + LIBRO.descripcion + ";" + LIBRO.disponibilidad + ";" + LIBRO.estado + ";" + LIBRO.ingreso;
     
         // proceso de guardar el libro
         File.AppendAllText(libros,nuevo_libro + Environment.NewLine);

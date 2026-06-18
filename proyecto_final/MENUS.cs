@@ -6,8 +6,7 @@ class MENUS
         int respuesta;
         do
         {
-            Console.WriteLine("        ──────────────────────────────────────────────────────────────");
-            Decoraciones.ENCABEZADO();
+            Decoraciones.ENCABEZADO2();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                           PANEL DE ADMINISTRACIÓN");
             Console.ResetColor();
@@ -77,7 +76,7 @@ class MENUS
         int respuesta;
         do
         {
-            Decoraciones.ENCABEZADO();
+            Decoraciones.ENCABEZADO2();
             Console.WriteLine("        ──────────────────────────────────────────────────────────────");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                               PANEL DE USUARIO");

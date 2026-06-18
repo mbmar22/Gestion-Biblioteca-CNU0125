@@ -12,8 +12,8 @@ class ADMINISTRACION_CATEGORIAS
 
     public static void CREAR_CATEGORIA()
     {
-        Console.WriteLine(" ───────────────────────────────────────────────────────────────────────── ");
         Decoraciones.ENCABEZADO();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.WriteLine("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
         Console.ResetColor();
         Console.WriteLine();
@@ -44,7 +44,7 @@ class ADMINISTRACION_CATEGORIAS
                 Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
                 Console.ResetColor();
             }
-            else if (!category.nombreCategoria.All(char.IsLetter))
+            else if (!category.nombreCategoria.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("¡ ERROR ! No se aceptan caracteres especiales.");
@@ -73,7 +73,7 @@ class ADMINISTRACION_CATEGORIAS
                     }
                 }
             }
-        } while (String.IsNullOrWhiteSpace(category.nombreCategoria) || !category.nombreCategoria.All(char.IsLetter) || categoria_existente);
+        } while (String.IsNullOrWhiteSpace(category.nombreCategoria) || !category.nombreCategoria.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))|| categoria_existente);
 
         String CATEGORIAS = category.idCategoria + ";" + category.nombreCategoria;
         File.AppendAllText(categorias, CATEGORIAS + Environment.NewLine);
@@ -82,12 +82,12 @@ class ADMINISTRACION_CATEGORIAS
         Console.WriteLine("\n¡Categoría registrada con éxito!");
         Console.ResetColor();
         Console.WriteLine("Regresará al panel de administración");
+        Decoraciones.cargando();
 
     }
 }
 
 // Hacer que si ingresan la categoría en minúsculas o con alguna variación extraña como aVENtura se ponga todo en minúscula con la primera letra en mayúscula.
-// Probarloooo.
 
 
 /* Encontrar la manera de cambiar idCategoria a string para podr añadirle letras al ID. 
@@ -95,12 +95,23 @@ Ahorita está como int por que para que se vaya sumando 1 a 1 el ID "categorias"
 
 
 // Hacer tipo ejercicio de la tienda.
+// (g) al registrar usuarios, libros o categorias?
 
-// No era que no se permitían carácteres especiales (???).
+// No era que no se permitían carácteres especiales (???)
+// (g) en q parte hay
+
 // Permite agregar categorias repetidas.
+// (g) si deja si no le ponen tilde, no se si poner un mensaje de q cuidado con la ortografia o buscar como validar q reconozca lo mismo.
 
 /* Luego de que se agrega una categoría o un usuario, hay un cambio muy brusco cuando se regresa a la pantalla del menú. 
 Investigar sobre como hacer que por ejemplo la consola muestre algo como "Regresando al menú..." por 3 segundos o algo así, o alguna transición de regreso o no sé, algo.*/
+
+// (g) ya puse en decoraciones unos ... de carga por 3 segundos, se miran bien cute
+
 // Ver lo del sonido.
 
+// (g) excelenteee lo ponemos solo en errores ej las alertas y en ops exitosas como registrado correctamente
+// o en todo como un sonido de click o asi?
+
 // Por defecto el estado del usuario debe de ser activo.
+// (g) okis

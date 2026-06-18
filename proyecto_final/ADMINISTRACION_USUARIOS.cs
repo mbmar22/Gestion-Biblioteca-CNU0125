@@ -169,34 +169,8 @@ class ADMINISTRACION_USUARIOS
             }
         } while (respuesta != 1 && respuesta != 2);
 
-        Console.WriteLine("");
-        do
-        {
-            Console.WriteLine("¿Cuál será el ESTADO de este usuario?");
-            Console.WriteLine("1. Activo  -  2. Inactivo");
-            Console.WriteLine("");
-            Console.Write("Digite el número de la opción: ");
-            while (! int.TryParse(Console.ReadLine(), out respuesta))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Digite una opción válida (1 o 2).");
-                Console.ResetColor();
-            }
-            switch (respuesta)
-            {
-                case 1:
-                    user.estado = "Activo";
-                    break;
-                case 2:
-                    user.estado = "Inactivo";
-                    break;
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("¡ ERROR ! Digite una opción válida (1 o 2).");
-                    Console.ResetColor();
-                    break;
-            }
-        } while (respuesta != 1 && respuesta != 2);
+        // estado activo por defecto
+        user.estado = "Activo";
 
         String USUARIOS = user.ID + ";" + user.nombre + ";" + user.apellido + ";" +
         user.username + ";" + user.clave + ";" + user.rol + ";" + user.estado;
