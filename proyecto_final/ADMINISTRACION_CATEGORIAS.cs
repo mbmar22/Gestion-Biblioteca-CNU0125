@@ -13,11 +13,8 @@ class ADMINISTRACION_CATEGORIAS
 
     public static void CREAR_CATEGORIA()
     {
-<<<<<<< HEAD
-=======
         CATEGORIA category = new CATEGORIA();
         Console.WriteLine(" ───────────────────────────────────────────────────────────────────────── ");
->>>>>>> 087fb19ee5ad4835cdbca64b24b598d728531426
         Decoraciones.ENCABEZADO();
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.WriteLine("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
