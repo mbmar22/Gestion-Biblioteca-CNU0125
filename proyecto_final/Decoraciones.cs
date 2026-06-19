@@ -5,7 +5,10 @@ class Decoraciones
     public static void ENCABEZADO()
     {
         Console.Clear();
-        ENCABEZADO2();
+        Console.WriteLine("                            ──  ⋆ ⋅ 📚 ⋅ ⋆  ──");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine("                               MATH LIBRARY ");
+        Console.ResetColor();
     }
 
     public static void ENCABEZADO_INICIAL()
@@ -14,14 +17,6 @@ class Decoraciones
         Console.WriteLine("Gestor de la biblioteca del centro de entrenamiento matemático Math For All");
         Console.WriteLine("        ──────────────────────────────────────────────────────────────"); 
 
-    }
-
-    public static void ENCABEZADO2()
-    {
-        Console.WriteLine("                            ──  ⋆ ⋅ 📚 ⋅ ⋆  ──");
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("                               MATH LIBRARY ");
-        Console.ResetColor();
     }
     public static void NOTA_NOMBRES()
     {
@@ -213,8 +208,8 @@ class Decoraciones
             "                       de gestión de biblioteca: ");
         Console.WriteLine("");
         Console.WriteLine(
-                "1. Ver todos los libros \n" +
-                "2. Registrar libro nuevo \n" +
+                "1. Ver todos los libros \n" + // falta ver inventario y ver todo lo d prestamos
+                "2. Registrar libro nuevo \n" + 
                 "3. Buscar libro \n" +
                 "4. Prestar un libro disponible \n" +
                 "5. Devolver libro prestado \n" +

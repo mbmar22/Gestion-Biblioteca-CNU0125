@@ -10,83 +10,92 @@ class ADMINISTRACION_CATEGORIAS
         public string idCategoria { get; set; } = "ID Categoría";
         public string nombreCategoria {get ; set; } = "Categoría";
     }
-
+    
     public static void CREAR_CATEGORIA()
     {
-        CATEGORIA category = new CATEGORIA();
-        Console.WriteLine(" ───────────────────────────────────────────────────────────────────────── ");
-        Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
-        Console.ResetColor();
-        Console.WriteLine();
-
-        int contadorIdC;
-
-        if (File.Exists(categorias))
-        {
-            contadorIdC = File.ReadAllLines(categorias).Length;
-        }
-        else
-        {
-            contadorIdC = 1;
-        }
-
-        category.idCategoria = $"{contadorIdC:D3}C";
-
-        Decoraciones.NOTA_CATEGORIAS();
-
-        bool categoria_existente;
+        string repetir;
 
         do
         {
-            categoria_existente = false;
+            CATEGORIA category = new CATEGORIA();
+            Console.WriteLine(" ───────────────────────────────────────────────────────────────────────── ");
+            Decoraciones.ENCABEZADO();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
+            Console.ResetColor();
+            Console.WriteLine();
 
-            category.nombreCategoria = VALIDAR.LETRAS_ESPACIOS("Ingrese el nombre de la categoría: ");
+            int contadorIdC;
 
-            // verificar repetidos
             if (File.Exists(categorias))
             {
-                string[] lineas = File.ReadAllLines(categorias);
+                contadorIdC = File.ReadAllLines(categorias).Length;
+            }
+            else
+            {
+                contadorIdC = 1;
+            }
 
-                foreach (string linea in lineas)
+            category.idCategoria = $"{contadorIdC:D3}C";
+
+            Decoraciones.NOTA_CATEGORIAS();
+
+            bool categoria_existente;
+
+            do
+            {
+                categoria_existente = false;
+
+                category.nombreCategoria = VALIDAR.LETRAS_ESPACIOS("Ingrese el nombre de la categoría: ");
+
+                // verificar repetidos
+                if (File.Exists(categorias))
                 {
-                    string[] datos = linea.Split(';');
+                    string[] lineas = File.ReadAllLines(categorias);
 
-                    if (datos.Length > 1 &&
-                        datos[1].Equals(category.nombreCategoria,
-                        StringComparison.OrdinalIgnoreCase))
+                    foreach (string linea in lineas)
                     {
-                        categoria_existente = true;
+                        string[] datos = linea.Split(';');
 
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("¡ ERROR ! Esa categoría ya existe.");
-                        Console.ResetColor();
+                        if (datos.Length > 1 &&
+                            datos[1].Equals(category.nombreCategoria,
+                            StringComparison.OrdinalIgnoreCase))
+                        {
+                            categoria_existente = true;
 
-                        break;
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("¡ ERROR ! Esa categoría ya existe.");
+                            Console.ResetColor();
+
+                            break;
+                        }
                     }
+                }
+
+            } while (categoria_existente);
+
+            bool existe = File.Exists(categorias);
+
+            using (StreamWriter sw = new StreamWriter(categorias, true))
+            {
+                if (!File.Exists(categorias) || new FileInfo(categorias).Length == 0)
+                {
+                    sw.WriteLine("ID Categoría;Categoría");
                 }
             }
 
-        } while (categoria_existente);
+            String CATEGORIAS = category.idCategoria + ";" + category.nombreCategoria;
+            File.AppendAllText(categorias, CATEGORIAS + Environment.NewLine);
 
-        bool existe = File.Exists(categorias);
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\n¡Categoría registrada con éxito!");
+            Console.ResetColor();
 
-        using (StreamWriter sw = new StreamWriter(categorias, true))
-        {
-            if (!File.Exists(categorias) || new FileInfo(categorias).Length == 0)
-            {
-                sw.WriteLine("ID Categoría;Categoría");
-            }
-        }
+            repetir = VALIDAR.SI_NO("\n¿Desea registrar otra libro? (S/N): ");
 
-        String CATEGORIAS = category.idCategoria + ";" + category.nombreCategoria;
-        File.AppendAllText(categorias, CATEGORIAS + Environment.NewLine);
+        } while (repetir == "S");
 
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("\n¡Categoría registrada con éxito!");
-        Console.ResetColor();
-        Console.WriteLine("Regresará al panel de administración");
+        Console.WriteLine("Regresará al Panel de Administración.");
         Decoraciones.cargando();
     }
 }

@@ -115,32 +115,6 @@ class VALIDAR
 
         return texto;
     }
-    public static string AL_MENOS_UNA_LETRA(string mensaje)
-    {
-        string texto;
-
-        do
-        {
-            Console.Write(mensaje);
-            texto = Console.ReadLine();
-
-            if (String.IsNullOrWhiteSpace(texto))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
-            }
-            else if (!texto.Any(char.IsLetter))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
-                Console.ResetColor();
-            }
-
-        } while (String.IsNullOrWhiteSpace(texto) || !texto.Any(char.IsLetter));
-
-        return texto;
-    }
 
     public static string AUTORVALIDO(string mensaje)
     {
@@ -279,6 +253,77 @@ class VALIDAR
             }
 
         } while (String.IsNullOrWhiteSpace(texto) || !texto.Any(char.IsLetter) || usuario_existente);
+        return texto;
+    }
+
+    public static string SI_NO(string mensaje)
+    {
+        string respuesta;
+
+        do
+        {
+            Console.Write(mensaje);
+            respuesta = Console.ReadLine().ToUpper();
+
+            if (respuesta != "S" && respuesta != "N")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! Solo puede ingresar S o N.");
+                Console.ResetColor();
+            }
+
+        } while (respuesta != "S" && respuesta != "N");
+
+        return respuesta;
+    }
+    public static bool CONFIRMAR(string mensaje)
+    {
+        string respuesta;
+
+        do
+        {
+            Console.Write(mensaje);
+            respuesta = Console.ReadLine().ToUpper();
+
+            if (respuesta != "S" && respuesta != "N")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! Solo puede ingresar S o N.");
+                Console.ResetColor();
+            }
+
+        } while (respuesta != "S" && respuesta != "N");
+
+        return respuesta == "S";
+    }
+
+    public static string AL_MENOS_UNA_LETRA(string mensaje)
+    {
+        string texto;
+
+        do
+        {
+            Console.Write(mensaje);
+            texto = Console.ReadLine();
+
+            if (String.IsNullOrWhiteSpace(texto))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
+                Console.ResetColor();
+            }
+            else if (!texto.Any(char.IsLetter))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
+                Console.ResetColor();
+            }
+
+        } while (
+            String.IsNullOrWhiteSpace(texto) ||
+            !texto.Any(char.IsLetter)
+        );
+
         return texto;
     }
 }

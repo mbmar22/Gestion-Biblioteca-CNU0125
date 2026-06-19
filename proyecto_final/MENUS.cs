@@ -3,10 +3,11 @@ class MENUS
     static String usuarios = ".//archivos//usuarios.csv";
     public static void MENU_ADMIN()
     {
+        string confirmacion = "\n¿Está seguro de que desea realizar esta acción? (S/N): ";
         int respuesta;
         do
         {
-            Decoraciones.ENCABEZADO2();
+            Decoraciones.ENCABEZADO();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                           PANEL DE ADMINISTRACIÓN");
             Console.ResetColor();
@@ -21,10 +22,13 @@ class MENUS
                 case 1:
                     break;
                 case 2:
-                    REGISTRO_LIBROS.REGISTRAR();
+                    if (VALIDAR.CONFIRMAR(confirmacion))
+                    {
+                        REGISTRO_LIBROS.REGISTRAR();
+                    }
                     break;
                 case 3:
-                    BUSQUEDA_LIBROS.BUSCAR_LIBROS();
+                    BUSQUEDA_LIBROS.BUSCAR_LIBROS();  
                     break;
                 case 4:
                     break;
@@ -33,30 +37,39 @@ class MENUS
                 case 6:
                     break;
                 case 7:
-                    ADMINISTRACION_USUARIOS.CREAR_USUARIO();
+                    if (VALIDAR.CONFIRMAR(confirmacion))
+                    {
+                        ADMINISTRACION_USUARIOS.CREAR_USUARIO();
+                    }
                     break;
                 case 8:
-                    ADMINISTRACION_USUARIOS.MANEJAR_USUARIO();
+                    if (VALIDAR.CONFIRMAR(confirmacion))
+                    {
+                        ADMINISTRACION_USUARIOS.MANEJAR_USUARIO();
+                    }
                     break;
                 case 9:
-                    ADMINISTRACION_CATEGORIAS.CREAR_CATEGORIA();
+                    if (VALIDAR.CONFIRMAR(confirmacion))
+                    {
+                        ADMINISTRACION_CATEGORIAS.CREAR_CATEGORIA();
+                    }
                     break;
                 case 10:
-                    
+                    break;
                 case 11:
                     Decoraciones.despedida();
                     break;
                 default:
                     break;
             }
-        } while (respuesta != 10);
+        } while (respuesta != 11);
     }
     public static void MENU_USUARIO()
     {
         int respuesta;
         do
         {
-            Decoraciones.ENCABEZADO2();
+            Decoraciones.ENCABEZADO();
             Console.WriteLine("        ──────────────────────────────────────────────────────────────");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                               PANEL DE USUARIO");
