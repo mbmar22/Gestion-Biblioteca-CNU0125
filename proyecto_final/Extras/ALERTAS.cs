@@ -34,4 +34,11 @@ class ALERTAS
         Console.WriteLine("¡ ERROR ! No se han encontrado resultados que coincidan con su búsqueda");
         Console.ResetColor();
     }
+
+    public static void ACCESO_DENEGADO()
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("ERROR. ACCESO DENEGADO.");
+        Console.ResetColor();
+    }
 }

@@ -93,7 +93,12 @@ class MENUS
                 case 1:
                     break;
                 case 2:
-                    BUSQUEDA_LIBROS.BUSCAR_LIBROS();
+                    string repetir;
+                    do
+                    {
+                        BUSQUEDA_LIBROS.BUSCAR_LIBROS();
+                        repetir = VALIDAR.SI_NO("¿Desea realizar otra búsqueda? (S/N): ");
+                    }  while (repetir == "S");
                     break;
                 case 3:
                     break;

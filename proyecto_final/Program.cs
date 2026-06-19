@@ -7,21 +7,17 @@
         String ROL = INICIAR_SESION.INICIO_DE_SESION();
         if (ROL == "")
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("ERROR. ACCESO DENEGADO.");
-            Console.ResetColor();
+            ALERTAS.ACCESO_DENEGADO();
             return;
         }
 
-        if (ROL == "Administrador")
+        if (ROL == "Administrador") // llamar menu de admin
         {
-            Console.Clear();
             MENUS.MENU_ADMIN();
         }
         else
         {
-            Console.Clear();
-            MENUS.MENU_USUARIO();
+            MENUS.MENU_USUARIO(); // llamar menu de usuarios regulares
         }
     }
 }
