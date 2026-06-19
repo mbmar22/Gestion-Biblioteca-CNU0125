@@ -35,7 +35,7 @@ class BUSQUEDA_LIBROS
     {
         Decoraciones.ENCABEZADO();
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                    PANEL DE BÚSQUEDA DE LIBROS POR NOMBRE");
+        Console.WriteLine("                  PANEL DE BÚSQUEDA DE LIBROS POR NOMBRE");
         Console.ResetColor();
         Console.WriteLine();
 

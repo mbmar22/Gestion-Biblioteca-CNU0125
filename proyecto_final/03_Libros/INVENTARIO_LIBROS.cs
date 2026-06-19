@@ -6,6 +6,11 @@ class INVENTARIO_LIBROS
     {
         String[] lineas = File.ReadAllLines(libros);
 
+        Decoraciones.ENCABEZADO();
+        Console.WriteLine("                       INVENTARIO DE LIBROS");
+
+        Console.WriteLine();
+
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.WriteLine("ID           TÍTULO                    AUTOR                CATEGORÍA          ESTADO           ");
         Console.ResetColor();
