@@ -2,7 +2,8 @@ using System.Text;
 using System.Threading;
 class Decoraciones
 {
-    public static void ENCABEZADO()
+    // Decoraciones para la estética del programa
+    public static void ENCABEZADO() 
     {
         Console.Clear();
         Console.WriteLine("                            ──  ⋆ ⋅ 📚 ⋅ ⋆  ──");
@@ -258,5 +259,4 @@ class Decoraciones
 
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
-
 }

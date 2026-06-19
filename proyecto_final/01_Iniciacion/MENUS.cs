@@ -20,6 +20,7 @@ class MENUS
             switch (respuesta)
             {
                 case 1:
+                    INVENTARIO_LIBROS.MOSTRAR_INVENTARIO();
                     break;
                 case 2:
                     if (VALIDAR.CONFIRMAR(confirmacion))
@@ -91,6 +92,7 @@ class MENUS
             switch (respuesta)
             {
                 case 1:
+                    INVENTARIO_LIBROS.MOSTRAR_INVENTARIO();
                     break;
                 case 2:
                     string repetir;
