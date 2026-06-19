@@ -7,15 +7,15 @@ class INVENTARIO_LIBROS
         String[] lineas = File.ReadAllLines(libros);
 
         Decoraciones.ENCABEZADO();
-        Console.WriteLine("                       INVENTARIO DE LIBROS");
+        Console.WriteLine("                           INVENTARIO DE LIBROS");
 
         Console.WriteLine();
 
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("ID           TÍTULO                    AUTOR                CATEGORÍA          ESTADO           ");
+        Console.WriteLine("ID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO           ");
         Console.ResetColor();
 
-        Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────────");
+        Decoraciones.SEPARADOR();
 
         for (int i = 0; i < lineas.Length; i++)
         {
@@ -25,14 +25,14 @@ class INVENTARIO_LIBROS
             {
                 continue;
             }
-            Console.WriteLine("{0,-12}{1,-25}{2,-22}{3,-20}{4,-10}",
+            Console.WriteLine("{0,-8}{1,-32}{2,-24}{3,-24}{4,-10}",
             datos[0],
             datos[1],
             datos[2],
             datos[3],
             datos[6]);
 
-            Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────────");
+            Decoraciones.SEPARADOR();
         }
 
         Console.WriteLine();

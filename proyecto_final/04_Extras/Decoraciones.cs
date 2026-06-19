@@ -267,4 +267,11 @@ class Decoraciones
         Console.ResetColor();
         Console.ReadKey();
     }
+
+    public static void SEPARADOR()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("─────────────────────────────────────────────────────────────────────────────────────────────────");
+        Console.ResetColor();
+    }
 }
