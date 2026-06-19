@@ -203,7 +203,7 @@ class Decoraciones
             "                       de gestión de biblioteca: ");
         Console.WriteLine("");
         Console.WriteLine(
-                "1. Ver todos los libros \n" + // falta ver inventario y ver todo lo d prestamos
+                "1. Ver todos los libros \n" +
                 "2. Registrar libro nuevo \n" + 
                 "3. Buscar libro \n" +
                 "4. Prestar un libro disponible \n" +
@@ -260,16 +260,11 @@ class Decoraciones
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
 
-    public static void INVENTARIO_ENCABEZADO()
+    public static void SALIR_AL_PANEL()
     {
-        Console.WriteLine("┌────────┬──────────────────────┬──────────────────────┬──────────────────┬──────────┐");
-
-        Console.BackgroundColor = ConsoleColor.DarkCyan;
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("│ ID     │ TÍTULO               │ AUTOR                │ CATEGORÍA        │ ESTADO   │");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("Presione cualquier tecla para regresar al panel: ");
         Console.ResetColor();
-
-        Console.WriteLine("├────────┼──────────────────────┼──────────────────────┼──────────────────┼──────────┤");
-
+        Console.ReadKey();
     }
 }
