@@ -105,9 +105,7 @@ struct USUARIO
 
             if (!(File.Exists(usuarios)))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Archivo no encontrado.");
-                Console.ResetColor();
+                ALERTAS.ARCHIVO_NO_ENCONTRADO();
                 return;
             }
 
@@ -196,9 +194,7 @@ struct USUARIO
 
             if (ENCONTRADO == false)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! No se ha encontrado el usuario.");
-                Console.ResetColor();
+                ALERTAS.RESULTADO_NO_ENCONTRADO();
                 Console.WriteLine("");
             }
         Console.WriteLine();

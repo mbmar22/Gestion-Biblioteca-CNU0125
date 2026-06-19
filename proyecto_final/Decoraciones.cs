@@ -116,9 +116,7 @@ class Decoraciones
             if (claveO.Length == 0)
             {
                 Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! La contraseña no puede estar vacía.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
                 Console.Write("Ingrese su contraseña: ");
             }
 
@@ -156,9 +154,7 @@ class Decoraciones
     {
         if (!File.Exists(categorias))
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("No hay categorías registradas.");
-            Console.ResetColor();
+            ALERTAS.ARCHIVO_NO_ENCONTRADO();
             return;
         }
 
@@ -166,9 +162,7 @@ class Decoraciones
 
         if (lineas.Length <= 1)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("No hay categorías registradas.");
-            Console.ResetColor();
+            //aki
             return;
         }
 
@@ -235,6 +229,34 @@ class Decoraciones
                 "5. Cambiar contraseña \n" +
                 "6. Salir");
         Console.WriteLine("");
+    }
+
+    public static void MOSTRAR_LIBRO(string[] datos)
+    {
+        Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
+
+        Console.Write("│ ");
+        Console.WriteLine(("ID: " + datos[0]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Título: " + datos[1]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Autor: " + datos[2]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Categoría: " + datos[3]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Estado: " + datos[6]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Registrado: " + datos[7]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Descripción: " + datos[4]).PadRight(60) + " │");
+
+        Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
 
 }

@@ -28,13 +28,22 @@ class MENUS
                     }
                     break;
                 case 3:
-                    BUSQUEDA_LIBROS.BUSCAR_LIBROS();  
+                    string repetir;
+                    do
+                    {
+                        BUSQUEDA_LIBROS.BUSCAR_LIBROS();
+                        repetir = VALIDAR.SI_NO("¿Desea realizar otra búsqueda? (S/N): ");
+                    }  while (repetir == "S");
                     break;
                 case 4:
                     break;
                 case 5:
                     break;
                 case 6:
+                    if (VALIDAR.CONFIRMAR(confirmacion))
+                    {
+                        MODIFICAR_LIBROS.CAMBIAR_LIBROS();
+                    }
                     break;
                 case 7:
                     if (VALIDAR.CONFIRMAR(confirmacion))

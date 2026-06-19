@@ -14,9 +14,7 @@ class VALIDAR
 
             if (String.IsNullOrWhiteSpace(texto))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
             }
 
         } while (String.IsNullOrWhiteSpace(texto));
@@ -35,9 +33,7 @@ class VALIDAR
 
             if (String.IsNullOrWhiteSpace(entrada))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
                 opcion = -1;
             }
             else if (!int.TryParse(entrada, out opcion))
@@ -69,9 +65,7 @@ class VALIDAR
 
             if (String.IsNullOrWhiteSpace(texto))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
             }
             else if (!texto.All(char.IsLetter))
             {
@@ -100,9 +94,7 @@ class VALIDAR
 
             if (String.IsNullOrWhiteSpace(texto))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
             }
             else if (!valido)
             {
@@ -126,9 +118,7 @@ class VALIDAR
 
             if (String.IsNullOrWhiteSpace(texto))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
             }
 
             // validar que solo sean letras y espacios, ese .All con el =>
@@ -162,9 +152,7 @@ class VALIDAR
 
                 if (String.IsNullOrWhiteSpace(respuesta))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                    Console.ResetColor();
+                    ALERTAS.VACIO();
                 }
 
             } while (String.IsNullOrWhiteSpace(respuesta));
@@ -196,9 +184,7 @@ class VALIDAR
 
             if (!categoria_encontrada)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Categoría no encontrada.");
-                Console.ResetColor();
+                ALERTAS.RESULTADO_NO_ENCONTRADO();
             }
 
         } while (!categoria_encontrada);
@@ -217,15 +203,11 @@ class VALIDAR
 
             if (String.IsNullOrWhiteSpace(texto))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
             }
             else if (!texto.Any(char.IsLetter))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
-                Console.ResetColor();
+                ALERTAS.UNA_LETRA();
             }
             else
             {
@@ -267,9 +249,7 @@ class VALIDAR
 
             if (respuesta != "S" && respuesta != "N")
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Solo puede ingresar S o N.");
-                Console.ResetColor();
+                ALERTAS.YESNO();
             }
 
         } while (respuesta != "S" && respuesta != "N");
@@ -287,9 +267,7 @@ class VALIDAR
 
             if (respuesta != "S" && respuesta != "N")
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Solo puede ingresar S o N.");
-                Console.ResetColor();
+                ALERTAS.YESNO();
             }
 
         } while (respuesta != "S" && respuesta != "N");
@@ -308,15 +286,11 @@ class VALIDAR
 
             if (String.IsNullOrWhiteSpace(texto))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
+                ALERTAS.VACIO();
             }
             else if (!texto.Any(char.IsLetter))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
-                Console.ResetColor();
+                ALERTAS.UNA_LETRA();
             }
 
         } while (

@@ -24,9 +24,7 @@ class INICIAR_SESION
 
             if (!File.Exists(usuarios))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("No existen usuarios registrados.");
-                Console.ResetColor();
+                ALERTAS.ARCHIVO_NO_ENCONTRADO();
                 return "";
             }
 
