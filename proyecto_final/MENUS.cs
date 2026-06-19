@@ -10,30 +10,11 @@ class MENUS
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                           PANEL DE ADMINISTRACIÓN");
             Console.ResetColor();
-            Console.WriteLine("Como administrador, puede realizar las siguientes acciones en el sistema \n" +
-            "                       de gestión de biblioteca: ");
-            Console.WriteLine("");
-            Console.WriteLine(
-                "1. Ver todos los libros \n" +
-                "2. Registrar libro nuevo \n" +
-                "3. Buscar libro \n" +
-                "4. Prestar un libro disponible \n" +
-                "5. Devolver libro prestado \n" +
-                "6. Modificar información del libro \n" +
-                "7. Registrar nuevo usuario \n" +
-                "8. Administrar usuarios \n" +
-                "9. Registrar nueva categoría \n" +
-                "10. Salir"
-            );
-            Console.WriteLine("");
-            Console.Write("Digite el número de la acción que desea realizar: ");
-            while (!int.TryParse(Console.ReadLine(), out respuesta))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-10).");
-                Console.ResetColor();
-                Console.Write("Digite el número de la acción que desea realizar: ");
-            }
+            
+            Decoraciones.OPCIONES_ADMIN();
+            
+
+            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,10);
 
             switch (respuesta)
             {
@@ -64,9 +45,6 @@ class MENUS
                     Decoraciones.despedida();
                     break;
                 default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-9).");
-                    Console.ResetColor();
                     break;
             }
         } while (respuesta != 10);
@@ -81,32 +59,17 @@ class MENUS
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                               PANEL DE USUARIO");
             Console.ResetColor();
-            Console.WriteLine("Como usuario estándar, puede realizar las siguientes acciones en el sistema \n" +
-                "                       de gestión de biblioteca: ");
-            Console.WriteLine("");
-            Console.WriteLine(
-                    "1. Ver libros \n" +
-                    "2. Buscar libro\n" +
-                    "3. Prestar libro \n" +
-                    "4. Ver mi historial de préstamos \n" +
-                    "5. Cambiar contraseña \n" +
-                    "6. Salir"
-                );
-            Console.WriteLine("");
-            Console.Write("Digite el número de la acción que desea realizar: ");
-            while (!int.TryParse(Console.ReadLine(), out respuesta))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-5).");
-                Console.ResetColor();
-                Console.Write("Digite el número de la acción que desea realizar: ");
-            }
+            
+            Decoraciones.OPCIONES_USER();
+
+            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,6);
 
             switch (respuesta)
             {
                 case 1:
                     break;
                 case 2:
+                    BUSQUEDA_LIBROS.BUSCAR_LIBROS();
                     break;
                 case 3:
                     break;
@@ -118,9 +81,6 @@ class MENUS
                     Decoraciones.despedida();
                     break;
                 default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-5).");
-                    Console.ResetColor();
                     break;
             }
         } while (respuesta != 6);

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Claims;
 
 class ADMINISTRACION_USUARIOS
 {
@@ -35,124 +36,28 @@ class ADMINISTRACION_USUARIOS
 
         Decoraciones.NOTA_NOMBRES();
 
-        do
-        {
-            Console.Write("Digite el primer nombre del usuario: ");
-            user.nombre = Console.ReadLine();
-
-            if (String.IsNullOrWhiteSpace(user.nombre))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
-            }
-            else if (!user.nombre.All(char.IsLetter))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! No se aceptan caracteres especiales.");
-                Console.ResetColor();
-            }
-        } while (String.IsNullOrWhiteSpace(user.nombre) || !user.nombre.All(char.IsLetter));
-
-        do
-        {
-            Console.Write("Digite el primer apellido del usuario: ");
-            user.apellido = Console.ReadLine();
-
-            if (String.IsNullOrWhiteSpace(user.apellido))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
-            }
-            else if (!user.apellido.All(char.IsLetter))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! No se aceptan caracteres especiales.");
-                Console.ResetColor();
-            }
-        } while (String.IsNullOrWhiteSpace(user.apellido) || !user.apellido.All(char.IsLetter));
+        
+        user.nombre = VALIDAR.SOLO_LETRAS("Digite el primer nombre del usuario: ");
+        user.apellido = VALIDAR.SOLO_LETRAS("Digite el primer apellido del usuario: ");
 
         Decoraciones.NOTA_USERNAME();
 
-        bool usuario_existente;
-        do
-        {
-            Console.Write("Digite el nuevo nombre de usuario: ");
-            user.username = Console.ReadLine();
-            usuario_existente = false;
-
-            if (String.IsNullOrWhiteSpace(user.username))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
-            }
-            else if (!user.username.Any(char.IsLetter))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
-                Console.ResetColor();
-            }
-            else
-            {
-                if (File.Exists(usuarios))
-                {
-                    string[] lineas = File.ReadAllLines(usuarios);
-
-                    foreach (string linea in lineas)
-                    {
-                        string[] datos = linea.Split(';');
-
-                        if (datos.Length >= 4 &&
-                            datos[3].Equals(user.username, StringComparison.OrdinalIgnoreCase))
-                        {
-                            usuario_existente = true;
-
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("¡ ERROR ! Ese nombre de usuario ya existe.");
-                            Console.ResetColor();
-
-                            break;
-                        }
-                    }
-                }
-            }
-
-        } while (String.IsNullOrWhiteSpace(user.username) || !user.username.Any(char.IsLetter) || usuario_existente);
+        user.username = VALIDAR.USERNAME_VALIDO("Digite el nuevo nombre de usuario: ");
 
         Decoraciones.NOTA_CLAVE();
 
-        do
-        {
-            Console.Write("Contraseña: ");
-            user.clave = Console.ReadLine();
-
-            if (String.IsNullOrWhiteSpace(user.clave))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
-            }
-
-        } while (String.IsNullOrWhiteSpace(user.clave));
-
+        
+        user.clave = VALIDAR.NO_VACIO("Contraseña: ");
+    
 
         Decoraciones.NOTA_ROLYESTADO();
         int respuesta;
         
         do
         {
-            Console.WriteLine("¿Qué ROL tendrá este usuario?");
-            Console.WriteLine("1. Administrador - 2. Usuario regular");
-            Console.WriteLine();
-            Console.Write("Digite el número de la opción: ");
-            while (! int.TryParse(Console.ReadLine(), out respuesta))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Digite una opción válida (1 o 2).");
-                Console.ResetColor();
-            }
+            respuesta = VALIDAR.OPCION("¿Qué ROL tendrá este usuario?" +
+            "\n1. Administrador - 2. Usuario regular", 1,2);
+
             switch (respuesta)
             {
                 case 1:
@@ -162,9 +67,6 @@ class ADMINISTRACION_USUARIOS
                     user.rol = "Usuario";
                     break;
                 default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("¡ ERROR ! Digite una opción válida (1 o 2).");
-                    Console.ResetColor();
                     break;
             }
         } while (respuesta != 1 && respuesta != 2);
@@ -236,15 +138,25 @@ class ADMINISTRACION_USUARIOS
             if (datos[3].Equals(BUSCADO, StringComparison.OrdinalIgnoreCase))
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("¡Usuario encontrado éxitosamente!");
+                Console.WriteLine("\n¡Usuario encontrado exitosamente!");
+                Console.WriteLine();
                 Console.ResetColor();
 
-                Console.WriteLine(
-                "Nombre: " + datos[1] + " " + datos[2] +
-                "\nUsuario: " + datos[3] +
-                "\nRol: " + datos[5] +
-                "\nEstado: " + datos[6]
-                );
+                Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
+
+                Console.Write("│ ");
+                Console.WriteLine(("Nombre: " + datos[1] + " " + datos[2]).PadRight(60) + " │");
+
+                Console.Write("│ ");
+                Console.WriteLine(("Usuario: " + datos[3]).PadRight(60) + " │");
+
+                Console.Write("│ ");
+                Console.WriteLine(("Rol: " + datos[5]).PadRight(60) + " │");
+
+                Console.Write("│ ");
+                Console.WriteLine(("Estado: " + datos[6]).PadRight(60) + " │");
+
+                Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
 
                 Console.WriteLine("");
                 Console.WriteLine("Puedes realizar las siguientes acciones: ");

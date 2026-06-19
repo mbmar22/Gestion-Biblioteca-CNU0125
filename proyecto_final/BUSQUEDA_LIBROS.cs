@@ -17,15 +17,7 @@ class BUSQUEDA_LIBROS
             );
         Console.WriteLine("");
 
-        int respuesta;
-        Console.Write("Digite el número de la acción que desea realizar: ");
-        while ((!int.TryParse(Console.ReadLine(), out respuesta)) || (respuesta != 1 && respuesta != 2))
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("¡ ERROR ! Debe ingresar una opción válida (1-2).");
-            Console.ResetColor();
-            Console.Write("Digite el número de la acción que desea realizar: ");
-        }
+        int respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,2);
         switch (respuesta)
         {
             case 1:
@@ -41,19 +33,14 @@ class BUSQUEDA_LIBROS
 
     static void BUSQUEDA_NOMBRE()
     {
-        String nombre_buscado;
-        do
-        {
-            Console.Write("Ingrese el nombre del libro que desea consultar: ");
-            nombre_buscado = Console.ReadLine();
+        Decoraciones.ENCABEZADO();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine("                    PANEL DE BÚSQUEDA DE LIBROS POR NOMBRE");
+        Console.ResetColor();
+        Console.WriteLine();
 
-            if (String.IsNullOrWhiteSpace(nombre_buscado))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
-            }
-        } while (String.IsNullOrWhiteSpace(nombre_buscado));
+        String nombre_buscado = VALIDAR.NO_VACIO("Ingrese el nombre del libro que desea buscar: ");
+        
 
         String[] lineas = File.ReadAllLines(libros);
         bool encontrado = false;
@@ -116,8 +103,15 @@ class BUSQUEDA_LIBROS
 
     }
 
+    static String categorias = ".//archivos//categorias.csv";
     static void BUSQUEDA_CATEGORIA()
     {
-        
+        Decoraciones.ENCABEZADO();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine("                  PANEL DE BÚSQUEDA DE LIBROS POR CATEGORÍA");
+        Console.ResetColor();
+        Console.WriteLine();
+
+        Decoraciones.mostrar_categorias();
     }
 }

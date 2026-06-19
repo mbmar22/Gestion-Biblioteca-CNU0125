@@ -26,23 +26,13 @@ class ADMINISTRACION_CATEGORIAS
         if (File.Exists(categorias))
         {
             contadorIdC = File.ReadAllLines(categorias).Length + 1;
-            if (contadorIdC < 10)
-            {
-                category.idCategoria = ($"00{contadorIdC}C");
-            }
-            else if (contadorIdC >= 10 || contadorIdC <= 99)
-            {
-                category.idCategoria = ($"0{contadorIdC}C");
-            }
-            else
-            {
-                category.idCategoria = ($"{contadorIdC}C");
-            }
         }
         else
         {
             contadorIdC = 1;
         }
+
+        category.idCategoria = $"{contadorIdC:D3}L";
 
         Decoraciones.NOTA_CATEGORIAS();
 
@@ -50,47 +40,32 @@ class ADMINISTRACION_CATEGORIAS
 
         do
         {
-            Console.Write("Ingrese el nombre de la categoría: ");
-            category.nombreCategoria = Console.ReadLine();
             categoria_existente = false;
 
-            if (String.IsNullOrWhiteSpace(category.nombreCategoria))
+            category.nombreCategoria = VALIDAR.SOLO_LETRAS("Ingrese el nombre de la categoría: ");
+
+            // verificar repetidos
+            if (File.Exists(categorias))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-                Console.ResetColor();
-            }
-            else if (!category.nombreCategoria.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! No se aceptan caracteres especiales.");
-                Console.ResetColor();
-            }
-            else
-            {
-                if (File.Exists(categorias))
+                string[] lineas = File.ReadAllLines(categorias);
+
+                foreach (string linea in lineas)
                 {
-                    string[] lineas = File.ReadAllLines(categorias);
-                    foreach (string linea in lineas)
+                    string[] datos = linea.Split(';');
+
+                    if (datos[1].Equals(category.nombreCategoria, StringComparison.OrdinalIgnoreCase))
                     {
-                        string[] datos = linea.Split(';');
-                        
-                        if (datos.Length >= 1 &&
-                        datos[1].Equals(category.nombreCategoria, StringComparison.OrdinalIgnoreCase))
-                        {
-                            categoria_existente = true;
+                        categoria_existente = true;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("¡ ERROR ! Esa categoría ya existe.");
+                        Console.ResetColor();
 
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("¡ ERROR ! Ese nombre de categoría ya existe.");
-                            Console.ResetColor();
-
-                            break;
-                        }
+                        break;
                     }
                 }
             }
-        } while (String.IsNullOrWhiteSpace(category.nombreCategoria) || !category.nombreCategoria.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))|| categoria_existente);
 
+        } while (categoria_existente);
 
         bool existe = File.Exists(categorias);
 
@@ -113,32 +88,3 @@ class ADMINISTRACION_CATEGORIAS
 
     }
 }
-
-// Hacer que si ingresan la categoría en minúsculas o con alguna variación extraña como aVENtura se ponga todo en minúscula con la primera letra en mayúscula.
-
-
-/* Encontrar la manera de cambiar idCategoria a string para podr añadirle letras al ID. 
-Ahorita está como int por que para que se vaya sumando 1 a 1 el ID "categorias" tiene que estar como int. */
-
-
-// Hacer tipo ejercicio de la tienda.
-// (g) al registrar usuarios, libros o categorias?
-
-// No era que no se permitían carácteres especiales (???)
-// (g) en q parte hay
-
-// Permite agregar categorias repetidas.
-// (g) si deja si no le ponen tilde, no se si poner un mensaje de q cuidado con la ortografia o buscar como validar q reconozca lo mismo.
-
-/* Luego de que se agrega una categoría o un usuario, hay un cambio muy brusco cuando se regresa a la pantalla del menú. 
-Investigar sobre como hacer que por ejemplo la consola muestre algo como "Regresando al menú..." por 3 segundos o algo así, o alguna transición de regreso o no sé, algo.*/
-
-// (g) ya puse en decoraciones unos ... de carga por 3 segundos, se miran bien cute
-
-// Ver lo del sonido.
-
-// (g) excelenteee lo ponemos solo en errores ej las alertas y en ops exitosas como registrado correctamente
-// o en todo como un sonido de click o asi?
-
-// Por defecto el estado del usuario debe de ser activo.
-// (g) okis

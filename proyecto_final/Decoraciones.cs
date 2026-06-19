@@ -5,10 +5,15 @@ class Decoraciones
     public static void ENCABEZADO()
     {
         Console.Clear();
-        Console.WriteLine("                            ──  ⋆ ⋅ 📚 ⋅ ⋆  ──");
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("                               MATH LIBRARY ");
-        Console.ResetColor();
+        ENCABEZADO2();
+    }
+
+    public static void ENCABEZADO_INICIAL()
+    {
+        ENCABEZADO();
+        Console.WriteLine("Gestor de la biblioteca del centro de entrenamiento matemático Math For All");
+        Console.WriteLine("        ──────────────────────────────────────────────────────────────"); 
+
     }
 
     public static void ENCABEZADO2()
@@ -132,6 +137,73 @@ class Decoraciones
         Console.ResetColor();
     }
     
+    static String categorias = ".//archivos//categorias.csv";
 
+    public static void mostrar_categorias()
+    {
+        String[] lineas = File.ReadAllLines(categorias);
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("\n 𓂃🖋   CATEGORÍAS DISPONIBLES");
+        Console.ResetColor();
+
+        int contador = 0;
+
+        for (int i = 0; i < lineas.Length; i++)
+        {
+            String[] datos = lineas[i].Split(';');
+
+            if (datos.Length > 1)
+            {
+                Console.Write(datos[1].PadRight(20));
+                contador++;
+
+                if (contador % 3 == 0)
+                {
+                    Console.WriteLine();
+                }
+            }
+        }
+        if (contador % 3 != 0)
+        {
+            Console.WriteLine();
+        }
+                
+        Console.WriteLine();
+            
+    }
+
+    public static void OPCIONES_ADMIN()
+    {
+        Console.WriteLine("Como administrador, puede realizar las siguientes acciones en el sistema \n" +
+            "                       de gestión de biblioteca: ");
+        Console.WriteLine("");
+        Console.WriteLine(
+                "1. Ver todos los libros \n" +
+                "2. Registrar libro nuevo \n" +
+                "3. Buscar libro \n" +
+                "4. Prestar un libro disponible \n" +
+                "5. Devolver libro prestado \n" +
+                "6. Modificar información del libro \n" +
+                "7. Registrar nuevo usuario \n" +
+                "8. Administrar usuarios \n" +
+                "9. Registrar nueva categoría \n" +
+                "10. Salir");
+        Console.WriteLine("");
+    }
+
+    public static void OPCIONES_USER()
+    {
+        Console.WriteLine("Como usuario estándar, puede realizar las siguientes acciones en el sistema \n" +
+            "                       de gestión de biblioteca: ");
+        Console.WriteLine("");
+        Console.WriteLine(
+                "1. Ver libros \n" +
+                "2. Buscar libro\n" +
+                "3. Prestar libro \n" +
+                "4. Ver mi historial de préstamos \n" +
+                "5. Cambiar contraseña \n" +
+                "6. Salir");
+        Console.WriteLine("");
+    }
 
 }
