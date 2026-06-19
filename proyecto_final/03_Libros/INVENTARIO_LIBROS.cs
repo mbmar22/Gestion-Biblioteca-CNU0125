@@ -6,15 +6,8 @@ class INVENTARIO_LIBROS
     {
         String[] lineas = File.ReadAllLines(libros);
 
-        Console.WriteLine("┌────────┬──────────────────────┬──────────────────────┬──────────────────┬──────────┐");
-
-        Console.BackgroundColor = ConsoleColor.DarkCyan;
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("│ ID     │ TÍTULO               │ AUTOR                │ CATEGORÍA        │ ESTADO   │");
-        Console.ResetColor();
-
-        Console.WriteLine("├────────┼──────────────────────┼──────────────────────┼──────────────────┼──────────┤");
-
+        Decoraciones.INVENTARIO_ENCABEZADO();
+        
         for (int i = 0; i < lineas.Length; i++)
         {
             String[] datos = lineas[i].Split(';');
@@ -47,5 +40,10 @@ class INVENTARIO_LIBROS
         }
 
         Console.WriteLine("└────────┴──────────────────────┴──────────────────────┴──────────────────┴──────────┘");
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("Presione cualquier tecla para regresar al panel...");
+        Console.ResetColor();
+        Console.ReadKey();
     }
 }

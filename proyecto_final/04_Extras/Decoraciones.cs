@@ -259,4 +259,17 @@ class Decoraciones
 
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
+
+    public static void INVENTARIO_ENCABEZADO()
+    {
+        Console.WriteLine("┌────────┬──────────────────────┬──────────────────────┬──────────────────┬──────────┐");
+
+        Console.BackgroundColor = ConsoleColor.DarkCyan;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("│ ID     │ TÍTULO               │ AUTOR                │ CATEGORÍA        │ ESTADO   │");
+        Console.ResetColor();
+
+        Console.WriteLine("├────────┼──────────────────────┼──────────────────────┼──────────────────┼──────────┤");
+
+    }
 }
