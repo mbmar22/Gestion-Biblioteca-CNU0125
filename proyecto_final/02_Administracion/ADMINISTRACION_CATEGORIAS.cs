@@ -38,7 +38,7 @@ class ADMINISTRACION_CATEGORIAS
 
             category.idCategoria = $"{contadorIdC:D3}C";
 
-            Decoraciones.NOTA_CATEGORIAS();
+            INSTRUCCIONES.NOTA_CATEGORIAS();
 
             bool categoria_existente;
 
