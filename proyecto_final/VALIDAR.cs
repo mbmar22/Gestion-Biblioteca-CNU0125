@@ -196,7 +196,7 @@ class VALIDAR
             } while (String.IsNullOrWhiteSpace(respuesta));
 
             // mostrar categorías
-            if (respuesta == "C")
+            if (respuesta == "1")
             {
 
                 Decoraciones.mostrar_categorias();

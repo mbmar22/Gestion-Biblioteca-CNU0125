@@ -24,5 +24,4 @@
             MENUS.MENU_USUARIO();
         }
     }
-
 }

@@ -56,7 +56,7 @@ class REGISTRO_LIBROS
 
         // categoria del libro
         Decoraciones.NOTA_CATEGORIAS();
-        LIBRO.categoria = VALIDAR.CATEGORIAVALIDA("Digite el nombre de la categoría o digite 'C' para" +
+        LIBRO.categoria = VALIDAR.CATEGORIAVALIDA("Digite el nombre de la categoría o digite '1' para" +
         "\n consultar las categorías existentes: ");
         
         // datos por defecto del libro
