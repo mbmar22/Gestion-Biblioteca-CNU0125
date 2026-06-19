@@ -98,18 +98,36 @@ class Decoraciones
 
         do
         {
-            password = Console.ReadKey(true);
-            if (password.Key == ConsoleKey.Backspace && claveO.Length > 0)
+            claveO.Clear();
+
+            do
             {
-                claveO.Remove(claveO.Length - 1, 1);
-                Console.Write("\b \b");
-            }
-            else if (password.Key != ConsoleKey.Enter && password.Key != ConsoleKey.Backspace)
+                password = Console.ReadKey(true);
+
+                if (password.Key == ConsoleKey.Backspace && claveO.Length > 0)
+                {
+                    claveO.Remove(claveO.Length - 1, 1);
+                    Console.Write("\b \b");
+                }
+                else if (password.Key != ConsoleKey.Enter &&
+                        password.Key != ConsoleKey.Backspace)
+                {
+                    claveO.Append(password.KeyChar);
+                    Console.Write("•");
+                }
+
+            } while (password.Key != ConsoleKey.Enter);
+
+            if (claveO.Length == 0)
             {
-                claveO.Append(password.KeyChar);
-                Console.Write("•");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("¡ ERROR ! La contraseña no puede estar vacía.");
+                Console.ResetColor();
+                Console.Write("Ingrese su contraseña: ");
             }
-        } while (password.Key != ConsoleKey.Enter);
+
+        } while (claveO.Length == 0);
 
         return claveO.ToString();
     }
@@ -141,20 +159,37 @@ class Decoraciones
 
     public static void mostrar_categorias()
     {
-        String[] lineas = File.ReadAllLines(categorias);
+        if (!File.Exists(categorias))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("No hay categorías registradas.");
+            Console.ResetColor();
+            return;
+        }
+
+        string[] lineas = File.ReadAllLines(categorias);
+
+        if (lineas.Length <= 1)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("No hay categorías registradas.");
+            Console.ResetColor();
+            return;
+        }
+
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine("\n 𓂃🖋   CATEGORÍAS DISPONIBLES");
         Console.ResetColor();
 
         int contador = 0;
 
-        for (int i = 0; i < lineas.Length; i++)
+        for (int i = 1; i < lineas.Length; i++) // empieza en 1 para saltar el encabezado
         {
-            String[] datos = lineas[i].Split(';');
+            string[] datos = lineas[i].Split(';');
 
             if (datos.Length > 1)
             {
-                Console.Write(datos[1].PadRight(20));
+                Console.Write(datos[1].PadRight(25));
                 contador++;
 
                 if (contador % 3 == 0)
@@ -163,13 +198,13 @@ class Decoraciones
                 }
             }
         }
+
         if (contador % 3 != 0)
         {
             Console.WriteLine();
         }
-                
+
         Console.WriteLine();
-            
     }
 
     public static void OPCIONES_ADMIN()
@@ -187,7 +222,8 @@ class Decoraciones
                 "7. Registrar nuevo usuario \n" +
                 "8. Administrar usuarios \n" +
                 "9. Registrar nueva categoría \n" +
-                "10. Salir");
+                "10. Cambiar contraseña\n" +
+                "11. Salir");
         Console.WriteLine("");
     }
 

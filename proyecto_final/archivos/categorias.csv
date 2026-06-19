@@ -1,8 +1,4 @@
-1;Terror
-2;Poesía
-3;Química
-4;Programación
-5;Física
-6;Teatro
-7;Tragedia Griega
-8;Filosofía
+ID Categoría;Categoría
+001C;Tragedia Griega
+002C;Poesía
+003C;Teatro

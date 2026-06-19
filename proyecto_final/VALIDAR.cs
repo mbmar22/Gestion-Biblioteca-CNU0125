@@ -1,4 +1,3 @@
-
 class VALIDAR
 {
     static String categorias = ".//archivos//categorias.csv";

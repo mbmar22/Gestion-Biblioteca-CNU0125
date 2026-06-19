@@ -16,7 +16,10 @@ class INICIAR_SESION
             Console.ResetColor();
 
             usuario = VALIDAR.NO_VACIO("Ingrese su usuario: ");
-            clave = VALIDAR.NO_VACIO("Ingrese su contraseña: ");
+            
+            Console.Write("Ingrese su contraseña: ");
+            clave = Decoraciones.ocultarClave();
+            Console.WriteLine();
 
 
             if (!File.Exists(usuarios))

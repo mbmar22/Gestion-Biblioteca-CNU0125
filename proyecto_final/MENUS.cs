@@ -14,7 +14,7 @@ class MENUS
             Decoraciones.OPCIONES_ADMIN();
             
 
-            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,10);
+            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,11);
 
             switch (respuesta)
             {
@@ -42,6 +42,8 @@ class MENUS
                     ADMINISTRACION_CATEGORIAS.CREAR_CATEGORIA();
                     break;
                 case 10:
+                    
+                case 11:
                     Decoraciones.despedida();
                     break;
                 default:

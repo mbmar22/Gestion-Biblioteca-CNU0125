@@ -25,14 +25,14 @@ class ADMINISTRACION_CATEGORIAS
 
         if (File.Exists(categorias))
         {
-            contadorIdC = File.ReadAllLines(categorias).Length + 1;
+            contadorIdC = File.ReadAllLines(categorias).Length;
         }
         else
         {
             contadorIdC = 1;
         }
 
-        category.idCategoria = $"{contadorIdC:D3}L";
+        category.idCategoria = $"{contadorIdC:D3}C";
 
         Decoraciones.NOTA_CATEGORIAS();
 
@@ -42,7 +42,7 @@ class ADMINISTRACION_CATEGORIAS
         {
             categoria_existente = false;
 
-            category.nombreCategoria = VALIDAR.SOLO_LETRAS("Ingrese el nombre de la categoría: ");
+            category.nombreCategoria = VALIDAR.LETRAS_ESPACIOS("Ingrese el nombre de la categoría: ");
 
             // verificar repetidos
             if (File.Exists(categorias))
@@ -53,9 +53,12 @@ class ADMINISTRACION_CATEGORIAS
                 {
                     string[] datos = linea.Split(';');
 
-                    if (datos[1].Equals(category.nombreCategoria, StringComparison.OrdinalIgnoreCase))
+                    if (datos.Length > 1 &&
+                        datos[1].Equals(category.nombreCategoria,
+                        StringComparison.OrdinalIgnoreCase))
                     {
                         categoria_existente = true;
+
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("¡ ERROR ! Esa categoría ya existe.");
                         Console.ResetColor();
@@ -71,9 +74,9 @@ class ADMINISTRACION_CATEGORIAS
 
         using (StreamWriter sw = new StreamWriter(categorias, true))
         {
-            if (!existe)
+            if (!File.Exists(categorias) || new FileInfo(categorias).Length == 0)
             {
-                sw.WriteLine("ID Categoría, Categoría");
+                sw.WriteLine("ID Categoría;Categoría");
             }
         }
 
@@ -85,6 +88,5 @@ class ADMINISTRACION_CATEGORIAS
         Console.ResetColor();
         Console.WriteLine("Regresará al panel de administración");
         Decoraciones.cargando();
-
     }
 }
