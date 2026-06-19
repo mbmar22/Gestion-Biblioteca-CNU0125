@@ -115,10 +115,10 @@ class BUSQUEDA_LIBROS
         }
     }
 
-    public static void BUSQUEDA_ID()
+    public static int BUSQUEDA_ID()
     {
         
-        string id_buscado = VALIDAR.NO_VACIO("Ingrese el ID del libro que desea modificar: ");
+        string id_buscado = VALIDAR.NO_VACIO("\nIngrese el ID del libro que desea modificar: ");
 
         string[] lineas = File.ReadAllLines(libros);
         bool encontrado = false;
@@ -139,7 +139,7 @@ class BUSQUEDA_LIBROS
                     Console.WriteLine();
 
                     Decoraciones.MOSTRAR_LIBRO(datos);
-                    break; // ya lo encontró, no ocupa seguir
+                    return i;
                 }
             }
         }
@@ -148,5 +148,6 @@ class BUSQUEDA_LIBROS
         {
             ALERTAS.RESULTADO_NO_ENCONTRADO();
         }
+        return -1;
     }
 }
