@@ -80,7 +80,6 @@ class MENUS
         do
         {
             Decoraciones.ENCABEZADO();
-            Console.WriteLine("        ──────────────────────────────────────────────────────────────");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                               PANEL DE USUARIO");
             Console.ResetColor();

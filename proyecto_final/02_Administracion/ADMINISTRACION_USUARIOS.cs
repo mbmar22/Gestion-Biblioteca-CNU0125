@@ -35,29 +35,29 @@ struct USUARIO
                 user.ID = 1;
             }
 
-            Decoraciones.NOTA_NOMBRES();
+            INSTRUCCIONES.NOTA_NOMBRES();
 
             
             user.nombre = VALIDAR.SOLO_LETRAS("Digite el primer nombre del usuario: ");
             user.apellido = VALIDAR.SOLO_LETRAS("Digite el primer apellido del usuario: ");
 
-            Decoraciones.NOTA_USERNAME();
+            INSTRUCCIONES.NOTA_USERNAME();
 
             user.username = VALIDAR.USERNAME_VALIDO("Digite el nuevo nombre de usuario: ");
 
-            Decoraciones.NOTA_CLAVE();
+            INSTRUCCIONES.NOTA_CLAVE();
 
             
             user.clave = VALIDAR.NO_VACIO("Contraseña: ");
         
 
-            Decoraciones.NOTA_ROLYESTADO();
+            INSTRUCCIONES.NOTA_ROLYESTADO();
             int respuesta;
             
             do
             {
                 respuesta = VALIDAR.OPCION("¿Qué ROL tendrá este usuario?" +
-                "\n1. Administrador - 2. Usuario regular", 1,2);
+                "\n1. Administrador - 2. Usuario regular: ", 1,2);
 
                 switch (respuesta)
                 {

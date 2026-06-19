@@ -47,19 +47,19 @@ class REGISTRO_LIBROS
             LIBRO.ID = $"{contadorId:D3}L";
 
             // titulo y autor del libro
-            Decoraciones.NOTA_LIBRO();
+            INSTRUCCIONES.NOTA_LIBRO();
 
             LIBRO.titulo = VALIDAR.NO_VACIO("Digite el nombre del título: ");
 
             LIBRO.autor = VALIDAR.AUTORVALIDO("Digite el nombre del autor: ");
             
             // descripcion del libro
-            Decoraciones.NOTA_DESCRIPCION();
+            INSTRUCCIONES.NOTA_DESCRIPCION();
 
             LIBRO.descripcion = VALIDAR.NO_VACIO("Introduzca una descripción breve del libro: ");
 
             // categoria del libro
-            Decoraciones.NOTA_CATEGORIAS();
+            INSTRUCCIONES.NOTA_CATEGORIAS();
             LIBRO.categoria = VALIDAR.CATEGORIAVALIDA("Digite el nombre de la categoría o digite '1' para" +
             "\nconsultar la lista de categorías existentes: ");
             
