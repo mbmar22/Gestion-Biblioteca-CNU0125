@@ -1,3 +1,5 @@
+using System.Formats.Asn1;
+
 class MENUS
 {
     static String usuarios = ".//archivos//usuarios.csv";
@@ -15,7 +17,7 @@ class MENUS
             Decoraciones.OPCIONES_ADMIN();
             
 
-            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,11);
+            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,10);
 
             switch (respuesta)
             {
@@ -37,42 +39,45 @@ class MENUS
                     }  while (repetir == "S");
                     break;
                 case 4:
+                    do
+                    {
+                        ADMINISTRACION_PRESTAMOS.MENU_PRESTAMOS();
+                        repetir = VALIDAR.SI_NO("¿Desea realizar algún préstamo, devolución o visualizar el registro de préstamos? (S/N): ");
+                    } while (repetir == "S");
                     break;
                 case 5:
-                    break;
-                case 6:
                     if (VALIDAR.CONFIRMAR(confirmacion))
                     {
                         MODIFICAR_LIBROS.CAMBIAR_LIBROS();
                     }
                     break;
-                case 7:
+                case 6:
                     if (VALIDAR.CONFIRMAR(confirmacion))
                     {
                         ADMINISTRACION_USUARIOS.CREAR_USUARIO();
                     }
                     break;
-                case 8:
+                case 7:
                     if (VALIDAR.CONFIRMAR(confirmacion))
                     {
                         ADMINISTRACION_USUARIOS.MANEJAR_USUARIO();
                     }
                     break;
-                case 9:
+                case 8:
                     if (VALIDAR.CONFIRMAR(confirmacion))
                     {
                         ADMINISTRACION_CATEGORIAS.CREAR_CATEGORIA();
                     }
                     break;
-                case 10:
+                case 9:
                     break;
-                case 11:
+                case 10:
                     Decoraciones.despedida();
                     break;
                 default:
                     break;
             }
-        } while (respuesta != 11);
+        } while (respuesta != 10);
     }
     public static void MENU_USUARIO()
     {

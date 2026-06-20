@@ -138,14 +138,13 @@ class Decoraciones
                 "1. Ver todos los libros \n" +
                 "2. Registrar libro nuevo \n" + 
                 "3. Buscar libro \n" +
-                "4. Prestar un libro disponible \n" +
-                "5. Devolver libro prestado \n" +
-                "6. Modificar información del libro \n" +
-                "7. Registrar nuevo usuario \n" +
-                "8. Administrar usuarios \n" +
-                "9. Registrar nueva categoría \n" +
-                "10. Cambiar contraseña\n" +
-                "11. Salir");
+                "4. Administración de préstamos \n" +
+                "5. Modificar información del libro \n" +
+                "6. Registrar nuevo usuario \n" +
+                "7. Administrar usuarios \n" +
+                "8. Registrar nueva categoría \n" +
+                "9. Cambiar contraseña\n" +
+                "10. Salir");
         Console.WriteLine("");
     }
 
