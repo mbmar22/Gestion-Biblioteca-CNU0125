@@ -1,4 +1,4 @@
-ID Libro, Título, Autor, Descripción, Categoría, Fecha de Ingreso, Estado, Dispopnibilidad
+IDLibro, Título, Autor, Categoría, Descripción, Disponibilidad, Estado, FechaDeIngreso
 001L;Azul;Rubén Darío;Poesía;Prueba cambio de descripcion;Disponible;Activo;17/06/2026
 002L;Cantos de vida y esperanza;Rubén Darío;Poesía;Poemario;Disponible;Activo;17/06/2026
 003L;Hamlet;William Shakespeare;Teatro;Teatro inglés, literatura inglesa;Disponible;Activo;17/06/2026
