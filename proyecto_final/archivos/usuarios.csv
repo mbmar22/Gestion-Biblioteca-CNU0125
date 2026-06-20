@@ -1,2 +1,4 @@
-1;Gretchen;Aburto;gretchen;67;Administrador;Activo;
+ID, Nombre, Apellido, Usuario, Clave, Rol, Estado
+1;Gretchen;Aburto;gretchen;67;Administrador;Activo
 2;María;Martínez;mbmar22;1234;Administrador;Activo
+3;Hola;Adiós;HolaAdios;123;Usuario;Activo

@@ -6,16 +6,18 @@ class REGISTRO_LIBROS
 
     static String libros = ".//archivos//libros.csv";
     static String categorias = ".//archivos//categorias.csv";
-    struct LIBROS
+
+    // cambié el struct a class para trabajar con clases heredadas. No sé qué estoy haciendo la verdad, jaja
+    public class LIBROS
     {
-        public string ID;
-        public String titulo;
-        public String autor;
-        public String descripcion;
-        public String categoria;
-        public String ingreso;
-        public String estado;
-        public String disponibilidad;
+        public string ID = "ID Libro";
+        public String titulo = "Título";
+        public String autor = "Autor";
+        public String descripcion = "Descripción";
+        public String categoria = "Categoría";
+        public String ingreso = "Fecha de Ingreso";
+        public String estado = "Estado";
+        public String disponibilidad = "Disponibilidad";
 
     }
 
