@@ -3,7 +3,7 @@ using System.Formats.Asn1;
 class MENUS
 {
     static String usuarios = ".//archivos//usuarios.csv";
-    public static void MENU_ADMIN()
+    public static void MENU_ADMIN() // MENU PARA ADMINISTRADORES
     {
         string confirmacion = "\n¿Está seguro de que desea realizar esta acción? (S/N): ";
         int respuesta;
@@ -14,11 +14,11 @@ class MENUS
             Console.WriteLine("                           PANEL DE ADMINISTRACIÓN");
             Console.ResetColor();
             
+            // ENTRADA DE DATOS: con las opciones, el usuario escoge una opción válida
             Decoraciones.OPCIONES_ADMIN();
-            
-
             respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,10);
 
+            // PROCESO
             switch (respuesta)
             {
                 case 1:

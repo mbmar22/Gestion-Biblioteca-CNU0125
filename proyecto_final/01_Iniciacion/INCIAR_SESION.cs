@@ -15,12 +15,12 @@ class INICIAR_SESION
             Console.WriteLine($"INTENTO {i + 1} DE INICIO DE SESIÓN.");
             Console.ResetColor();
 
-            usuario = VALIDAR.NO_VACIO("Ingrese su usuario: ");
+            // ENTRADAS DE INICIO DE SESIÓN (usuario y contraseña)
+            usuario = VALIDAR.AL_MENOS_UNA_LETRA("Ingrese su usuario: ");
             
             Console.Write("Ingrese su contraseña: ");
             clave = Decoraciones.ocultarClave();
             Console.WriteLine();
-
 
             if (!File.Exists(usuarios))
             {
@@ -28,7 +28,7 @@ class INICIAR_SESION
                 return "";
             }
 
-            String[] lineas = File.ReadAllLines(usuarios);
+            String[] lineas = File.ReadAllLines(usuarios); // proceso
 
             foreach (String linea in lineas)
             {
@@ -39,7 +39,7 @@ class INICIAR_SESION
 
                 String[] datos = linea.Split(';');
 
-                if (datos.Length < 7)
+                if (datos.Length < 7) // para evitar out of index range
                 {
                     continue;
                 }
@@ -47,7 +47,7 @@ class INICIAR_SESION
                 if (datos[3].Equals(usuario, StringComparison.OrdinalIgnoreCase)
                     && datos[4] == clave)
                 {
-                    if (datos[6] == "Activo")
+                    if (datos[6] == "Activo") // SALIDAS
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine($"\n¡Bienvenido a Math Library, {datos[1]}!");
