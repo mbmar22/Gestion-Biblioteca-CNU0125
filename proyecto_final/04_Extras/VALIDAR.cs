@@ -29,7 +29,7 @@ class VALIDAR
         do
         {
             Console.Write(mensaje);
-            string entrada = Console.ReadLine();
+            string? entrada = Console.ReadLine();
 
             if (String.IsNullOrWhiteSpace(entrada))
             {

@@ -29,18 +29,6 @@ public class USUARIO
 
             USUARIO user = new USUARIO();
 
-            int contadorIdU;
-            if (File.Exists(usuarios))
-            {
-                contadorIdU = File.ReadAllLines(usuarios).Length + 1;
-            }
-            else
-            {
-                contadorIdU = 1;
-            }
-
-            user.ID = $"{contadorIdU:D3}L";
-
             INSTRUCCIONES.NOTA_NOMBRES();
 
             
@@ -80,6 +68,78 @@ public class USUARIO
 
             // estado activo por defecto
             user.estado = "Activo";
+
+
+            //Contador de ID
+            int contadorIdR;
+            int contadorIdRA; // Contador de Id para Admin
+            int contadorIdRU; // Contador de Id para User
+
+
+            if (File.Exists(usuarios))
+            {
+                contadorIdR = File.ReadAllLines(usuarios).Count(l => !string.IsNullOrWhiteSpace(l)) - 1;
+                if (user.rol == "Administrador")
+                {
+                    contadorIdRA = 0;
+
+                    foreach (string linea in File.ReadAllLines(usuarios))
+                    {
+                        if (string.IsNullOrWhiteSpace(linea))
+                            continue;
+
+                        string id = linea.Split(';')[0];
+
+                        if (id.EndsWith('A'))
+                        {
+                            int numero = int.Parse(id.Substring(id.Length - 4, 3));
+
+                            if (numero > contadorIdRA)
+                            {
+                                contadorIdRA = numero;
+                            }
+                        }
+                    }
+
+                    contadorIdRA++;
+
+                    user.ID = $"{contadorIdR + 1:D3}I{contadorIdRA:D3}A";
+
+                }
+                else
+                {
+                    contadorIdRU = 0;
+
+                    foreach (string linea in File.ReadAllLines(usuarios))
+                    {
+                        if (string.IsNullOrWhiteSpace(linea))
+                            continue;
+
+                        string id = linea.Split(';')[0];
+
+                        if (id.EndsWith('U'))
+                        {
+                            int numero = int.Parse(id.Substring(id.Length - 4, 3));
+
+                            if (numero > contadorIdRU)
+                            {
+                                contadorIdRU = numero;
+                            }
+                        }
+                    }
+
+                    contadorIdRU++;
+
+                    user.ID = $"{contadorIdR + 1:D3}I{contadorIdRU:D3}U";
+                }
+            }
+            else
+            {
+                contadorIdR = 1;
+                contadorIdRA = 1;
+                contadorIdRU = 1;
+            }
+
 
             String USUARIOS = user.ID + ";" + user.nombre + ";" + user.apellido + ";" +
             user.username + ";" + user.clave + ";" + user.rol + ";" + user.estado;

@@ -176,6 +176,6 @@ Para mañana:
 - Búsqueda del usuario luego de la confirmación del libro.
 - Confirmar si es el usuario correcto.
 - Agregar validaciones. 
-- Agregar 
+- Completar ID de Préstamos con lo del IDLibro y IDUsuario.
 - Ver porqué no se cambia de "Disponible" a "Prestado"
 */
