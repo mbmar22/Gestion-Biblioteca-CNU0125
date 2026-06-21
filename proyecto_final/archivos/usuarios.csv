@@ -1,4 +1,4 @@
 ID, Nombre, Apellido, Usuario, Clave, Rol, Estado
-1;Gretchen;Aburto;gretchen;67;Administrador;Activo
+1;Gretchen;Aburto;gretchen;sixseven;Administrador;Activo
 2;María;Martínez;mbmar22;1234;Administrador;Inactivo
 3;Hola;Adiós;HolaAdios;123;Usuario;Activo

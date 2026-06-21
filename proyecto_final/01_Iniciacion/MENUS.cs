@@ -70,6 +70,14 @@ class MENUS
                     }
                     break;
                 case 9:
+                    if (VALIDAR.CONFIRMAR(confirmacion))
+                    {
+                        bool cerrar_sesion = CAMBIO_CLAVE.MODIFICAR_CLAVE();
+                        if (cerrar_sesion)
+                        {
+                            return;
+                        }
+                    }
                     break;
                 case 10:
                     Decoraciones.despedida();
@@ -90,7 +98,7 @@ class MENUS
             Console.ResetColor();
             
             Decoraciones.OPCIONES_USER();
-
+            string confirmacion = "\n¿Está seguro de que desea realizar esta acción? (S/N): ";
             respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,6);
 
             switch (respuesta)
@@ -111,6 +119,14 @@ class MENUS
                 case 4:
                     break;
                 case 5:
+                    if (VALIDAR.CONFIRMAR(confirmacion))
+                    {
+                        bool cerrar_sesion = CAMBIO_CLAVE.MODIFICAR_CLAVE();
+                        if (cerrar_sesion)
+                        {
+                            return;
+                        }
+                    }
                     break;
                 case 6:
                     Decoraciones.despedida();
