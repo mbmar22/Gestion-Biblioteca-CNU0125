@@ -8,13 +8,13 @@ static String usuarios = ".//archivos//usuarios.csv";
 // de struct a class
 public class USUARIO
 {
-    public int ID;
-    public string nombre = "Nombre";
-    public string apellido = "Apellido";
-    public string username = "Usuario";
-    public string clave = "Clave";
-    public string rol = "Rol";
-    public string estado = "Estado";
+    public string ID = "-";
+    public string nombre = "-";
+    public string apellido = "-";
+    public string username = "-";
+    public string clave = "-";
+    public string rol = "-";
+    public string estado = "-";
 }
     public static void CREAR_USUARIO()
     {    
@@ -28,14 +28,18 @@ public class USUARIO
             Console.WriteLine("");
 
             USUARIO user = new USUARIO();
+
+            int contadorIdU;
             if (File.Exists(usuarios))
             {
-                user.ID = File.ReadAllLines(usuarios).Length + 1;
+                contadorIdU = File.ReadAllLines(usuarios).Length + 1;
             }
             else
             {
-                user.ID = 1;
+                contadorIdU = 1;
             }
+
+            user.ID = $"{contadorIdU:D3}L";
 
             INSTRUCCIONES.NOTA_NOMBRES();
 

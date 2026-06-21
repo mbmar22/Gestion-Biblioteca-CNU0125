@@ -80,7 +80,7 @@ class ADMINISTRACION_CATEGORIAS
             {
                 if (!File.Exists(categorias) || new FileInfo(categorias).Length == 0)
                 {
-                    sw.WriteLine("ID Categoría;Categoría");
+                    sw.WriteLine("IdCategoría;Categoría");
                 }
             }
 
@@ -91,7 +91,7 @@ class ADMINISTRACION_CATEGORIAS
             Console.WriteLine("\n¡Categoría registrada con éxito!");
             Console.ResetColor();
 
-            repetir = VALIDAR.SI_NO("\n¿Desea registrar otra libro? (S/N): ");
+            repetir = VALIDAR.SI_NO("\n¿Desea registrar otra categoría? (S/N): ");
 
         } while (repetir == "S");
 

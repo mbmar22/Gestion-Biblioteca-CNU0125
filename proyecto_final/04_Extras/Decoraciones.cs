@@ -180,7 +180,7 @@ class Decoraciones
         Console.WriteLine(("Categoría: " + datos[3]).PadRight(60) + " │");
 
         Console.Write("│ ");
-        Console.WriteLine(("Estado: " + datos[6]).PadRight(60) + " │");
+        Console.WriteLine(("Disponibilidad: " + datos[5]).PadRight(60) + " │");
 
         Console.Write("│ ");
         Console.WriteLine(("Registrado: " + datos[7]).PadRight(60) + " │");

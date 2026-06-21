@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.Security.Cryptography.X509Certificates;
+
+class Program
 {
     public static void Main(String[] args)
     {
