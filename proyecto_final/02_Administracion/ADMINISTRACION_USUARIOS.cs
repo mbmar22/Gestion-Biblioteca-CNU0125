@@ -129,7 +129,7 @@ public class USUARIO
             {
                 String[] datos = lineas[i].Split(';');
 
-                if (datos[3].Equals(BUSCADO, StringComparison.OrdinalIgnoreCase))
+                if (datos.Length > 3 && datos[3].Equals(BUSCADO, StringComparison.OrdinalIgnoreCase))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\n¡Usuario encontrado exitosamente!");

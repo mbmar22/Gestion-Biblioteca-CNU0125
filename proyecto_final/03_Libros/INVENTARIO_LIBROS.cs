@@ -12,7 +12,7 @@ class INVENTARIO_LIBROS
         Console.WriteLine();
 
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("ID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO           ");
+        Console.WriteLine("ID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO    DISPONIBILIDAD");
         Console.ResetColor();
 
         Decoraciones.SEPARADOR();
@@ -25,12 +25,13 @@ class INVENTARIO_LIBROS
             {
                 continue;
             }
-            Console.WriteLine("{0,-8}{1,-32}{2,-24}{3,-24}{4,-10}",
+            Console.WriteLine("{0,-8}{1,-32}{2,-24}{3,-24}{4,-10}{5,-16}",
             datos[0],
             datos[1],
             datos[2],
             datos[3],
-            datos[6]);
+            datos[6],
+            datos[5]);
 
             Decoraciones.SEPARADOR();
         }

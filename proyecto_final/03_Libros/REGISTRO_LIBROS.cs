@@ -28,7 +28,6 @@ class REGISTRO_LIBROS
         do
         {
             LIBROS LIBRO = new LIBROS();
-            Console.WriteLine("        ──────────────────────────────────────────────────────────────");
             Decoraciones.ENCABEZADO();  
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("                        PANEL DE REGISTRO DE LIBROS");
