@@ -12,7 +12,7 @@ class INVENTARIO_LIBROS
         Console.WriteLine();
 
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("ID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO    DISPONIBILIDAD");
+        Console.WriteLine("ID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO");
         Console.ResetColor();
 
         Decoraciones.SEPARADOR();

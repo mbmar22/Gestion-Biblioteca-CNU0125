@@ -1,3 +1,1 @@
-IdPrestamo;IdLibro;UsuarioId;FechaPrestamo;FechaDevolucion
-001P;001L;1;20/06/2026;
-002P;009L;2;20/06/2026;
+IdPrestamo;IdLibro;UsuarioId;Disponibilidad;FechaPrestamo;FechaDevolucion

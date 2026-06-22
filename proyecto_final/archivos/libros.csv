@@ -1,15 +1,15 @@
-IDLibro, Título, Autor, Categoría, Descripción, Disponibilidad, Estado, FechaDeIngreso
-001L;Azul;Rubén Darío;Poesía;Prueba cambio de descripciòn;Disponible;Inactivo;17/06/2026
-002L;Cantos de vida y esperanza;Rubén Darío;Poesía;Poemario;Disponible;Activo;17/06/2026
-003L;Hamlet;William Shakespeare;Teatro;Teatro inglés, literatura inglesa;Disponible;Activo;17/06/2026
-004L;Versos sencillos;José Martí;Poesía;Poemario de José Martí;Disponible;Activo;17/06/2026
-005L;Versos libres;José Martí;Poesía;Prueba de cambio de descripcion;Disponible;Activo;17/06/2026
-006L;Ismaelillo;José Martí;Poesía;Poesía cubana, literatura cubana;Disponible;Activo;17/06/2026
-007L;La Odisea;Homero;Tragedia Griega;El reflejo de la sociedad en la épica;Disponible;Activo;17/06/2026
-008L;Edipo Rey;Sófocles;Tragedia Griega;Tragedia griega;Disponible;Activo;17/06/2026
-009L;Antígona;Sófocles;Tragedia Griega;Sófocles referente del modo existencial de pensar y ser;Disponible;Activo;17/06/2026
-010L;Electra;Eurípedes;Tragedia Griega;.;Disponible;Activo;17/06/2026
-011L;Prometeo encadenado;Esquilo;Tragedia Griega;.;Disponible;Activo;17/06/2026
-012L;Prosas Profanas;Rubén Darío;Poesía;.;Disponible;Activo;18/06/2026
-013L;Fundamentos de programación;Luis Joyanes Aguilar;Programación;Algoritmos, estructuras de datos y objetos;Disponible;Activo;18/06/2026
-014L;El amor, las mujeres y la vida;Mario Benedetti;Poesía;Recopilacion de poemas;Prestado;Inactivo;18/06/2026
+IDLibro, Título, Autor, Categoría, Descripción, Estado, FechaDeIngreso
+001L;Azul;Rubén Darío;Poesía;Prueba cambio de descripciòn;Inactivo;17/06/2026
+002L;Cantos de vida y esperanza;Rubén Darío;Poesía;Poemario;Activo;17/06/2026
+003L;Hamlet;William Shakespeare;Teatro;Teatro inglés, literatura inglesa;Activo;17/06/2026
+004L;Versos sencillos;José Martí;Poesía;Poemario de José Martí;Activo;17/06/2026
+005L;Versos libres;José Martí;Poesía;Prueba de cambio de descripcion;Activo;17/06/2026
+006L;Ismaelillo;José Martí;Poesía;Poesía cubana, literatura cubana;Activo;17/06/2026
+007L;La Odisea;Homero;Tragedia Griega;El reflejo de la sociedad en la épica;Activo;17/06/2026
+008L;Edipo Rey;Sófocles;Tragedia Griega;Tragedia griega;Activo;17/06/2026
+009L;Antígona;Sófocles;Tragedia Griega;Sófocles referente del modo existencial de pensar y ser;Activo;17/06/2026
+010L;Electra;Eurípedes;Tragedia Griega;.;Activo;17/06/2026
+011L;Prometeo encadenado;Esquilo;Tragedia Griega;.;Activo;17/06/2026
+012L;Prosas Profanas;Rubén Darío;Poesía;.;Activo;18/06/2026
+013L;Fundamentos de programación;Luis Joyanes Aguilar;Programación;Algoritmos, estructuras de datos y objetos;Activo;18/06/2026
+014L;El amor, las mujeres y la vida;Mario Benedetti;Poesía;Recopilacion de poemas;Inactivo;18/06/2026

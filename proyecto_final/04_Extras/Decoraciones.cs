@@ -179,14 +179,15 @@ class Decoraciones
         Console.Write("│ ");
         Console.WriteLine(("Categoría: " + datos[3]).PadRight(60) + " │");
 
-        Console.Write("│ ");
-        Console.WriteLine(("Disponibilidad: " + datos[5]).PadRight(60) + " │");
+        // Corregir esto, lo puse así para mientras, como comentario.
+        //Console.Write("│ ");
+        //Console.WriteLine(("Disponibilidad: " + datos[5]).PadRight(60) + " │");
 
-        Console.Write("│ ");
-        Console.WriteLine(("Estado: " + datos[6]).PadRight(60) + " │");
+        //Console.Write("│ ");
+        //Console.WriteLine(("Estado: " + datos[6]).PadRight(60) + " │");
 
-        Console.Write("│ ");
-        Console.WriteLine(("Registrado: " + datos[7]).PadRight(60) + " │");
+        //Console.Write("│ ");
+        //Console.WriteLine(("Registrado: " + datos[7]).PadRight(60) + " │");
 
         Console.Write("│ ");
         Console.WriteLine(("Descripción: " + datos[4]).PadRight(60) + " │");
@@ -230,4 +231,12 @@ class Decoraciones
         Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────────────");
         Console.ResetColor();
     }
+
+    public static void LIBRO_NO_DISPONIBLE()
+    {
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine("Libro no disponible.\n");
+        Console.ResetColor();
+    }
+
 }

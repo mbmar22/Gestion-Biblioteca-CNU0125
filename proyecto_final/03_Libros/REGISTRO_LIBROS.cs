@@ -17,7 +17,6 @@ class REGISTRO_LIBROS
         public String categoria = "Categoría";
         public String ingreso = "Fecha de Ingreso";
         public String estado = "Estado";
-        public String disponibilidad = "Disponibilidad";
 
     }
 
@@ -66,10 +65,9 @@ class REGISTRO_LIBROS
             
             // datos por defecto del libro
             LIBRO.estado = "Activo";        
-            LIBRO.disponibilidad = "Disponible";
             LIBRO.ingreso = DateTime.Now.ToString("dd/MM/yyyy");
 
-            String nuevo_libro = LIBRO.ID + ";" + LIBRO.titulo + ";" + LIBRO.autor + ";" + LIBRO.categoria + ";" + LIBRO.descripcion + ";" + LIBRO.disponibilidad + ";" + LIBRO.estado + ";" + LIBRO.ingreso;
+            String nuevo_libro = LIBRO.ID + ";" + LIBRO.titulo + ";" + LIBRO.autor + ";" + LIBRO.categoria + ";" + LIBRO.descripcion + ";" + LIBRO.estado + ";" + LIBRO.ingreso;
         
             // proceso de guardar el libro
             File.AppendAllText(libros,nuevo_libro + Environment.NewLine);

@@ -1,10 +1,11 @@
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 class PRESTAMOS
 {
     public string IdPrestamo { get; set; }
     public string LibroId { get; set; }
-    public int UsuarioId { get; set; }
+    public string UsuarioId { get; set; }
 
     public string Disponibilidad { get; set; } 
     public DateTime Fecha_Prestamo { get; set; }
@@ -13,7 +14,7 @@ class PRESTAMOS
     public PRESTAMOS(
         string idPrestamo,
         string libroId,
-        int usuarioId,
+        string usuarioId,
         string disponibilidad,
         DateTime fechaPrestamo,
         DateTime? fechaDevolucion = null
@@ -39,6 +40,14 @@ class PRESTAMOS
 
         string repetir;
 
+        using (StreamWriter sw = new StreamWriter(prestamos, true))
+        {
+            if (!File.Exists(prestamos) || new FileInfo(prestamos).Length == 0)
+            {
+                sw.WriteLine("IdPrestamo;IdLibro;UsuarioId;Disponibilidad;FechaPrestamo;FechaDevolucion");
+            }
+        }
+
         do
         {
             Decoraciones.ENCABEZADO();
@@ -62,41 +71,93 @@ class PRESTAMOS
 
             string resp = "N";
 
+            String[] lineas = File.ReadAllLines(libros);
+            String[] lines = File.ReadAllLines(prestamos);
+
             do
             {
                 String libro_buscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
-                
-                String[] lineas = File.ReadAllLines(libros);
 
-                int resultados = 0;
+                //int resultados = 0;
+
+                //int resultados2 = 0;
 
                 for (int i = 0; i < lineas.Length; i++)
                 {
                     String[] datos = lineas[i].Split(';');
 
-                    if (datos.Length > 7)
+                    if (datos.Length > 6)
                     { 
                         if (datos[0].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
                         {
-                            resultados++;
+                            //resultados++; no sé de donde salió esto la verdad (???)
 
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            Decoraciones.MOSTRAR_LIBRO(datos);
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-
-                            if(datos[5] != "Disponible")
+                            if(datos[5] != "Activo")
                             {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("Libro no disponible.");
-                                Console.ResetColor();
+                                Decoraciones.LIBRO_NO_DISPONIBLE();
                             }
                             else
                             {
+                                for (int j = 0; j < lines.Length; j++)
+                                {
+                                    String[] data = lines[j].Split(';');
+
+                                    if (data.Length > 5)
+                                    {
+                                        if(data[1].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            //resultados2++;
+
+                                            if(data[3] != "Disponible") // ver porqué cree que el libro sigue estando disponible si ya está prestado
+                                            {
+                                                Decoraciones.LIBRO_NO_DISPONIBLE();
+                                            }
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                                Decoraciones.MOSTRAR_LIBRO(datos);
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+                                                Console.WriteLine("Este libro ya ha sido prestado, pero está disponible en este momento"); //borrar también, jaja
+                                                
+                                                string disponibilidad = "Prestado";
+                                                string usuario = "PorDefinir";
+
+                                                PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], usuario, disponibilidad, DateTime.Now);
+
+                                                using (StreamWriter sw = new StreamWriter (prestamos, true))
+                                                {
+                                                    sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
+                                                }
+                                            }            
+                                        }
+                                        else
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                                            Decoraciones.MOSTRAR_LIBRO(datos);
+                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+                                            Console.WriteLine("El libro aún no ha sido prestado"); //borrar esto después, nada más estaba probando, xd
+
+                                            string disponibilidad = "Prestado";
+                                            string usuario = "PorDefinir";
+
+                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], usuario, disponibilidad, DateTime.Now);
+
+                                            using (StreamWriter sw = new StreamWriter (prestamos, true))
+                                            {
+                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
+                                            }
+                                        }
+                                    }
+                                }
+                            
                                 resp = VALIDAR.SI_NO($"\n¿Es '{datos[1]}' el libro que desea prestar? (S/ N): ");
                                 Console.ResetColor();
-                            }
 
+                            }
                         }
+
                     }
                 }
             } while (resp == "N");
@@ -117,6 +178,7 @@ class PRESTAMOS
         } while (repetir == "S");
     }
 
+
     public static void DEVOLVER_LIBRO()
     {
 
@@ -125,3 +187,12 @@ class PRESTAMOS
 
 }
 
+
+// añadir en el código del préstamo la cantidad de veces que ha sido prestado el libro? o ya mucho?, no lo sé la verdad, xd
+
+/* problema: El código debe de revisar el último registro del libro en caso de estar en la lista de préstamos y en base a su disponibilidad escoger si se hace o no.
+ideas para solucionarlo: 
+- En el id de préstamos 000P, añadir el código del libro, tipo 001P001L001C, para que el programa lea el 001 cantidad que significa cantidad de veces que ha sido prestado ese libro, entonces, en base a eso debe de buscar la cantidad máxima y decidir en base a eso.
+El problema es que habría que convertir aislar ese 001 y convertirlo a string como en lo de usuario. No sé que hacer la verdad.
+
+*/
