@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 
 class PRESTAMOS
@@ -33,11 +34,11 @@ class PRESTAMOS
         
     }
 
-    public static void PRESTAR_LIBRO()
+    public static void PRESTAR_LIBRO_ADMIN()
     {
         String libros = ".//archivos//libros.csv";
         String prestamos = ".//archivos//prestamos.csv";
-        String usuarios = ".//archivos//usuarios.csv";
+        // String usuarios = ".//archivos//usuarios.csv";
 
         string repetir;
 
@@ -78,6 +79,7 @@ class PRESTAMOS
             do
             {
                 String libro_buscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
+                Console.WriteLine("\n");
 
                 for (int i = 0; i < lineas.Length; i++)
                 {
@@ -123,61 +125,39 @@ class PRESTAMOS
                                     Decoraciones.MOSTRAR_LIBRO(datos);
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-                                    if (tieneHistorial)
+                                    if (tieneHistorial) // o sea, si ya había sido prestado pero está disponible para prestar
                                     {
-                                        Console.WriteLine("Este libro ya había sido prestado pero está disponible");
                                         resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
                                         Console.ResetColor(); 
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("El libro nunca ha sido prestado");
-                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
-                                        Console.ResetColor();
-                                        
-                                    }
-
-                                    string respue = "N"; 
-                                    string nombreUsuario = "";
-
-                                    do
-                                    {
-                                        string usuario_buscado = VALIDAR.USERNAME_ID_VALIDO("\nIngrese el ID del usuario: ");
-
-                                        string[] lineass = File.ReadAllLines(usuarios);
-
-                                        bool encontrado = false;
-                                        
-                                        for (int k = 0; k < lineass.Length; k++)
+                                        if (resp == "S")
                                         {
-                                            string[] dato = lineass[k].Split(';');
+                                            string nombreUsuario = BUSCAR_USUARIO();
+                                            string disponibilidad = "Prestado";
 
-                                            if(dato.Length > 1 && dato[0].Equals(usuario_buscado, StringComparison.OrdinalIgnoreCase))
+                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
+
+                                            using (StreamWriter sw = new StreamWriter(prestamos, true))
                                             {
-                                                encontrado = true;
-                                                nombreUsuario = dato[1];
-                                                break;
+                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
                                             }
                                         }
-
-                                        if (encontrado)
-                                        {
-                                            respue = VALIDAR.SI_NO($"¿Es '{nombreUsuario}' el usuario que busca? (S/N): ");
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Usuario no encontrado. Intente otra vez.");
-                                        }
-                                        
-                                    } while (respue == "N");
-
-                                    string disponibilidad = "Prestado";
-
-                                    PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
-
-                                    using (StreamWriter sw = new StreamWriter(prestamos, true))
+                                    }
+                                    else // el libro nunca ha sido prestado
                                     {
-                                        sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
+                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
+                                        Console.ResetColor();
+                                        if (resp == "S")
+                                        {
+                                            string nombreUsuario = BUSCAR_USUARIO();
+                                            string disponibilidad = "Prestado";
+
+                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
+
+                                            using (StreamWriter sw = new StreamWriter(prestamos, true))
+                                            {
+                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -190,6 +170,57 @@ class PRESTAMOS
         } while (repetir == "S");
     }
 
+    public static string BUSCAR_USUARIO()
+    {
+        String usuarios = ".//archivos//usuarios.csv"; 
+        string answer = "S";
+        string nombreUsuario = "";
+
+        do
+        {
+            string usuario_buscado = VALIDAR.USERNAME_ID_VALIDO("\nIngrese el ID del usuario: ");
+
+            string[] lineass = File.ReadAllLines(usuarios);
+
+            bool encontrado = false;
+            
+            for (int k = 0; k < lineass.Length; k++)
+            {
+                string[] dato = lineass[k].Split(';');
+
+                if(dato.Length > 1 && dato[0].Equals(usuario_buscado, StringComparison.OrdinalIgnoreCase))
+                {
+                    encontrado = true;
+                    nombreUsuario = dato[1];
+                    break;
+                }
+            }
+
+            bool continuar = false;
+            if (encontrado)
+            {
+                answer = VALIDAR.SI_NO($"\n¿Es '{nombreUsuario}' el usuario que busca? (S/N): ");
+                if (answer == "S")
+                {
+                    continuar = true;
+                }
+            }
+            else
+            {
+                return nombreUsuario = "BBB";
+            }
+
+        if (continuar == true)
+        {
+            return nombreUsuario;
+        }
+        else
+        {
+            return "" ; // encontrar la manera de cancelar ese return por que cuando se corre si se le da N entonces se corta el programa.
+        }
+        } while (answer == "N");
+    }
+
 
     public static void DEVOLVER_LIBRO()
     {
@@ -199,12 +230,4 @@ class PRESTAMOS
 
 }
 
-
-// añadir en el código del préstamo la cantidad de veces que ha sido prestado el libro? o ya mucho?, no lo sé la verdad, xd
-
-/* problema: El código debe de revisar el último registro del libro en caso de estar en la lista de préstamos y en base a su disponibilidad escoger si se hace o no.
-ideas para solucionarlo: 
-- En el id de préstamos 000P, añadir el código del libro, tipo 001P001L001C, para que el programa lea el 001 cantidad que significa cantidad de veces que ha sido prestado ese libro, entonces, en base a eso debe de buscar la cantidad máxima y decidir en base a eso.
-El problema es que habría que convertir aislar ese 001 y convertirlo a string como en lo de usuario. No sé que hacer la verdad.
-
-*/
+// por qué 

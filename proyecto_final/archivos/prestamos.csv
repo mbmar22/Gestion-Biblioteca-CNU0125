@@ -1,11 +1,3 @@
 IdPrestamo;IdLibro;UsuarioId;Disponibilidad;FechaPrestamo;FechaDevolucion
-001P;003L;PorDefinir;Prestado;6/21/2026 9:38:09 PM
-002P;004L;PorDefinir;Prestado;6/21/2026 9:44:53 PM
-003P;007L;PorDefinir;Prestado;6/21/2026 9:55:55 PM
-004P;009L;PorDefinir;Prestado;6/21/2026 10:01:29 PM
-005P;006L;PorDefinir;Prestado;6/21/2026 10:06:12 PM
-006P;005L;PorDefinir;Prestado;6/21/2026 10:07:44 PM
-007P;002L;PorDefinir;Prestado;6/21/2026 10:09:15 PM
-008P;008L;PorDefinir;Prestado;6/21/2026 10:20:06 PM
-009P;011L;PorDefinir;Prestado;6/21/2026 10:28:35 PM
-010P;013L;Gretchen;Prestado;6/21/2026 10:48:49 PM
+001P;002L;aaa;Prestado;6/22/2026 10:23:29 AM
+002P;003L;María;Prestado;6/22/2026 10:26:21 AM

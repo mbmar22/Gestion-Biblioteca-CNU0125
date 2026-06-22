@@ -16,7 +16,8 @@ class ADMINISTRACION_PRESTAMOS
         Console.WriteLine(
             "1. Ver historial de préstamos.\n" +
             "2. Prestar libro\n" +
-            "3. Devolver libro.");
+            "3. Devolver libro.\n" +
+            "4. Regresar al menú.");
 
         Console.WriteLine("");
 
@@ -28,10 +29,13 @@ class ADMINISTRACION_PRESTAMOS
             PRESTAMOS.MOSTRAR_PRESTAMOS();
                 break;
             case 2:
-            PRESTAMOS.PRESTAR_LIBRO();
+            PRESTAMOS.PRESTAR_LIBRO_ADMIN();
                 break;
             case 3:
             PRESTAMOS.DEVOLVER_LIBRO();
+                break;
+            case 4:
+            MENUS.MENU_ADMIN();
                 break;
         }
 

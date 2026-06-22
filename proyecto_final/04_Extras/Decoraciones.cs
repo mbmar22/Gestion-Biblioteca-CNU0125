@@ -235,7 +235,7 @@ class Decoraciones
     public static void LIBRO_NO_DISPONIBLE()
     {
         Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine("Libro no disponible.\n");
+        Console.WriteLine("Libro no disponible.");
         Console.ResetColor();
     }
 
