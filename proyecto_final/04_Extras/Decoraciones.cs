@@ -231,12 +231,17 @@ class Decoraciones
         Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────────────");
         Console.ResetColor();
     }
-
-    public static void LIBRO_NO_DISPONIBLE()
+    public static void TEXTO_CYAN(string mensaje)
     {
-        Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine("Libro no disponible.");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine(mensaje);
         Console.ResetColor();
     }
 
+    public static void TEXTO_ROJO(string mensaje)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(mensaje);
+        Console.ResetColor();
+    }
 }

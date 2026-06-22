@@ -34,9 +34,7 @@ class BUSQUEDA_LIBROS
     static void BUSQUEDA_NOMBRE()
     {
         Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                  PANEL DE BÚSQUEDA DE LIBROS POR NOMBRE");
-        Console.ResetColor();
+        Decoraciones.TEXTO_CYAN("                  PANEL DE BÚSQUEDA DE LIBROS POR NOMBRE");
         Console.WriteLine();
 
         String nombre_buscado = VALIDAR.NO_VACIO("Ingrese el nombre del libro que desea buscar: ");
@@ -80,9 +78,7 @@ class BUSQUEDA_LIBROS
     static void BUSQUEDA_CATEGORIA()
     {
         Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                  PANEL DE BÚSQUEDA DE LIBROS POR CATEGORÍA");
-        Console.ResetColor();
+        Decoraciones.TEXTO_CYAN("                  PANEL DE BÚSQUEDA DE LIBROS POR CATEGORÍA");
         Console.WriteLine();
 
         Decoraciones.mostrar_categorias();

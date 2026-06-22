@@ -22,9 +22,7 @@ public class USUARIO
         do
         {
             Decoraciones.ENCABEZADO();  
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                        PANEL DE CREACIÓN DE USUARIOS");
-            Console.ResetColor();
+            Decoraciones.TEXTO_CYAN("                        PANEL DE CREACIÓN DE USUARIOS");
             Console.WriteLine("");
 
             USUARIO user = new USUARIO();
@@ -164,10 +162,8 @@ public class USUARIO
         do
         {
             Decoraciones.ENCABEZADO();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                     PANEL DE MODIFICACIÓN DE USUARIOS ");
+            Decoraciones.TEXTO_CYAN("                     PANEL DE MODIFICACIÓN DE USUARIOS ");
             Console.WriteLine("");
-            Console.ResetColor();
 
             if (!(File.Exists(usuarios)))
             {

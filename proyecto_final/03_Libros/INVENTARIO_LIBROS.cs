@@ -7,14 +7,9 @@ class INVENTARIO_LIBROS
         String[] lineas = File.ReadAllLines(libros);
 
         Decoraciones.ENCABEZADO();
-        Console.WriteLine("                           INVENTARIO DE LIBROS");
+        Decoraciones.TEXTO_CYAN("MOSTRANDO EL INVENTARIO DE LIBROS");
 
-        Console.WriteLine();
-
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("ID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO");
-        Console.ResetColor();
-
+        Decoraciones.TEXTO_CYAN("\nID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO");
         Decoraciones.SEPARADOR();
 
         for (int i = 0; i < lineas.Length; i++)

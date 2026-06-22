@@ -18,11 +18,8 @@ class ADMINISTRACION_CATEGORIAS
         do
         {
             CATEGORIA category = new CATEGORIA();
-            Console.WriteLine(" ───────────────────────────────────────────────────────────────────────── ");
             Decoraciones.ENCABEZADO();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
-            Console.ResetColor();
+            Decoraciones.TEXTO_CYAN("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
             Console.WriteLine();
 
             int contadorIdC;
@@ -63,9 +60,7 @@ class ADMINISTRACION_CATEGORIAS
                         {
                             categoria_existente = true;
 
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("¡ ERROR ! Esa categoría ya existe.");
-                            Console.ResetColor();
+                            Decoraciones.TEXTO_ROJO("¡ ERROR ! Esa categoría ya existe.");
 
                             break;
                         }

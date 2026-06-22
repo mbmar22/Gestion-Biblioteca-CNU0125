@@ -55,12 +55,10 @@ class MODIFICAR_LIBROS()
         string[] datos = lineas[indice].Split(';');
 
         Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                   EDITAR DESCRIPCIÓN DEL LIBRO");
-        Console.ResetColor();
-        Console.WriteLine();
+        Decoraciones.TEXTO_CYAN("                   EDITAR DESCRIPCIÓN DEL LIBRO");
 
-        Console.WriteLine($"{datos[1]}  -  {datos[2]}");
+
+        Console.WriteLine($"\n{datos[1]}  -  {datos[2]}");
         Console.WriteLine($"Descripción actual: {datos[4]}");
         Console.WriteLine();
 
@@ -85,9 +83,7 @@ class MODIFICAR_LIBROS()
         string[] datos = lineas[indice].Split(';');
 
         Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                      EDITAR ESTADO DEL LIBRO");
-        Console.ResetColor();
+        Decoraciones.TEXTO_CYAN("                      EDITAR ESTADO DEL LIBRO");
         Console.WriteLine();
 
         Console.WriteLine($"{datos[1]}  -  {datos[2]}");

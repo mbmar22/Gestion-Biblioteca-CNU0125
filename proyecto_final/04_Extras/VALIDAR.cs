@@ -40,15 +40,12 @@ class VALIDAR
             }
             else if (!int.TryParse(entrada, out opcion))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Debe ingresar un número.");
-                Console.ResetColor();
+                Decoraciones.TEXTO_ROJO("¡ ERROR ! Debe ingresar un número.");
+
             }
             else if (opcion < min || opcion > max)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"¡ ERROR ! Debe ingresar una opción entre {min} y {max}.");
-                Console.ResetColor();
+                Decoraciones.TEXTO_ROJO($"¡ ERROR ! Debe ingresar una opción entre {min} y {max}.");
             }
 
         } while (opcion < min || opcion > max);
@@ -71,9 +68,7 @@ class VALIDAR
             }
             else if (!texto.All(char.IsLetter))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Solo se permiten letras.");
-                Console.ResetColor();
+                Decoraciones.TEXTO_ROJO("¡ ERROR ! Solo se permiten letras.");
             }
 
         } while (String.IsNullOrWhiteSpace(texto) || !texto.All(char.IsLetter));
@@ -100,9 +95,7 @@ class VALIDAR
             }
             else if (!valido)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! Solo se permiten letras y espacios.");
-                Console.ResetColor();
+                Decoraciones.TEXTO_ROJO("¡ ERROR ! Solo se permiten letras y espacios.");
             }
 
         } while (!valido);
@@ -127,9 +120,7 @@ class VALIDAR
 
             else if (!texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '.' || c == '\'' || c == '-'))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("¡ ERROR ! No se permiten números y ciertos caracteres especiales.");
-                Console.ResetColor();
+                Decoraciones.TEXTO_ROJO("¡ ERROR ! No se permiten números y ciertos caracteres especiales.");
             }
 
         } while (String.IsNullOrWhiteSpace(texto) || !texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '.' ||  c == '\'' || c == '-'));
@@ -279,9 +270,7 @@ class VALIDAR
 
                 if (!usuario_existente)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("El ID ingresado no existe.");
-                    Console.ResetColor();
+                    Decoraciones.TEXTO_ROJO("El ID ingresado no existe.");
                 }
             }
         } while (String.IsNullOrWhiteSpace(texto) || !usuario_existente);

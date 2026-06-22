@@ -2,43 +2,36 @@ class ALERTAS
 {
     public static void VACIO()
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("¡ ERROR ! Este campo no puede estar vacío.");
-        Console.ResetColor();
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! Este campo no puede estar vacío.");
     }
 
     public static void ARCHIVO_NO_ENCONTRADO()
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("¡ ERROR ! No se ha encontrado el archivo al que se desea acceder.");
-        Console.ResetColor();
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! No se ha encontrado el archivo al que se desea acceder.");
     }
 
     public static void YESNO()
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("¡ ERROR ! Solo puede ingresar S o N.");
-        Console.ResetColor();
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! Solo puede ingresar S o N.");
     }
 
     public static void UNA_LETRA()
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("¡ ERROR ! Debe contener al menos una letra.");
-        Console.ResetColor();
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! Debe contener al menos una letra.");
     }
 
     public static void RESULTADO_NO_ENCONTRADO()
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("¡ ERROR ! No se han encontrado resultados que coincidan con su búsqueda");
-        Console.ResetColor();
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! No se han encontrado resultados que coincidan con su búsqueda");
     }
 
     public static void ACCESO_DENEGADO()
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("ERROR. ACCESO DENEGADO.");
-        Console.ResetColor();
+        Decoraciones.TEXTO_ROJO("ERROR. ACCESO DENEGADO.");
+    }
+
+    public static void LIBRO_NO_DISPONIBLE()
+    {
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! Este libro no se encuentra disponible.\n");
     }
 }
