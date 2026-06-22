@@ -1,5 +1,5 @@
 ID, Nombre, Apellido, Usuario, Clave, Rol, Estado
-001I001A;Gretchen;Aburto;gretchen;67;Administrador;Activo
+001I001A;Gretchen;Aburto;gretchen;sixseven;Administrador;Activo
 002I002A;María;Martínez;mbmar22;1234;Administrador;Activo
 003I001U;slsls;slsl;slsl;slsl;Usuario;Activo
 004I003A;slsl;slsls;lsls;wlwl;Administrador;Activo

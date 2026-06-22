@@ -60,7 +60,9 @@ class CAMBIO_CLAVE
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\n¡ERROR! Las contraseñas no coinciden.");
+            Decoraciones.cargando();
             Console.ResetColor();
+            Console.ReadKey();
             return false;
         }
 
