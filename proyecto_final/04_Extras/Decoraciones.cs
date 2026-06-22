@@ -194,6 +194,28 @@ class Decoraciones
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
 
+
+    static string usuarios = ".//archivos//usuarios";
+
+    public static void MOSTRAR_USUARIO(string[] datos)
+    {
+        string[] lineas = File.ReadAllLines(usuarios);
+
+        Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
+
+        Console.Write("│ ");
+        Console.WriteLine(("ID: " + datos[0]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Nombre: " + datos[1]).PadRight(60) + " │");
+
+        Console.Write("│ ");
+        Console.WriteLine(("Apellido: " + datos[2]).PadRight(60) + " │");
+
+        Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
+    }
+
+
     public static void SALIR_AL_PANEL()
     {
         Console.ForegroundColor = ConsoleColor.DarkCyan;

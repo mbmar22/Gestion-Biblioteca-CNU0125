@@ -19,6 +19,8 @@ class VALIDAR
 
         } while (String.IsNullOrWhiteSpace(texto));
 
+        Console.ResetColor();
+        
         return texto;
     }
 
@@ -237,6 +239,56 @@ class VALIDAR
         } while (String.IsNullOrWhiteSpace(texto) || !texto.Any(char.IsLetter) || usuario_existente);
         return texto;
     }
+
+
+    public static string USERNAME_ID_VALIDO(string mensaje)
+    {
+        string texto;
+        bool usuario_existente;
+
+        do
+        {
+            Console.Write(mensaje);
+            texto = Console.ReadLine();
+            usuario_existente = false;
+
+            if (String.IsNullOrWhiteSpace(texto))
+            {
+                ALERTAS.VACIO();
+            }
+            else
+            {
+                texto = texto.Trim();
+
+                if (File.Exists(usuarios))
+                {
+                    string [] lineas = File.ReadAllLines(usuarios);
+
+                    foreach (string linea in lineas)
+                    {
+                        string[] datos = linea.Split(';');
+
+                        if (datos.Length > 0 &&
+                        datos[0].Trim().Equals(texto, StringComparison.OrdinalIgnoreCase))
+                        {
+                            usuario_existente = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!usuario_existente)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("El ID ingresado no existe.");
+                    Console.ResetColor();
+                }
+            }
+        } while (String.IsNullOrWhiteSpace(texto) || !texto.Any(char.IsLetter) || !usuario_existente);
+
+        return texto;
+    }
+
 
     public static string SI_NO(string mensaje)
     {
