@@ -264,7 +264,7 @@ class VALIDAR
                 {
                     string [] lineas = File.ReadAllLines(usuarios);
 
-                    foreach (string linea in lineas)
+                    foreach (string linea in lineas.Skip(1)) // el skip es para que ignore el encabezado
                     {
                         string[] datos = linea.Split(';');
 
@@ -284,7 +284,7 @@ class VALIDAR
                     Console.ResetColor();
                 }
             }
-        } while (String.IsNullOrWhiteSpace(texto) || !texto.Any(char.IsLetter) || !usuario_existente);
+        } while (String.IsNullOrWhiteSpace(texto) || !usuario_existente);
 
         return texto;
     }

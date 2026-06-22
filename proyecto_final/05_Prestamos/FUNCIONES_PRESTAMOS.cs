@@ -37,6 +37,7 @@ class PRESTAMOS
     {
         String libros = ".//archivos//libros.csv";
         String prestamos = ".//archivos//prestamos.csv";
+        String usuarios = ".//archivos//usuarios.csv";
 
         string repetir;
 
@@ -78,10 +79,6 @@ class PRESTAMOS
             {
                 String libro_buscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
 
-                //int resultados = 0;
-
-                //int resultados2 = 0;
-
                 for (int i = 0; i < lineas.Length; i++)
                 {
                     String[] datos = lineas[i].Split(';');
@@ -90,90 +87,105 @@ class PRESTAMOS
                     { 
                         if (datos[0].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
                         {
-                            //resultados++; no sé de donde salió esto la verdad (???)
-
                             if(datos[5] != "Activo")
                             {
                                 Decoraciones.LIBRO_NO_DISPONIBLE();
                             }
                             else
                             {
-                                for (int j = 0; j < lines.Length; j++)
+                                bool libroPrestado = false; // este bool comienza falso porque asumimos que inicialmente el libro no está prestado
+                                bool tieneHistorial = false; // este otro es para ver si el libro ya fue prestado
+
+                                for (int j = lines.Length - 1; j >= 0; j--)
                                 {
                                     String[] data = lines[j].Split(';');
 
-                                    if (data.Length > 5)
+                                    if (data.Length > 3 && data[1].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
                                     {
-                                        if(data[1].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
+                                        tieneHistorial = true;
+
+                                        if(data[3] == "Prestado")
                                         {
-                                            //resultados2++;
+                                            libroPrestado = true;
+                                        }
 
-                                            if(data[3] != "Disponible") // ver porqué cree que el libro sigue estando disponible si ya está prestado
+                                        break;
+                                    }
+                                }
+
+                                if(libroPrestado)
+                                {
+                                    Decoraciones.LIBRO_NO_DISPONIBLE();
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                                    Decoraciones.MOSTRAR_LIBRO(datos);
+                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+                                    if (tieneHistorial)
+                                    {
+                                        Console.WriteLine("Este libro ya había sido prestado pero está disponible");
+                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
+                                        Console.ResetColor(); 
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("El libro nunca ha sido prestado");
+                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
+                                        Console.ResetColor();
+                                        
+                                    }
+
+                                    string respue = "N"; 
+                                    string nombreUsuario = "";
+
+                                    do
+                                    {
+                                        string usuario_buscado = VALIDAR.USERNAME_ID_VALIDO("\nIngrese el ID del usuario: ");
+
+                                        string[] lineass = File.ReadAllLines(usuarios);
+
+                                        bool encontrado = false;
+                                        
+                                        for (int k = 0; k < lineass.Length; k++)
+                                        {
+                                            string[] dato = lineass[k].Split(';');
+
+                                            if(dato.Length > 1 && dato[0].Equals(usuario_buscado, StringComparison.OrdinalIgnoreCase))
                                             {
-                                                Decoraciones.LIBRO_NO_DISPONIBLE();
+                                                encontrado = true;
+                                                nombreUsuario = dato[1];
+                                                break;
                                             }
-                                            else
-                                            {
-                                                Console.ForegroundColor = ConsoleColor.DarkGray;
-                                                Decoraciones.MOSTRAR_LIBRO(datos);
-                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                        }
 
-                                                Console.WriteLine("Este libro ya ha sido prestado, pero está disponible en este momento"); //borrar también, jaja
-                                                
-                                                string disponibilidad = "Prestado";
-                                                string usuario = "PorDefinir";
-
-                                                PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], usuario, disponibilidad, DateTime.Now);
-
-                                                using (StreamWriter sw = new StreamWriter (prestamos, true))
-                                                {
-                                                    sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
-                                                }
-                                            }            
+                                        if (encontrado)
+                                        {
+                                            respue = VALIDAR.SI_NO($"¿Es '{nombreUsuario}' el usuario que busca? (S/N): ");
                                         }
                                         else
                                         {
-                                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                                            Decoraciones.MOSTRAR_LIBRO(datos);
-                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-
-                                            Console.WriteLine("El libro aún no ha sido prestado"); //borrar esto después, nada más estaba probando, xd
-
-                                            string disponibilidad = "Prestado";
-                                            string usuario = "PorDefinir";
-
-                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], usuario, disponibilidad, DateTime.Now);
-
-                                            using (StreamWriter sw = new StreamWriter (prestamos, true))
-                                            {
-                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
-                                            }
+                                            Console.WriteLine("Usuario no encontrado. Intente otra vez.");
                                         }
+                                        
+                                    } while (respue == "N");
+
+                                    string disponibilidad = "Prestado";
+
+                                    PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
+
+                                    using (StreamWriter sw = new StreamWriter(prestamos, true))
+                                    {
+                                        sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
                                     }
                                 }
-                            
-                                resp = VALIDAR.SI_NO($"\n¿Es '{datos[1]}' el libro que desea prestar? (S/ N): ");
-                                Console.ResetColor();
-
                             }
                         }
-
                     }
                 }
             } while (resp == "N");
-
-
-            string respu = "N"; 
-
-            do
-            {
-                String usuario_buscado = VALIDAR.USERNAME_ID_VALIDO("\nIngrese el ID del usuario: ");
-
-                respu = VALIDAR.SI_NO(usuario_buscado);
-                // Nada más ver por qué cuando se hace la confirmación del usuario imprime otra vez el id que se le dio, ver si es tal vez por el return, no sé.
-
-            } while (respu == "N");
-
+    
             repetir = VALIDAR.SI_NO("¿Desea prestar otro libro? (S/N): ");
         } while (repetir == "S");
     }
