@@ -109,7 +109,7 @@ class Decoraciones
         {
             string[] datos = lineas[i].Split(';');
 
-            if (datos.Length > 1)
+            if (datos.Length > 1) // para evitar el out of index range
             {
                 Console.Write(datos[1].PadRight(25));
                 contador++;
