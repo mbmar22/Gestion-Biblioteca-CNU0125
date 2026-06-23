@@ -11,9 +11,7 @@ class INICIAR_SESION
 
         for (int i = 0; i < 3; i++)
         {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"INTENTO {i + 1} DE INICIO DE SESIÓN.");
-            Console.ResetColor();
+            Decoraciones.TEXTO_CYAN($"INTENTO {i + 1} DE INICIO DE SESIÓN.");
 
             // ENTRADAS DE INICIO DE SESIÓN (usuario y contraseña)
             usuario = VALIDAR.AL_MENOS_UNA_LETRA("Ingrese su usuario: ");
@@ -49,19 +47,13 @@ class INICIAR_SESION
                 {
                     if (datos[6] == "Activo") // SALIDAS
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine($"\n¡Bienvenido a Math Library, {datos[1]}!");
-                        Console.ResetColor();
+                        Decoraciones.TEXTO_VERDE($"\n¡Bienvenido a Math Library, {datos[1]}!");
                         Decoraciones.cargando();
-
                         return datos[5];
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Querido/a {datos[1]}, tu usuario está inhabilitado, comunícate con el administrador.");
-                        Console.ResetColor();
-
+                        Decoraciones.TEXTO_ROJO($"Querido/a {datos[1]}, tu usuario está inhabilitado, comunícate con el administrador.");
                         return "";
                     }
                 }
@@ -69,19 +61,13 @@ class INICIAR_SESION
 
             if (i < 2)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n¡ERROR! Usuario o contraseña incorrectos.");
-                Console.ResetColor();
-
+                Decoraciones.TEXTO_ROJO("\n¡ ERROR ! Usuario o contraseña incorrectos.");
                 Console.WriteLine($"Te quedan {2 - i} intento(s).");
                 Console.WriteLine("");
             }
         }
 
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("Has agotado los 3 intentos permitidos.");
-        Console.ResetColor();
-
+        Decoraciones.TEXTO_ROJO("Has agotado los 3 intentos permitidos.");
         return "";
     }
 }

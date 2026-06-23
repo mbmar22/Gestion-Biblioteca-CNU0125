@@ -9,9 +9,7 @@ class ADMINISTRACION_PRESTAMOS
     public static void MENU_PRESTAMOS()
     {
         Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                ADMINISTRACIÓN DE PRÉSTAMOS Y DEVOLUCIONES");
-        Console.ResetColor();
+        Decoraciones.TEXTO_CYAN("                ADMINISTRACIÓN DE PRÉSTAMOS Y DEVOLUCIONES");
         Console.WriteLine("");
         Console.WriteLine(
             "1. Ver historial de préstamos.\n" +

@@ -244,4 +244,11 @@ class Decoraciones
         Console.WriteLine(mensaje);
         Console.ResetColor();
     }
+
+    public static void TEXTO_VERDE(string mensaje)
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine(mensaje);
+        Console.ResetColor();
+    }
 }

@@ -90,15 +90,15 @@ class MENUS
     public static void MENU_USUARIO()
     {
         int respuesta;
+        string confirmacion = "\n¿Está seguro de que desea realizar esta acción? (S/N): ";
+        
         do
         {
             Decoraciones.ENCABEZADO();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                               PANEL DE USUARIO");
-            Console.ResetColor();
+            Decoraciones.TEXTO_CYAN("                               PANEL DE USUARIO");
             
             Decoraciones.OPCIONES_USER();
-            string confirmacion = "\n¿Está seguro de que desea realizar esta acción? (S/N): ";
+            
             respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,6);
 
             switch (respuesta)

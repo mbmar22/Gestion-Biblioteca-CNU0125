@@ -217,10 +217,7 @@ class VALIDAR
                         {
                             usuario_existente = true;
 
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("¡ ERROR ! Ese nombre de usuario ya existe.");
-                            Console.ResetColor();
-
+                            Decoraciones.TEXTO_ROJO("¡ ERROR ! Ese nombre de usuario ya existe.");
                             break;
                         }
                     }

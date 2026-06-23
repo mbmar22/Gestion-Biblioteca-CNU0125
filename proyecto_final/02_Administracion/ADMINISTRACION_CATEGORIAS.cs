@@ -79,13 +79,11 @@ class ADMINISTRACION_CATEGORIAS
                 }
             }
 
+            // guardar nueva categoria
             String CATEGORIAS = category.idCategoria + ";" + category.nombreCategoria;
             File.AppendAllText(categorias, CATEGORIAS + Environment.NewLine);
 
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("\n¡Categoría registrada con éxito!");
-            Console.ResetColor();
-
+            Decoraciones.TEXTO_VERDE("\n¡Categoría registrada con éxito!");
             repetir = VALIDAR.SI_NO("\n¿Desea registrar otra categoría? (S/N): ");
 
         } while (repetir == "S");
