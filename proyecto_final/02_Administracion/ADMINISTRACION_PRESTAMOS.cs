@@ -27,7 +27,15 @@ class ADMINISTRACION_PRESTAMOS
             PRESTAMOS.MOSTRAR_PRESTAMOS();
                 break;
             case 2:
-            PRESTAMOS.PRESTAR_LIBRO_ADMIN();
+            if (INICIAR_SESION.Sesion.Rol == "Administrador")
+                {
+                    PRESTAMOS.PRESTAR_LIBRO_ADMIN();
+                }
+                else
+                {
+                    PRESTAMOS.PRESTAR_LIBRO_USER();
+                }
+            
                 break;
             case 3:
             PRESTAMOS.DEVOLVER_LIBRO();

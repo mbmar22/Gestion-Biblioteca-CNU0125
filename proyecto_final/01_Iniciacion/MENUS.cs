@@ -115,6 +115,11 @@ class MENUS
                     }  while (repetir == "S");
                     break;
                 case 3:
+                    do
+                    {
+                        ADMINISTRACION_PRESTAMOS.MENU_PRESTAMOS();
+                        repetir = VALIDAR.SI_NO("¿Desea realizar algún préstamo, devolución o visualizar el registro de préstamos? (S/N): ");
+                    } while (repetir == "S");
                     break;
                 case 4:
                     break;

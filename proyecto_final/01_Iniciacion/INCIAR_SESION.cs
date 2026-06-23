@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 class INICIAR_SESION
 {
@@ -47,7 +48,11 @@ class INICIAR_SESION
                 {
                     if (datos[6] == "Activo") // SALIDAS
                     {
-                        Decoraciones.TEXTO_VERDE($"\n¡Bienvenido a Math Library, {datos[1]}!");
+                        Sesion.IdUsuario = datos[0];
+                        Sesion.Rol = datos[5];
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"\n¡Bienvenido a Math Library, {datos[1]}!");
+                        Console.ResetColor();
                         Decoraciones.cargando();
                         return datos[5];
                     }
@@ -69,5 +74,11 @@ class INICIAR_SESION
 
         Decoraciones.TEXTO_ROJO("Has agotado los 3 intentos permitidos.");
         return "";
+    }
+
+    public static class Sesion
+    {
+        public static string IdUsuario { get; set; } = "";
+        public static string Rol { get; set; } = "";
     }
 }

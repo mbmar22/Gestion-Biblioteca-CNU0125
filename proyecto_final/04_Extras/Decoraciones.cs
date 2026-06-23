@@ -251,4 +251,20 @@ class Decoraciones
         Console.WriteLine(mensaje);
         Console.ResetColor();
     }
+    public static void PRESTAR_LIBRO()
+    {
+        Decoraciones.ENCABEZADO();
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine("PRESTAR LIBRO");
+        Console.ResetColor();
+        Console.WriteLine();
+    }
+
+    public static void LIBRO_NO_DISPONIBLE()
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Libro no disponible para préstamos.");
+        Console.ResetColor();
+    }
+
 }
