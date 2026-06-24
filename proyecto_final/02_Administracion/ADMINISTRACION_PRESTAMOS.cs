@@ -19,7 +19,7 @@ class ADMINISTRACION_PRESTAMOS
         do
         {
             Decoraciones.ENCABEZADO();
-            Decoraciones.TEXTO_CYAN("           PANEL DE ADMINISTRACIÓN DE PRÉSTAMOS\n");
+            Decoraciones.TEXTO_CYAN("                    PANEL DE ADMINISTRACIÓN DE PRÉSTAMOS\n");
 
             Console.WriteLine(
                 "1. Ver historial de préstamos\n" +

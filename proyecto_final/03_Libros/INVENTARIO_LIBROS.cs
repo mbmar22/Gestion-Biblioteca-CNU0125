@@ -45,8 +45,9 @@ class INVENTARIO_LIBROS
             "+" + new string('-', anchoEstado + 2) + "+";
 
         Decoraciones.ENCABEZADO();
-        Console.WriteLine("MOSTRANDO EL INVENTARIO DE LIBROS");
-
+        Console.WriteLine("\nMOSTRANDO EL INVENTARIO DE LIBROS");
+        Decoraciones.cargando();
+        Console.WriteLine();
         Console.WriteLine(separador);
 
         Decoraciones.TEXTO_CYAN(

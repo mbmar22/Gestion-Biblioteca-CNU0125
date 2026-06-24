@@ -81,19 +81,19 @@ class MODIFICAR_LIBROS()
 
         Decoraciones.cargando();
 
-        if (datos[6].Equals("Activo", StringComparison.OrdinalIgnoreCase))
+        if (datos[5].Equals("Activo", StringComparison.OrdinalIgnoreCase))
         {
-            datos[6] = "Inactivo";
+            datos[5] = "Inactivo";
         }
         else
         {
-            datos[6] = "Activo";
+            datos[5] = "Activo";
         }
 
         lineas[indice] = string.Join(";", datos);
 
         File.WriteAllLines(libros, lineas);
 
-        Decoraciones.TEXTO_VERDE($"\nEstado actualizado a: {datos[6]}");
+        Decoraciones.TEXTO_VERDE($"\nEstado actualizado a: {datos[5]}");
     }
 }
