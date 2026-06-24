@@ -81,7 +81,6 @@ class PRESTAMOS
 
         string estadoCatalogo = "";
 
-        // 1. Buscar en libros.csv
         foreach (string linea in lineasLibros)
         {
             if (string.IsNullOrWhiteSpace(linea)) continue;
@@ -92,7 +91,7 @@ class PRESTAMOS
                 datos[0].Trim().Equals(libroBuscado, StringComparison.OrdinalIgnoreCase))
             {
                 libroEncontrado = datos;
-                estadoCatalogo = datos[5].Trim(); // Estado del catálogo: Activo/Inactivo
+                estadoCatalogo = datos[5].Trim(); // Disponibilidad: Activo/Inactivo
                 break;
             }
         }
@@ -100,7 +99,7 @@ class PRESTAMOS
         if (libroEncontrado == null)
             return null;
 
-        // 2. Revisar historial de préstamos (último estado)
+        // Esto es para revisar historial de préstamos (último estado, si es está como "Disponible" o "Prestado")
         string estadoPrestamo = "Disponible";
 
         if (File.Exists(prestamos))
@@ -122,7 +121,7 @@ class PRESTAMOS
             }
         }
 
-        // 3. Resultado final
+        // Esto es lo del resultado final
         string[] resultado = new string[libroEncontrado.Length + 1];
         libroEncontrado.CopyTo(resultado, 0);
         resultado[^1] = estadoPrestamo;
