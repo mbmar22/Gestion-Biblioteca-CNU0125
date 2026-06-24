@@ -234,5 +234,4 @@ class Decoraciones
         Console.Write(mensaje);
         Console.ResetColor();
     }
-
 }
