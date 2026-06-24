@@ -189,12 +189,11 @@ class Decoraciones
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
 
-
     static string usuarios = ".//archivos//usuarios";
+    static string prestamos = ".//archivos//prestamos.csv";
 
     public static void MOSTRAR_USUARIO(string[] datos)
     {
-        string[] lineas = File.ReadAllLines(usuarios);
 
         Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
 
@@ -210,6 +209,13 @@ class Decoraciones
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
 
+    public static void MOSTRAR_PRESTAMOS_ADMIN(string[] datos)
+    {
+        string[] lineas = File.ReadAllLines(prestamos);  
+
+        Console.WriteLine("ID Préstamo - ID Libro - ID Usuario - Disponibilidad - Fecha de Préstamo - Fecha de Devolución");
+        Console.WriteLine(datos[0] + datos[1] + datos[2] + datos[3] + datos[4] + datos[5]); 
+    }
 
     public static void SALIR_AL_PANEL()
     {
@@ -248,4 +254,13 @@ class Decoraciones
         Decoraciones.ENCABEZADO();
         Decoraciones.TEXTO_CYAN("                              PRESTAR LIBRO\n");
     }
+
+    public static void COLORES_TITULARES(string mensaje)
+    {
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
+        Console.Write(mensaje);
+        Console.ResetColor();
+        Console.Write(" | ");
+    }
+
 }
