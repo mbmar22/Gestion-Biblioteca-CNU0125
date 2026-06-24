@@ -377,9 +377,4 @@ class VALIDAR
         } while ( SIN_PUNTO_Y_COMA(texto) || !texto.Any(char.IsLetter));
         return texto;
     }
-
-  public static bool SALIR(string mensaje)
-    {
-        return mensaje.Trim().ToUpper() == "X";
-    }
 }

@@ -74,11 +74,6 @@ class PRESTAMOS
         string prestamos = ".//archivos//prestamos.csv";
 
         string libroBuscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
-        
-        if (VALIDAR.SALIR(libroBuscado))
-        {
-            return null;
-        }
 
         string[] lineasLibros = File.ReadAllLines(libros);
 
@@ -353,6 +348,5 @@ class PRESTAMOS
 
         File.WriteAllLines(prestamos, lineas);
         Decoraciones.TEXTO_VERDE("Libro devuelto correctamente.");
-        Decoraciones.SALIR_AL_PANEL();
     }
 }
