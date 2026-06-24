@@ -2,3 +2,4 @@ ID, Nombre, Apellido, Usuario, Clave, Rol, Estado
 001I001A;Gretchen;Aburto;gretchen;67;Administrador;Activo
 002I002A;María;Martínez;mbmar22;1234;Administrador;Activo
 003I001U;Silvia;Ticay;profe_silvia;1234;Usuario;Activo
+004I003A;Sofia;Martinez;Sofiayaoi;JOONGDOKCANON;Administrador;Activo
