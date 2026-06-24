@@ -1,54 +1,69 @@
-using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
-using System.Security.Cryptography.X509Certificates;
-
-// En administración de préstamos se pueden prestar libros, devolver libros, consultar préstamos activos, consultar historial de préstamos, etc.
-
 class ADMINISTRACION_PRESTAMOS
 {
-    public static void MENU_PRESTAMOS()
+    public static void MENU_ADMIN_PRESTAMOS()
     {
-        Decoraciones.ENCABEZADO();
-        Decoraciones.TEXTO_CYAN("                ADMINISTRACIÓN DE PRÉSTAMOS Y DEVOLUCIONES\n");
-        Console.WriteLine(
-            "1. Ver historial de préstamos.\n" +
-            "2. Prestar libro\n" +
-            "3. Devolver libro.\n" +
-            "4. Regresar al menú.");
+        int respuesta;
 
-        Console.WriteLine("");
-
-        int respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1, 4);
-
-        switch (respuesta)
+        do
         {
-            case 1:
-                if (INICIAR_SESION.Sesion.Rol == "Administrador")
-                {
+            Decoraciones.ENCABEZADO();
+            Decoraciones.TEXTO_CYAN("           PANEL DE ADMINISTRACIÓN DE PRÉSTAMOS\n");
+
+            Console.WriteLine(
+                "1. Ver historial de préstamos\n" +
+                "2. Prestar libro\n" +
+                "3. Gestionar la devolución de libros\n" +
+                "4. Regresar\n");
+
+            respuesta = VALIDAR.OPCION("Seleccione una opción: ", 1, 4);
+
+            switch (respuesta)
+            {
+                case 1:
                     PRESTAMOS.MOSTRAR_PRESTAMOS_ADMIN();
-                }
-                else
-                {
-                    PRESTAMOS.MOSTRAR_PRESTAMOS_USER();
-                }
-                break;
-            case 2:
-                if (INICIAR_SESION.Sesion.Rol == "Administrador")
-                {
+                    break;
+
+                case 2:
                     PRESTAMOS.PRESTAR_LIBRO(true);
-                }
-                else
-                {
-                    PRESTAMOS.PRESTAR_LIBRO(false);
-                }
-                break;
-            case 3:
-            if (INICIAR_SESION.Sesion.Rol == "Administrador")
-                PRESTAMOS.DEVOLVER_LIBRO();
-                break;
-            case 4:
-                return;
-        }
-        Console.WriteLine();
+                    break;
+
+                case 3:
+                    PRESTAMOS.DEVOLVER_LIBRO();
+                    break;
+
+                case 4:
+                    return;
+            }
+
+        } while (true);
     }
-}
+    public static void MENU_USUARIO_PRESTAMOS()
+    {
+        int respuesta;
+        do
+        {
+            Decoraciones.ENCABEZADO();
+            Decoraciones.TEXTO_CYAN("            PANEL DE GESTIÓN DE PRÉSTAMOS\n");
+
+            Console.WriteLine(
+                "1. Ver préstamos realizados\n" +
+                "2. Prestar libro\n" +
+                "3. Regresar\n");
+            respuesta = VALIDAR.OPCION("Seleccione una opción: ", 1, 3);
+
+            switch (respuesta)
+            {
+                case 1:
+                    PRESTAMOS.MOSTRAR_PRESTAMOS_USER();
+                    break;
+
+                    case 2:
+                    PRESTAMOS.PRESTAR_LIBRO(false);
+                    break;
+
+                    case 3:
+                    return;
+                }
+            } while (respuesta != 3);
+        }
+    }

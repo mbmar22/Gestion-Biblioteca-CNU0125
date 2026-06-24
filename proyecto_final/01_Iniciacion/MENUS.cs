@@ -39,11 +39,7 @@ class MENUS
                     }  while (repetir == "S");
                     break;
                 case 4:
-                    do
-                    {
-                        ADMINISTRACION_PRESTAMOS.MENU_PRESTAMOS();
-                        repetir = VALIDAR.SI_NO("¿Desea realizar algún préstamo, devolución o visualizar el registro de préstamos? (S/N): ");
-                    } while (repetir == "S");
+                    ADMINISTRACION_PRESTAMOS.MENU_ADMIN_PRESTAMOS();
                     break;
                 case 5:
                     if (VALIDAR.CONFIRMAR(confirmacion))
@@ -115,11 +111,7 @@ class MENUS
                     }  while (repetir == "S");
                     break;
                 case 3:
-                    do
-                    {
-                        ADMINISTRACION_PRESTAMOS.MENU_PRESTAMOS();
-                        repetir = VALIDAR.SI_NO("¿Desea realizar otra operación de préstamos? (S/N): ");
-                    } while (repetir == "S");
+                    ADMINISTRACION_PRESTAMOS.MENU_USUARIO_PRESTAMOS();
                     break;
                 case 4:
                     if (VALIDAR.CONFIRMAR(confirmacion))

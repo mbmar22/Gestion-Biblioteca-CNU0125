@@ -133,7 +133,7 @@ class PRESTAMOS
 
                 string[] datos = linea.Split(';');
 
-                if (datos.Length > 1)
+                if (datos.Length > 6)
                 {
                     if (datos[0].Equals(USUARIO_BUSCADO, StringComparison.OrdinalIgnoreCase))
                     {
@@ -200,7 +200,7 @@ class PRESTAMOS
     {
         String prestamos = ".//archivos//prestamos.csv";
 
-        String [] linea = File.ReadAllLines(prestamos);
+        String [] lineas = File.ReadAllLines(prestamos);
 
         Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
         Console.Write("| ");
@@ -212,29 +212,33 @@ class PRESTAMOS
         Decoraciones.COLORES_TITULARES("Fecha Devolución", 16);
         Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
 
-        foreach (string lineas in linea.Skip(1)) // saltar la primera por que es el encabezado, y el encabezado ya lo estamos imprimiendo aparte.
+        foreach (string linea in lineas.Skip(1))
         {
-            string[] columnas = lineas.Split(";");
-            // string fechaTexto = columnas[4];
-            string estadoPrestamo = columnas[5];
+            if (string.IsNullOrWhiteSpace(linea)) continue;
 
-            //DateTime fecha = DateTime.Parse(fechaTexto); // esto es para convertir la fecha que está guardada con el registro del tiempo
+            string[] columnas = linea.Split(';');
 
-            Console.Write($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[2], -10} | {columnas[3], -14} | {columnas[4], -14} | ");
+            if (columnas.Length < 6)
+                continue;
+
+            string estadoPrestamo = columnas[3];
+
+            Console.Write($"| {columnas[0],-11} | {columnas[1],-8} | {columnas[2],-10} | {columnas[3],-14} | {columnas[4],-14} | ");
 
             if (columnas[5] == "Pendiente")
             {
-                Decoraciones.PRESTAMO_PENDIENTE($"{estadoPrestamo, -17}");
-                Console.Write(" |");
+                Decoraciones.PRESTAMO_PENDIENTE($"{columnas[5],-17}");
             }
             else
             {
-                Console.Write($" {estadoPrestamo.ToString(), -17} |");
+                Console.Write($"{columnas[5],-17}");
             }
 
-            Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
+            Console.WriteLine(" |");
+            Console.WriteLine("+-------------+----------+------------+----------------+----------------+-------------------+");
         }
     }
+
 
     public static void MOSTRAR_PRESTAMOS_USER()
     {
@@ -254,10 +258,7 @@ class PRESTAMOS
         foreach (string lineas in linea.Skip(1))
         {
             string[] columnas = lineas.Split(";");
-            // string fechaTexto = columnas[4];
             string estadoPrestamo = columnas[5];
-
-            // DateTime fecha = DateTime.Parse(fechaTexto);
 
             if (columnas[2] == INICIAR_SESION.Sesion.IdUsuario)
             {
@@ -277,34 +278,6 @@ class PRESTAMOS
             }
         }
     }
-
-    static bool LIBRO_NO_DISPONIBLE(string idLibro)
-    {
-        string prestamos = ".//archivos//prestamos.csv";
-
-        if (!File.Exists(prestamos))
-        {
-            return true;
-        }
-
-        string[] lineas = File.ReadAllLines(prestamos);
-
-        for (int i = lineas.Length - 1; i >= 0; i--)
-        {
-            if (string.IsNullOrWhiteSpace(lineas[i])) continue;
-
-            string[] datos = lineas[i].Split(';');
-
-            if (datos.Length > 3 && datos[1] == idLibro)
-            {
-                return datos[3] != "Prestado";
-            }
-        }
-
-        return true;
-    }
-
-
     public static void DEVOLVER_LIBRO()
     {
         string prestamos = ".//archivos//prestamos.csv";
@@ -329,6 +302,6 @@ class PRESTAMOS
 
         File.WriteAllLines(prestamos, lineas);
 
-        Console.WriteLine("Libro devuelto correctamente.");
+        Decoraciones.TEXTO_VERDE("Libro devuelto correctamente.");
     }
 }
