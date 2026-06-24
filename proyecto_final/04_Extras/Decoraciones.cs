@@ -191,7 +191,7 @@ class Decoraciones
 
     public static void SALIR_AL_PANEL()
     {
-        Console.Write("Presione cualquier tecla para regresar al panel: ");
+        Console.Write("Presione cualquier tecla para regresar...");
         Console.ReadKey();
     }
 

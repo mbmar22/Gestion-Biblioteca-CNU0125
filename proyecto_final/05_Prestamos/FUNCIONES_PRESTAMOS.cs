@@ -244,7 +244,7 @@ class PRESTAMOS
     {
         String prestamos = ".//archivos//prestamos.csv";
 
-        String [] linea = File.ReadAllLines(prestamos);
+        String [] lineas = File.ReadAllLines(prestamos);
 
         Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
         Console.Write("| ");
@@ -255,27 +255,35 @@ class PRESTAMOS
         Decoraciones.COLORES_TITULARES("Fecha Devolución", 16);
         Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
 
-        foreach (string lineas in linea.Skip(1))
+        foreach (string linea in lineas.Skip(1))
         {
-            string[] columnas = lineas.Split(";");
-            string estadoPrestamo = columnas[5];
+            if (string.IsNullOrWhiteSpace(linea)) continue;
 
-            if (columnas[2] == INICIAR_SESION.Sesion.IdUsuario)
+            string[] columnas = linea.Split(';');
+
+            if (columnas.Length < 6)
             {
-                Console.Write($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[3], -14} | {columnas[4], -14} | ");
-
-                if (columnas[5] == "Pendiente")
-                {
-                    Decoraciones.PRESTAMO_PENDIENTE($"{estadoPrestamo, -16}");
-                    Console.Write(" |");
-                }
-                else
-                {
-                    Console.Write($" {estadoPrestamo.ToString(), -16} |");
-                }
-
-                Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
+                continue;
             }
+            // solo mostrar los realizados por el usuario logueado
+            if (columnas[2] != INICIAR_SESION.Sesion.IdUsuario)
+            {
+                continue;
+            }
+
+            Console.Write($"| {columnas[0],-11} | {columnas[1],-8} | {columnas[3],-14} | {columnas[4],-14} | ");
+
+            if (columnas[5] == "Pendiente")
+            {
+                Decoraciones.PRESTAMO_PENDIENTE($"{columnas[5],-16}");
+            }
+            else
+            {
+                Console.Write($"{columnas[5],-16}");
+            }
+
+            Console.WriteLine(" |");
+            Console.WriteLine("+-------------+----------+----------------+----------------+------------------+");
         }
     }
     public static void DEVOLVER_LIBRO()
@@ -301,7 +309,6 @@ class PRESTAMOS
         }
 
         File.WriteAllLines(prestamos, lineas);
-
         Decoraciones.TEXTO_VERDE("Libro devuelto correctamente.");
     }
 }

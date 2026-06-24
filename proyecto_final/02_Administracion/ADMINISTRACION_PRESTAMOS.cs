@@ -21,14 +21,17 @@ class ADMINISTRACION_PRESTAMOS
             {
                 case 1:
                     PRESTAMOS.MOSTRAR_PRESTAMOS_ADMIN();
+                    Decoraciones.SALIR_AL_PANEL();
                     break;
 
                 case 2:
                     PRESTAMOS.PRESTAR_LIBRO(true);
+                    Decoraciones.SALIR_AL_PANEL();
                     break;
 
                 case 3:
                     PRESTAMOS.DEVOLVER_LIBRO();
+                    Decoraciones.SALIR_AL_PANEL();
                     break;
 
                 case 4:
@@ -55,10 +58,12 @@ class ADMINISTRACION_PRESTAMOS
             {
                 case 1:
                     PRESTAMOS.MOSTRAR_PRESTAMOS_USER();
+                    Decoraciones.SALIR_AL_PANEL();
                     break;
 
                     case 2:
                     PRESTAMOS.PRESTAR_LIBRO(false);
+                    Decoraciones.SALIR_AL_PANEL();
                     break;
 
                     case 3:
