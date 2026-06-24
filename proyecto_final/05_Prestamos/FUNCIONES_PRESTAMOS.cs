@@ -46,6 +46,7 @@ class PRESTAMOS
             {
                 string usuario = OBTENER_USUARIO(es_administrador);
                 GUARDAR_PRESTAMO(libro[0], usuario);
+                Decoraciones.TEXTO_VERDE("¡Préstamo realizado con éxito!");
             }
 
             repetir = VALIDAR.SI_NO("\n¿Desea prestar otro libro? (S/N): ");
@@ -313,32 +314,6 @@ class PRESTAMOS
         }
     }
 
-    static bool LIBRO_NO_DISPONIBLE(string idLibro)
-    {
-        string prestamos = ".//archivos//prestamos.csv";
-
-        if (!File.Exists(prestamos))
-        {
-            return true;
-        }
-
-        string[] lineas = File.ReadAllLines(prestamos);
-
-        for (int i = lineas.Length - 1; i >= 0; i--)
-        {
-            if (string.IsNullOrWhiteSpace(lineas[i])) continue;
-
-            string[] datos = lineas[i].Split(';');
-
-            if (datos.Length > 3 && datos[1].Trim().Equals(idLibro.Trim(), StringComparison.OrdinalIgnoreCase))
-            {
-                return !datos[3].Trim().Equals("Prestado", StringComparison.OrdinalIgnoreCase);
-            }
-        }
-
-        return true;
-    }
-
     public static void DEVOLVER_LIBRO()
     {
         string prestamos = ".//archivos//prestamos.csv";
@@ -378,5 +353,6 @@ class PRESTAMOS
 
         File.WriteAllLines(prestamos, lineas);
         Decoraciones.TEXTO_VERDE("Libro devuelto correctamente.");
+        Decoraciones.SALIR_AL_PANEL();
     }
 }

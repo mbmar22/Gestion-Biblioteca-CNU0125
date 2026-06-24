@@ -191,7 +191,7 @@ class Decoraciones
 
     public static void SALIR_AL_PANEL()
     {
-        Console.Write("Presione cualquier tecla para regresar...");
+        Console.Write("\nPresione cualquier tecla para regresar...");
         Console.ReadKey();
     }
 
@@ -231,8 +231,6 @@ class Decoraciones
 
     public static void PRESTAMO_PENDIENTE(string mensaje)
     {
-        Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.Write(mensaje);
-        Console.ResetColor();
+        Decoraciones.TEXTO_ROJO(mensaje);
     }
 }
