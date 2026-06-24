@@ -33,7 +33,6 @@ class ADMINISTRACION_PRESTAMOS
                 {
                     PRESTAMOS.PRESTAR_LIBRO(false);
                 }
-            
                 break;
             case 3:
                 break;
@@ -45,16 +44,3 @@ class ADMINISTRACION_PRESTAMOS
         Console.WriteLine();
     }
 }
-
-
-/* 
-Para mañana: 
-- Búsqueda del usuario luego de la confirmación del libro.
-- Confirmar si es el usuario correcto.
-- Agregar validaciones. 
-- Completar ID de Préstamos con lo del IDLibro y IDUsuario.
-- Ver porqué no se cambia de "Disponible" a "Prestado"
-
-To-do:
-- ¿Por qué me sale cuando ingreso el usuario que no está en el formato correcto? - Corregido, ahora corregir más bien por qué cuando digo "¿Es 'usuario' el usuario que busca? Me imprime otra vez también el ID del usuario que el di :/ Estoy segura que eso de return texto
-*/
