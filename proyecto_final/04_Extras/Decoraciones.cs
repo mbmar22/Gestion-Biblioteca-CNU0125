@@ -228,4 +228,12 @@ class Decoraciones
         Console.Write(texto.PadRight(ancho) + " | ");
         Console.ResetColor();
     }
+
+    public static void PRESTAMO_PENDIENTE(string mensaje)
+    {
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.Write(mensaje);
+        Console.ResetColor();
+    }
+
 }

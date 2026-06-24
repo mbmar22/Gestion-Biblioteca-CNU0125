@@ -35,7 +35,7 @@ class PRESTAMOS
                 GUARDAR_PRESTAMO(libro[0], usuario);
             }
 
-            repetir = VALIDAR.SI_NO("¿Desea prestar otro libro? (S/N): ");
+            repetir = VALIDAR.SI_NO("\n¿Desea prestar otro libro? (S/N): ");
 
         } while (repetir == "S");
     }
@@ -164,17 +164,17 @@ class PRESTAMOS
     {
         string prestamos = ".//archivos//prestamos.csv";
 
-        if (!File.Exists(prestamos))
-        {
-            return "001P";
-        }
-
         string[] lineas = File.ReadAllLines(prestamos);
 
         int contador = 0;
 
         foreach (string l in lineas)
         {
+            if (lineas.Length == 1) // solo encabezado
+            {
+                return "001P";
+            }
+
             if (!string.IsNullOrWhiteSpace(l)) // si solo hay una linea (el encabezado) o el archivo esta vacio
             {
                 contador++;
@@ -192,7 +192,7 @@ class PRESTAMOS
 
         using (StreamWriter sw = new StreamWriter(prestamos, true))
         {
-            sw.WriteLine($"{idPrestamo};{idLibro};{idUsuario};Prestado;{DateTime.Now};Pendiente");
+            sw.WriteLine($"{idPrestamo};{idLibro};{idUsuario};Prestado;{DateTime.Now.ToString("dd/MM/yyyy")};Pendiente");
         }
     }
 
@@ -215,11 +215,24 @@ class PRESTAMOS
         foreach (string lineas in linea.Skip(1)) // saltar la primera por que es el encabezado, y el encabezado ya lo estamos imprimiendo aparte.
         {
             string[] columnas = lineas.Split(";");
-            string fechaTexto = columnas[4];
-            DateTime fecha = DateTime.Parse(fechaTexto); // esto es para convertir la fecha que está guardada con el registro del tiempo
+            // string fechaTexto = columnas[4];
+            string estadoPrestamo = columnas[5];
 
-            Console.WriteLine($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[2], -10} | {columnas[3], -14} | {fecha.ToString("dd/MM/yyyy"), -14} | {columnas[5], -17} |");
-            Console.WriteLine("+-------------+----------+------------+----------------+----------------+-------------------+");
+            //DateTime fecha = DateTime.Parse(fechaTexto); // esto es para convertir la fecha que está guardada con el registro del tiempo
+
+            Console.Write($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[2], -10} | {columnas[3], -14} | {columnas[4], -14} | ");
+
+            if (columnas[5] == "Pendiente")
+            {
+                Decoraciones.PRESTAMO_PENDIENTE($"{estadoPrestamo, -17}");
+                Console.Write(" |");
+            }
+            else
+            {
+                Console.Write($" {estadoPrestamo.ToString(), -17} |");
+            }
+
+            Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
         }
     }
 
@@ -241,14 +254,81 @@ class PRESTAMOS
         foreach (string lineas in linea.Skip(1))
         {
             string[] columnas = lineas.Split(";");
-            string fechaTexto = columnas[4];
-            DateTime fecha = DateTime.Parse(fechaTexto);
+            // string fechaTexto = columnas[4];
+            string estadoPrestamo = columnas[5];
+
+            // DateTime fecha = DateTime.Parse(fechaTexto);
 
             if (columnas[2] == INICIAR_SESION.Sesion.IdUsuario)
             {
-                Console.WriteLine($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[3], -14} | {fecha.ToString("dd/MM/yyyy"), -14} | {columnas[5], -16} |");
-                Console.WriteLine("+-------------+----------+----------------+----------------+------------------+");
+                Console.Write($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[3], -14} | {columnas[4], -14} | ");
+
+                if (columnas[5] == "Pendiente")
+                {
+                    Decoraciones.PRESTAMO_PENDIENTE($"{estadoPrestamo, -16}");
+                    Console.Write(" |");
+                }
+                else
+                {
+                    Console.Write($" {estadoPrestamo.ToString(), -16} |");
+                }
+
+                Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
             }
         }
+    }
+
+    static bool LIBRO_NO_DISPONIBLE(string idLibro)
+    {
+        string prestamos = ".//archivos//prestamos.csv";
+
+        if (!File.Exists(prestamos))
+        {
+            return true;
+        }
+
+        string[] lineas = File.ReadAllLines(prestamos);
+
+        for (int i = lineas.Length - 1; i >= 0; i--)
+        {
+            if (string.IsNullOrWhiteSpace(lineas[i])) continue;
+
+            string[] datos = lineas[i].Split(';');
+
+            if (datos.Length > 3 && datos[1] == idLibro)
+            {
+                return datos[3] != "Prestado";
+            }
+        }
+
+        return true;
+    }
+
+
+    public static void DEVOLVER_LIBRO()
+    {
+        string prestamos = ".//archivos//prestamos.csv";
+
+        string[] lineas = File.ReadAllLines(prestamos);
+
+        string idPrestamo = VALIDAR.PRESTAMO_ID_VALIDO("\nIngrese el ID del préstamo: ");
+
+        for (int i = 1; i < lineas.Length; i++)
+        {
+            string[] columnas = lineas[i].Split(';');
+
+            if (columnas[0].Trim().Equals(idPrestamo.Trim(), StringComparison.OrdinalIgnoreCase))
+            {
+                columnas[3] = "Disponible"; // cambiar estado
+                columnas[5] = DateTime.Now.ToString("dd/MM/yyyy"); // fecha devolución
+
+                lineas[i] = string.Join(";", columnas);
+                break;
+            }
+        }
+
+        File.WriteAllLines(prestamos, lineas);
+
+        Console.WriteLine("Libro devuelto correctamente.");
     }
 }

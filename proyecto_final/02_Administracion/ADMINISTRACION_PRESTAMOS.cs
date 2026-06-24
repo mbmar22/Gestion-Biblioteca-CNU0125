@@ -43,6 +43,8 @@ class ADMINISTRACION_PRESTAMOS
                 }
                 break;
             case 3:
+            if (INICIAR_SESION.Sesion.Rol == "Administrador")
+                PRESTAMOS.DEVOLVER_LIBRO();
                 break;
             case 4:
                 MENUS.MENU_ADMIN();
