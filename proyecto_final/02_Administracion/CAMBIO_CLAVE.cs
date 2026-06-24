@@ -6,6 +6,7 @@ class CAMBIO_CLAVE
     public static int VERIFICAR_USUARIO()
     {
         Decoraciones.ENCABEZADO();
+        Decoraciones.TEXTO_CYAN("              PANEL DE CAMBIO DE CONTRASEÑA");
         string usuario = VALIDAR.AL_MENOS_UNA_LETRA("Ingrese su usuario: ");
         string clave = VALIDAR.NO_VACIO("Ingrese su contraseña actual: ");
 
@@ -33,9 +34,7 @@ class CAMBIO_CLAVE
 
             else if (datos[3].Equals(usuario, StringComparison.OrdinalIgnoreCase) && datos[4] != clave)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n¡ERROR! Contraseña incorrecta.");
-                Console.ResetColor();
+                Decoraciones.TEXTO_ROJO("\n¡ ERROR ! Contraseña incorrecta.");
                 return -1;
             }
         }
@@ -58,10 +57,8 @@ class CAMBIO_CLAVE
 
         if (nueva_clave != confirmacion_clave)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\n¡ERROR! Las contraseñas no coinciden.");
+            Decoraciones.TEXTO_ROJO("\n¡ERROR! Las contraseñas no coinciden.");
             Decoraciones.cargando();
-            Console.ResetColor();
             Console.ReadKey();
             return false;
         }
@@ -76,9 +73,9 @@ class CAMBIO_CLAVE
 
         File.WriteAllLines(usuarios, lineas);
 
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\nContraseña actualizada correctamente.");
-        Console.ResetColor();
+        Decoraciones.TEXTO_VERDE("\n¡Contraseña actualizada con éxito!");
+        Console.Write("Presione cualquier tecla para salir del programa: ");
+        Console.ReadKey();
         return true;
     }
 }

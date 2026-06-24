@@ -50,9 +50,8 @@ class INICIAR_SESION
                     {
                         Sesion.IdUsuario = datos[0];
                         Sesion.Rol = datos[5];
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine($"\n¡Bienvenido a Math Library, {datos[1]}!");
-                        Console.ResetColor();
+
+                        Decoraciones.TEXTO_VERDE($"\n¡Bienvenido a Math Library, {datos[1]}!");
                         Decoraciones.cargando();
                         return datos[5];
                     }
@@ -67,8 +66,7 @@ class INICIAR_SESION
             if (i < 2)
             {
                 Decoraciones.TEXTO_ROJO("\n¡ ERROR ! Usuario o contraseña incorrectos.");
-                Console.WriteLine($"Te quedan {2 - i} intento(s).");
-                Console.WriteLine("");
+                Console.WriteLine($"Te quedan {2 - i} intento(s).\n");
             }
         }
 

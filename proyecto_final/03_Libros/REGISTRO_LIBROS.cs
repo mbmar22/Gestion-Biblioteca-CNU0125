@@ -23,15 +23,11 @@ class REGISTRO_LIBROS
     public static void REGISTRAR()
     {
         string repetir;
-        
         do
         {
             LIBROS LIBRO = new LIBROS();
             Decoraciones.ENCABEZADO();  
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("                        PANEL DE REGISTRO DE LIBROS");
-            Console.ResetColor();
-            Console.WriteLine("");
+            Decoraciones.TEXTO_CYAN("                        PANEL DE REGISTRO DE LIBROS\n");
 
             // asignacion del ID
             int contadorId;
@@ -72,9 +68,7 @@ class REGISTRO_LIBROS
             // proceso de guardar el libro
             File.AppendAllText(libros,nuevo_libro + Environment.NewLine);
 
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("\n¡Libro registrado con éxito!");
-            Console.ResetColor();
+            Decoraciones.TEXTO_VERDE("\n¡Libro registrado con éxito!");
 
             repetir = VALIDAR.SI_NO("\n¿Desea registrar otro libro? (S/N): ");
 

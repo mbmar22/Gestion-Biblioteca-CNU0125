@@ -14,14 +14,13 @@ class ADMINISTRACION_CATEGORIAS
     public static void CREAR_CATEGORIA()
     {
         string repetir;
-
         do
         {
             CATEGORIA category = new CATEGORIA();
             Decoraciones.ENCABEZADO();
-            Decoraciones.TEXTO_CYAN("                      PANEL DE CREACIÓN DE CATEGORÍAS                      ");
-            Console.WriteLine();
+            Decoraciones.TEXTO_CYAN("                      PANEL DE CREACIÓN DE CATEGORÍAS                      \n");
 
+            // asignación de ID de categoría
             int contadorIdC;
 
             if (File.Exists(categorias))
@@ -38,7 +37,7 @@ class ADMINISTRACION_CATEGORIAS
             INSTRUCCIONES.NOTA_CATEGORIAS();
 
             bool categoria_existente;
-
+            // ENTRADAS
             do
             {
                 categoria_existente = false;

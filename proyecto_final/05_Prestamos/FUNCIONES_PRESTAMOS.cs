@@ -1,354 +1,196 @@
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
-
 class PRESTAMOS
 {
-    public string IdPrestamo { get; set; }
-    public string LibroId { get; set; }
-    public string UsuarioId { get; set; }
-
-    public string Disponibilidad { get; set; } 
-    public DateTime Fecha_Prestamo { get; set; }
-    public DateTime? Fecha_Devolucion { get; set; }
-
-    public PRESTAMOS(
-        string idPrestamo,
-        string libroId,
-        string usuarioId,
-        string disponibilidad,
-        DateTime fechaPrestamo,
-        DateTime? fechaDevolucion = null
-    )
+    public static void PRESTAR_LIBRO(bool es_administrador)
     {
-        IdPrestamo = idPrestamo;
-        LibroId = libroId;
-        UsuarioId = usuarioId;
-        Disponibilidad = disponibilidad;
-        Fecha_Prestamo = fechaPrestamo;
-        Fecha_Devolucion = fechaDevolucion;
-    }
+        string repetir = "";
 
-    public static void MOSTRAR_PRESTAMOS()
-    {
-        
-    }
-
-    public static void PRESTAR_LIBRO_USER()
-    {
-        String libros = ".//archivos//libros.csv";
-        String prestamos = ".//archivos//prestamos.csv";
-
-        string repetir;
-
-        using (StreamWriter sw = new StreamWriter(prestamos, true))
-        {
-            if (!File.Exists(prestamos) || new FileInfo(prestamos).Length == 0)
-            {
-                sw.WriteLine("IdPrestamo;IdLibro;UsuarioId;Disponibilidad;FechaPrestamo;FechaDevolucion");
-            }
-        }
-
+        CREAR_ARCHIVO_PRESTAMOS();
         do
         {
             Decoraciones.PRESTAR_LIBRO();
 
-            int contadorIdP;
+            string[] libro = BUSCAR_LIBRO();
 
-            if (File.Exists(prestamos))
+            if (libro == null)
             {
-                contadorIdP = File.ReadAllLines(prestamos).Length;
-            }
-            else
-            {
-                contadorIdP = 1;
+                ALERTAS.RESULTADO_NO_ENCONTRADO();
+                continue;
             }
 
-            string idPrestamo = $"{contadorIdP:D3}P";
-
-            string resp = "N";
-
-            String[] lineas = File.ReadAllLines(libros);
-            String[] lines = File.ReadAllLines(prestamos);
-
-            do
+            if (!LIBRO_DISPONIBLE(libro[0]))
             {
-                String libro_buscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
-                Console.WriteLine("\n");
+                ALERTAS.LIBRO_NO_DISPONIBLE();
+                continue;
+            }
 
-                for (int i = 0; i < lineas.Length; i++)
-                {
-                    String[] datos = lineas[i].Split(';');
+            Decoraciones.MOSTRAR_LIBRO(libro);
 
-                    if (datos.Length > 6)
-                    { 
-                        if (datos[0].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
-                        {
-                            if(datos[5] != "Activo")
-                            {
-                                Decoraciones.LIBRO_NO_DISPONIBLE();
-                            }
-                            else
-                            {
-                                bool libroPrestado = false; // este bool comienza falso porque asumimos que inicialmente el libro no está prestado
-                                bool tieneHistorial = false; // este otro es para ver si el libro ya fue prestado
+            string resp = VALIDAR.SI_NO($"\n¿Es '{libro[1]}' el libro que desea prestar? (S/N): ");
 
-                                for (int j = lines.Length - 1; j >= 0; j--)
-                                {
-                                    String[] data = lines[j].Split(';');
+            if (resp == "S")
+            {
+                string usuario = OBTENER_USUARIO(es_administrador);
+                GUARDAR_PRESTAMO(libro[0], usuario);
+            }
 
-                                    if (data.Length > 3 && data[1].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        tieneHistorial = true;
-
-                                        if(data[3] == "Prestado")
-                                        {
-                                            libroPrestado = true;
-                                        }
-
-                                        break;
-                                    }
-                                }
-
-                                if(libroPrestado)
-                                {
-                                    Decoraciones.LIBRO_NO_DISPONIBLE();
-                                }
-                                else
-                                {
-                                    Decoraciones.MOSTRAR_LIBRO(datos);
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-
-                                    if (tieneHistorial) // o sea, si ya había sido prestado pero está disponible para prestar
-                                    {
-                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
-                                        Console.ResetColor(); 
-
-                                        if (resp == "S")
-                                        {
-                                            string nombreUsuario = INICIAR_SESION.Sesion.IdUsuario;
-                                            string disponibilidad = "Prestado";
-
-                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
-
-                                            using (StreamWriter sw = new StreamWriter(prestamos, true))
-                                            {
-                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
-                                            }
-                                        }
-                                    }
-                                    else // el libro nunca ha sido prestado
-                                    {
-                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
-                                        Console.ResetColor();
-                                        if (resp == "S")
-                                        {
-                                            string nombreUsuario = INICIAR_SESION.Sesion.IdUsuario;
-                                            string disponibilidad = "Prestado";
-
-                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
-
-                                            using (StreamWriter sw = new StreamWriter(prestamos, true))
-                                            {
-                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } while (resp == "N");
-    
             repetir = VALIDAR.SI_NO("¿Desea prestar otro libro? (S/N): ");
+
         } while (repetir == "S");
     }
 
-    public static void PRESTAR_LIBRO_ADMIN()
+    static void CREAR_ARCHIVO_PRESTAMOS()
     {
-        String libros = ".//archivos//libros.csv";
-        String prestamos = ".//archivos//prestamos.csv";
+        string prestamos = ".//archivos//prestamos.csv";
 
-        string repetir;
-
-        using (StreamWriter sw = new StreamWriter(prestamos, true))
+        if (!File.Exists(prestamos) || new FileInfo(prestamos).Length == 0)
         {
-            if (!File.Exists(prestamos) || new FileInfo(prestamos).Length == 0)
+            using (StreamWriter sw = new StreamWriter(prestamos, true))
             {
                 sw.WriteLine("IdPrestamo;IdLibro;UsuarioId;Disponibilidad;FechaPrestamo;FechaDevolucion");
             }
         }
+    }
 
-        do
+    static string[] BUSCAR_LIBRO()
+    {
+        string libros = ".//archivos//libros.csv";
+        string libroBuscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
+
+        string[] lineas = File.ReadAllLines(libros);
+
+        foreach (string linea in lineas)
         {
-            Decoraciones.PRESTAR_LIBRO();
+            if (string.IsNullOrWhiteSpace(linea)) continue;
 
-            int contadorIdP;
+            string[] datos = linea.Split(';');
 
-            if (File.Exists(prestamos))
+            if (datos.Length >= 6)
             {
-                contadorIdP = File.ReadAllLines(prestamos).Length;
-            }
-            else
-            {
-                contadorIdP = 1;
-            }
-
-            string idPrestamo = $"{contadorIdP:D3}P";
-
-            string resp = "N";
-
-            String[] lineas = File.ReadAllLines(libros);
-            String[] lines = File.ReadAllLines(prestamos);
-
-            do
-            {
-                String libro_buscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
-                Console.WriteLine("\n");
-
-                for (int i = 0; i < lineas.Length; i++)
+                if (datos[0].Equals(libroBuscado, StringComparison.OrdinalIgnoreCase))
                 {
-                    String[] datos = lineas[i].Split(';');
-
-                    if (datos.Length > 6)
-                    { 
-                        if (datos[0].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
-                        {
-                            if(datos[5] != "Activo")
-                            {
-                                Decoraciones.LIBRO_NO_DISPONIBLE();
-                            }
-                            else
-                            {
-                                bool libroPrestado = false; // este bool comienza falso porque asumimos que inicialmente el libro no está prestado
-                                bool tieneHistorial = false; // este otro es para ver si el libro ya fue prestado
-
-                                for (int j = lines.Length - 1; j >= 0; j--)
-                                {
-                                    String[] data = lines[j].Split(';');
-
-                                    if (data.Length > 3 && data[1].Equals(libro_buscado, StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        tieneHistorial = true;
-
-                                        if(data[3] == "Prestado")
-                                        {
-                                            libroPrestado = true;
-                                        }
-
-                                        break;
-                                    }
-                                }
-
-                                if(libroPrestado)
-                                {
-                                    Decoraciones.LIBRO_NO_DISPONIBLE();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                                    Decoraciones.MOSTRAR_LIBRO(datos);
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-
-                                    if (tieneHistorial) // o sea, si ya había sido prestado pero está disponible para prestar
-                                    {
-                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
-                                        Console.ResetColor(); 
-                                        if (resp == "S")
-                                        {
-                                            string nombreUsuario = BUSCAR_USUARIO();
-                                            string disponibilidad = "Prestado";
-
-                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
-
-                                            using (StreamWriter sw = new StreamWriter(prestamos, true))
-                                            {
-                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
-                                            }
-                                        }
-                                    }
-                                    else // el libro nunca ha sido prestado
-                                    {
-                                        resp = VALIDAR.SI_NO($"\nEs '{datos[1]}' el libro que desea prestar? (S/N): ");
-                                        Console.ResetColor();
-                                        if (resp == "S")
-                                        {
-                                            string nombreUsuario = BUSCAR_USUARIO();
-                                            string disponibilidad = "Prestado";
-
-                                            PRESTAMOS prest = new PRESTAMOS(idPrestamo, datos[0], nombreUsuario, disponibilidad, DateTime.Now);
-
-                                            using (StreamWriter sw = new StreamWriter(prestamos, true))
-                                            {
-                                                sw.WriteLine($"{prest.IdPrestamo};{prest.LibroId};{prest.UsuarioId};{prest.Disponibilidad};{prest.Fecha_Prestamo}");
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    return datos;
                 }
-            } while (resp == "N");
-    
-            repetir = VALIDAR.SI_NO("¿Desea prestar otro libro? (S/N): ");
-        } while (repetir == "S");
+            }
+        }
+        return null;
+    }
+
+    static bool LIBRO_DISPONIBLE(string idLibro)
+    {
+        string prestamos = ".//archivos//prestamos.csv";
+
+        if (!File.Exists(prestamos))
+        {
+            return true;
+        }
+
+        string[] lineas = File.ReadAllLines(prestamos);
+
+        for (int i = lineas.Length - 1; i >= 0; i--)
+        {
+            if (string.IsNullOrWhiteSpace(lineas[i])) continue;
+
+            string[] datos = lineas[i].Split(';');
+
+            if (datos.Length > 3 && datos[1] == idLibro)
+            {
+                return datos[3] != "Prestado";
+            }
+        }
+
+        return true;
+    }
+
+    static string OBTENER_USUARIO(bool es_administrador)
+    {
+        if (es_administrador)
+        {
+            return BUSCAR_USUARIO();
+        }
+
+        return INICIAR_SESION.Sesion.IdUsuario;
     }
 
     public static string BUSCAR_USUARIO()
     {
         string usuarios = ".//archivos//usuarios.csv";
-        string answer = "S";
+        string respuesta;
 
         do
         {
-            string usuario_buscado = VALIDAR.USERNAME_ID_VALIDO("\nIngrese el ID del usuario: ");
+            string USUARIO_BUSCADO = VALIDAR.USERNAME_ID_VALIDO("\nIngrese el ID del usuario: ");
 
             string[] lineas = File.ReadAllLines(usuarios);
 
-            bool encontrado = false;
-            string nombreUsuario = "";
-            string idUsuario = "";
+            string nombre_usuario = "";
+            string ID_usuario = "";
 
             foreach (string linea in lineas)
             {
-                string[] dato = linea.Split(';');
+                if (string.IsNullOrWhiteSpace(linea)) continue;
 
-                if (dato.Length > 1 &&
-                    dato[0].Equals(usuario_buscado, StringComparison.OrdinalIgnoreCase))
+                string[] datos = linea.Split(';');
+
+                if (datos.Length > 1)
                 {
-                    encontrado = true;
-                    nombreUsuario = dato[1];
-                    idUsuario = dato [0];
-                    break;
+                    if (datos[0].Equals(USUARIO_BUSCADO, StringComparison.OrdinalIgnoreCase))
+                    {
+                        nombre_usuario = datos[1];
+                        ID_usuario = datos[0];
+                        break;
+                    }
                 }
             }
 
-            if (!encontrado)
+            if (ID_usuario == "")
             {
-                return "BBB";
+                ALERTAS.RESULTADO_NO_ENCONTRADO();
+                continue;
             }
 
-            answer = VALIDAR.SI_NO($"\n¿Es '{nombreUsuario}' el usuario que busca? (S/N): ");
+            respuesta = VALIDAR.SI_NO($"\n¿Es '{nombre_usuario}' el usuario que busca? (S/N): ");
 
-            if (answer == "S")
+            if (respuesta == "S")
             {
-                return idUsuario;
+                return ID_usuario;
             }
 
-        } while (answer == "N");
-
-        return "";
+        } while (true);
     }
 
-
-    public static void DEVOLVER_LIBRO()
+    static string GENERAR_ID_PRESTAMO()
     {
+        string prestamos = ".//archivos//prestamos.csv";
 
+        if (!File.Exists(prestamos))
+        {
+            return "001P";
+        }
+
+        string[] lineas = File.ReadAllLines(prestamos);
+
+        int contador = 0;
+
+        foreach (string l in lineas)
+        {
+            if (!string.IsNullOrWhiteSpace(l)) // si solo hay una linea (el encabezado) o el archivo esta vacio
+            {
+                contador++;
+            }
+        }
+
+        return $"{(contador + 1):D3}P";
     }
 
+    static void GUARDAR_PRESTAMO(string idLibro, string idUsuario)
+    {
+        string prestamos = ".//archivos//prestamos.csv";
 
+        string idPrestamo = GENERAR_ID_PRESTAMO();
+
+        using (StreamWriter sw = new StreamWriter(prestamos, true))
+        {
+            sw.WriteLine($"{idPrestamo};{idLibro};{idUsuario};Prestado;{DateTime.Now};Pendiente");
+        }
+    }
 }
-
-// por qué 

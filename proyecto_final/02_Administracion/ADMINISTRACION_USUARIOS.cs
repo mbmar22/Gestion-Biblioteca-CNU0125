@@ -4,8 +4,6 @@ using System.Security.Claims;
 class ADMINISTRACION_USUARIOS
 {
 static String usuarios = ".//archivos//usuarios.csv";
-
-// de struct a class
 public class USUARIO
 {
     public string ID = "-";
@@ -22,131 +20,49 @@ public class USUARIO
         do
         {
             Decoraciones.ENCABEZADO();  
-            Decoraciones.TEXTO_CYAN("                        PANEL DE CREACIÓN DE USUARIOS");
-            Console.WriteLine("");
+            Decoraciones.TEXTO_CYAN("                        PANEL DE CREACIÓN DE USUARIOS\n");
 
             USUARIO user = new USUARIO();
-
-            INSTRUCCIONES.NOTA_NOMBRES();
-
+            // ENTRADAS
+            INSTRUCCIONES.NOTA_NOMBRES(); // nombre y apellido del usuario
             
             user.nombre = VALIDAR.SOLO_LETRAS("Digite el primer nombre del usuario: ");
             user.apellido = VALIDAR.SOLO_LETRAS("Digite el primer apellido del usuario: ");
 
-            INSTRUCCIONES.NOTA_USERNAME();
+            INSTRUCCIONES.NOTA_USERNAME(); // username
 
             user.username = VALIDAR.USERNAME_VALIDO("Digite el nuevo nombre de usuario: ");
 
-            INSTRUCCIONES.NOTA_CLAVE();
-
+            INSTRUCCIONES.NOTA_CLAVE(); // contraseña
             
             user.clave = VALIDAR.NO_VACIO("Contraseña: ");
         
+            INSTRUCCIONES.NOTA_ROLYESTADO(); // rol y estado
 
-            INSTRUCCIONES.NOTA_ROLYESTADO();
-            int respuesta;
-            
-            do
-            {
-                respuesta = VALIDAR.OPCION("¿Qué ROL tendrá este usuario?" +
-                "\n1. Administrador - 2. Usuario regular: ", 1,2);
-
-                switch (respuesta)
-                {
-                    case 1:
-                        user.rol = "Administrador";
-                        break;
-                    case 2:
-                        user.rol = "Usuario";
-                        break;
-                    default:
-                        break;
-                }
-            } while (respuesta != 1 && respuesta != 2);
-
-            // estado activo por defecto
             user.estado = "Activo";
 
+            int respuesta = VALIDAR.OPCION("¿Qué ROL tendrá este usuario?" +
+            "\n1. Administrador - 2. Usuario regular: ", 1,2);
 
-            //Contador de ID
-            int contadorIdR;
-            int contadorIdRA; // Contador de Id para Admin
-            int contadorIdRU; // Contador de Id para User
-
-
-            if (File.Exists(usuarios))
+            if (respuesta == 1)
             {
-                contadorIdR = File.ReadAllLines(usuarios).Count(l => !string.IsNullOrWhiteSpace(l)) - 1;
-                if (user.rol == "Administrador")
-                {
-                    contadorIdRA = 0;
-
-                    foreach (string linea in File.ReadAllLines(usuarios))
-                    {
-                        if (string.IsNullOrWhiteSpace(linea))
-                            continue;
-
-                        string id = linea.Split(';')[0];
-
-                        if (id.EndsWith('A'))
-                        {
-                            int numero = int.Parse(id.Substring(id.Length - 4, 3));
-
-                            if (numero > contadorIdRA)
-                            {
-                                contadorIdRA = numero;
-                            }
-                        }
-                    }
-
-                    contadorIdRA++;
-
-                    user.ID = $"{contadorIdR + 1:D3}I{contadorIdRA:D3}A";
-
-                }
-                else
-                {
-                    contadorIdRU = 0;
-
-                    foreach (string linea in File.ReadAllLines(usuarios))
-                    {
-                        if (string.IsNullOrWhiteSpace(linea))
-                            continue;
-
-                        string id = linea.Split(';')[0];
-
-                        if (id.EndsWith('U'))
-                        {
-                            int numero = int.Parse(id.Substring(id.Length - 4, 3));
-
-                            if (numero > contadorIdRU)
-                            {
-                                contadorIdRU = numero;
-                            }
-                        }
-                    }
-
-                    contadorIdRU++;
-
-                    user.ID = $"{contadorIdR + 1:D3}I{contadorIdRU:D3}U";
-                }
+                user.rol = "Administrador";
             }
             else
             {
-                contadorIdR = 1;
-                contadorIdRA = 1;
-                contadorIdRU = 1;
+                user.rol = "Usuario";
             }
 
+            user.ID = GENERAR_ID(usuarios, user.rol); // asignación del ID por el sistema
+
+            // guardar datos
 
             String USUARIOS = user.ID + ";" + user.nombre + ";" + user.apellido + ";" +
             user.username + ";" + user.clave + ";" + user.rol + ";" + user.estado;
 
             File.AppendAllText(usuarios,USUARIOS + Environment.NewLine);
             
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("\n¡Usuario guardado con éxito!");
-            Console.ResetColor();
+            Decoraciones.TEXTO_VERDE("\n¡Usuario guardado con éxito!");
 
             repetir = VALIDAR.SI_NO("\n¿Desea registrar otro usuario? (S/N): ");
 
@@ -162,8 +78,7 @@ public class USUARIO
         do
         {
             Decoraciones.ENCABEZADO();
-            Decoraciones.TEXTO_CYAN("                     PANEL DE MODIFICACIÓN DE USUARIOS ");
-            Console.WriteLine("");
+            Decoraciones.TEXTO_CYAN("                     PANEL DE MODIFICACIÓN DE USUARIOS \n");
 
             if (!(File.Exists(usuarios)))
             {
@@ -171,8 +86,7 @@ public class USUARIO
                 return;
             }
 
-            String BUSCADO;
-            BUSCADO = VALIDAR.AL_MENOS_UNA_LETRA("Ingrese el nombre del usuario al que desea acceder: ");
+            String BUSCADO = VALIDAR.AL_MENOS_UNA_LETRA("Ingrese el nombre del usuario al que desea acceder: ");
 
             String[] lineas = File.ReadAllLines(usuarios);
 
@@ -187,10 +101,7 @@ public class USUARIO
 
                 if (datos.Length > 3 && datos[3].Equals(BUSCADO, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("\n¡Usuario encontrado exitosamente!");
-                    Console.WriteLine();
-                    Console.ResetColor();
+                    Decoraciones.TEXTO_VERDE("\n¡Usuario encontrado exitosamente!\n");
 
                     Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
 
@@ -208,8 +119,7 @@ public class USUARIO
 
                     Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
 
-                    Console.WriteLine("");
-                    Console.WriteLine("Puedes realizar las siguientes acciones: ");
+                    Console.WriteLine("\nPuedes realizar las siguientes acciones: ");
                     Console.WriteLine("1. Cambiar rol  - 2. Cambiar estado");
 
                     CAMBIO = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ",1,2);
@@ -245,11 +155,7 @@ public class USUARIO
 
                     File.WriteAllLines(usuarios, lineas);
 
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("\n¡Cambios guardados con éxito!");
-                    Console.ResetColor();
-                    Console.WriteLine("");
-
+                    Decoraciones.TEXTO_VERDE("\n¡Cambios guardados con éxito!\n");
                     break;
                 }
             }
@@ -257,14 +163,66 @@ public class USUARIO
             if (ENCONTRADO == false)
             {
                 ALERTAS.RESULTADO_NO_ENCONTRADO();
-                Console.WriteLine("");
             }
-        Console.WriteLine();
-        repetir = VALIDAR.SI_NO("¿Desea modificar otro usuario? (S/N): ");
 
-    } while (repetir == "S");
+            repetir = VALIDAR.SI_NO("\n¿Desea modificar otro usuario? (S/N): ");
 
-    Console.WriteLine("Regresará al Panel de Administración.");
-    Decoraciones.cargando();
+        } while (repetir == "S");
+
+        Console.WriteLine("Regresará al Panel de Administración.");
+        Decoraciones.cargando();
+    }
+
+    static string GENERAR_ID(string usuarios, string rol)
+    {
+        int contadorTotal = 0;
+        int contadorRol = 0;
+        char sufijo;
+
+        if (rol == "Administrador")
+        {
+            sufijo = 'A';
+        }
+        else
+        {
+            sufijo = 'U';
+        }
+
+        if (File.Exists(usuarios))
+        {
+            string[] lineas = File.ReadAllLines(usuarios);
+
+            foreach (string linea in lineas)
+            {
+                if (string.IsNullOrWhiteSpace(linea))
+                    continue;
+
+                if (linea.StartsWith("ID"))
+                    continue;
+
+                contadorTotal++;
+
+                string id = linea.Split(';')[0];
+
+                if (id.EndsWith(sufijo))
+                {
+                    string numeroTexto = id.Substring(id.Length - 4, 3);
+                    int numero;
+
+                    if (int.TryParse(numeroTexto, out numero))
+                    {
+                        if (numero > contadorRol)
+                        {
+                            contadorRol = numero;
+                        }
+                    }
+                }
+            }
+        }
+
+        contadorTotal++;
+        contadorRol++;
+
+        return $"{contadorTotal:D3}I{contadorRol:D3}{sufijo}";
     }
 }

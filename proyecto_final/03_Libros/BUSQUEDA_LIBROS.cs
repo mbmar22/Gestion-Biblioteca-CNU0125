@@ -34,12 +34,10 @@ class BUSQUEDA_LIBROS
     static void BUSQUEDA_NOMBRE()
     {
         Decoraciones.ENCABEZADO();
-        Decoraciones.TEXTO_CYAN("                  PANEL DE BÚSQUEDA DE LIBROS POR NOMBRE");
-        Console.WriteLine();
+        Decoraciones.TEXTO_CYAN("                  PANEL DE BÚSQUEDA DE LIBROS POR NOMBRE\n");
 
-        String nombre_buscado = VALIDAR.NO_VACIO("Ingrese el nombre del libro que desea buscar: ");
+        String nombre_buscado = VALIDAR.NO_VACIO("Ingrese el nombre del libro que desea buscar: "); // ENTRADA
         
-
         String[] lineas = File.ReadAllLines(libros);
         bool encontrado = false;
         int resultados = 0;
@@ -55,17 +53,11 @@ class BUSQUEDA_LIBROS
                     encontrado = true;
                     resultados++;
 
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"\n¡Libro nº {resultados} encontrado con éxito!");
-                    Console.WriteLine();
-                    Console.ResetColor();
-
+                    Decoraciones.TEXTO_VERDE($"\n¡Libro nº {resultados} encontrado con éxito!\n"); // SALIDA
                     Decoraciones.MOSTRAR_LIBRO(datos);
                 }
-
             }
         }
-
         if (!encontrado)
         {
             ALERTAS.RESULTADO_NO_ENCONTRADO();
@@ -78,11 +70,10 @@ class BUSQUEDA_LIBROS
     static void BUSQUEDA_CATEGORIA()
     {
         Decoraciones.ENCABEZADO();
-        Decoraciones.TEXTO_CYAN("                  PANEL DE BÚSQUEDA DE LIBROS POR CATEGORÍA");
-        Console.WriteLine();
+        Decoraciones.TEXTO_CYAN("                  PANEL DE BÚSQUEDA DE LIBROS POR CATEGORÍA\n");
 
         Decoraciones.mostrar_categorias();
-        string categoria_buscada = VALIDAR.NO_VACIO("Ingrese el nombre de la categoría que desea buscar: ");
+        string categoria_buscada = VALIDAR.NO_VACIO("Ingrese el nombre de la categoría que desea buscar: "); // ENTRADA
         
 
         String[] lineas = File.ReadAllLines(libros);
@@ -97,14 +88,11 @@ class BUSQUEDA_LIBROS
                 if (datos[3].Contains(categoria_buscada, StringComparison.OrdinalIgnoreCase))
                 {
                     encontrado = true;
-                    Console.WriteLine();
 
-                    Decoraciones.MOSTRAR_LIBRO(datos);
+                    Decoraciones.MOSTRAR_LIBRO(datos); // SALIDA
                 }
-
             }
         }
-
         if (!encontrado)
         {
             ALERTAS.RESULTADO_NO_ENCONTRADO();
@@ -129,12 +117,9 @@ class BUSQUEDA_LIBROS
                 {
                     encontrado = true;
 
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine("\n¡Libro encontrado con éxito!");
-                    Console.ResetColor();
-                    Console.WriteLine();
-
+                    Decoraciones.TEXTO_VERDE("\n¡Libro encontrado con éxito!\n"); // SALIDA
                     Decoraciones.MOSTRAR_LIBRO(datos);
+
                     return i;
                 }
             }

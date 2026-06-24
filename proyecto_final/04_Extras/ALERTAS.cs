@@ -32,6 +32,6 @@ class ALERTAS
 
     public static void LIBRO_NO_DISPONIBLE()
     {
-        Decoraciones.TEXTO_ROJO("¡ ERROR ! Este libro no se encuentra disponible.\n");
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! Este libro no se encuentra disponible para préstamoss.\n");
     }
 }

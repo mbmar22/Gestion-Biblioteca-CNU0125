@@ -9,8 +9,7 @@ class ADMINISTRACION_PRESTAMOS
     public static void MENU_PRESTAMOS()
     {
         Decoraciones.ENCABEZADO();
-        Decoraciones.TEXTO_CYAN("                ADMINISTRACIÓN DE PRÉSTAMOS Y DEVOLUCIONES");
-        Console.WriteLine("");
+        Decoraciones.TEXTO_CYAN("                ADMINISTRACIÓN DE PRÉSTAMOS Y DEVOLUCIONES\n");
         Console.WriteLine(
             "1. Ver historial de préstamos.\n" +
             "2. Prestar libro\n" +
@@ -24,21 +23,19 @@ class ADMINISTRACION_PRESTAMOS
         switch (respuesta)
         {
             case 1:
-            PRESTAMOS.MOSTRAR_PRESTAMOS();
                 break;
             case 2:
             if (INICIAR_SESION.Sesion.Rol == "Administrador")
                 {
-                    PRESTAMOS.PRESTAR_LIBRO_ADMIN();
+                    PRESTAMOS.PRESTAR_LIBRO(true);
                 }
                 else
                 {
-                    PRESTAMOS.PRESTAR_LIBRO_USER();
+                    PRESTAMOS.PRESTAR_LIBRO(false);
                 }
             
                 break;
             case 3:
-            PRESTAMOS.DEVOLVER_LIBRO();
                 break;
             case 4:
             MENUS.MENU_ADMIN();

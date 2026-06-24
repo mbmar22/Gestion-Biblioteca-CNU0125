@@ -7,9 +7,7 @@ class Decoraciones
     {
         Console.Clear();
         Console.WriteLine("                            ──  ⋆ ⋅ 📚 ⋅ ⋆  ──");
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("                               MATH LIBRARY ");
-        Console.ResetColor();
+        Decoraciones.TEXTO_VERDE("                               MATH LIBRARY ");
     }
 
     public static void ENCABEZADO_INICIAL()
@@ -19,11 +17,10 @@ class Decoraciones
         Console.WriteLine("        ──────────────────────────────────────────────────────────────"); 
 
     }
-    public static string ocultarClave()
+    public static string ocultarClave() // para ocultar la clave en el inicio de sesión
     {
         StringBuilder claveO = new StringBuilder();
         ConsoleKeyInfo password;
-
         do
         {
             claveO.Clear();
@@ -60,25 +57,21 @@ class Decoraciones
 
     public static void despedida()
     {
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("¡Hasta la próxima! Adiós.");
-        Console.ResetColor();
+        Decoraciones.TEXTO_VERDE("¡Hasta la próxima! Adiós.");
         Console.WriteLine("© Math Library 2026");
     }
 
     public static void cargando()
     {
         Console.WriteLine("");
-        Console.ForegroundColor = ConsoleColor.Cyan;
 
         for (int i = 0; i < 6; i++) // 3 segundos
         {
             Thread.Sleep(500);
-            Console.Write(" . ");
+            Decoraciones.TEXTO_CYAN(" . ");
         }
 
         Console.WriteLine();
-        Console.ResetColor();
     }
     
     static String categorias = ".//archivos//categorias.csv";
@@ -144,8 +137,7 @@ class Decoraciones
                 "7. Administrar usuarios \n" +
                 "8. Registrar nueva categoría \n" +
                 "9. Cambiar contraseña\n" +
-                "10. Salir");
-        Console.WriteLine("");
+                "10. Salir\n");
     }
 
     public static void OPCIONES_USER()
@@ -219,9 +211,7 @@ class Decoraciones
 
     public static void SALIR_AL_PANEL()
     {
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.Write("Presione cualquier tecla para regresar al panel: ");
-        Console.ResetColor();
+        Decoraciones.TEXTO_CYAN("Presione cualquier tecla para regresar al panel: ");
         Console.ReadKey();
     }
 
@@ -254,17 +244,6 @@ class Decoraciones
     public static void PRESTAR_LIBRO()
     {
         Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("PRESTAR LIBRO");
-        Console.ResetColor();
-        Console.WriteLine();
+        Decoraciones.TEXTO_CYAN("               PRESTAR LIBRO\n");
     }
-
-    public static void LIBRO_NO_DISPONIBLE()
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("Libro no disponible para préstamos.");
-        Console.ResetColor();
-    }
-
 }
