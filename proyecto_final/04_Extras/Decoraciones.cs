@@ -219,6 +219,14 @@ class Decoraciones
     {
         Decoraciones.ENCABEZADO();
         Decoraciones.TEXTO_CYAN("                              PRESTAR LIBRO\n");
+        Console.WriteLine("Si desea salir, presione 'X'");
+    }
+
+    public static void DEVOLVER_LIBRO()
+    {
+        Decoraciones.ENCABEZADO();
+        Decoraciones.TEXTO_CYAN("                              DEVOLVER LIBRO\n");
+        Console.WriteLine("Si desea salir, presione 'X'");
     }
 
     public static void COLORES_TITULARES(string texto, int ancho)
@@ -231,6 +239,9 @@ class Decoraciones
 
     public static void PRESTAMO_PENDIENTE(string mensaje)
     {
-        Decoraciones.TEXTO_ROJO(mensaje);
+        // Es diferente de TEXTO_ROJO porque texto rojo es Console.WriteLine, mientras que aquí se mantiene como Console.Write ya que falta el último "|" para cerrar la tabla.
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.Write(mensaje);
+        Console.ResetColor();
     }
 }

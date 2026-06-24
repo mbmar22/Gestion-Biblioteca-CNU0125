@@ -240,37 +240,41 @@ class VALIDAR
             texto = Console.ReadLine();
             usuario_existente = false;
 
-            if (SIN_PUNTO_Y_COMA(texto))
+            if (string.IsNullOrWhiteSpace(texto))
             {
                 ALERTAS.VACIO();
+                continue;
             }
-            else
+
+            texto = texto.Trim();
+
+            if (SALIR(texto))
             {
-                texto = texto.Trim();
+                return texto;
+            }
 
-                if (File.Exists(usuarios))
+            if (File.Exists(usuarios))
+            {
+                string [] lineas = File.ReadAllLines(usuarios);
+
+                foreach (string linea in lineas.Skip(1)) // el skip es para que ignore el encabezado
                 {
-                    string [] lineas = File.ReadAllLines(usuarios);
+                    string[] datos = linea.Split(';');
 
-                    foreach (string linea in lineas.Skip(1)) // el skip es para que ignore el encabezado
+                    if (datos.Length > 0 &&
+                    datos[0].Trim().Equals(texto, StringComparison.OrdinalIgnoreCase))
                     {
-                        string[] datos = linea.Split(';');
-
-                        if (datos.Length > 0 &&
-                        datos[0].Trim().Equals(texto, StringComparison.OrdinalIgnoreCase))
-                        {
-                            usuario_existente = true;
-                            break;
-                        }
+                        usuario_existente = true;
+                        break;
                     }
                 }
-
-                if (!usuario_existente)
-                {
-                    Decoraciones.TEXTO_ROJO("El ID ingresado no existe.");
-                }
             }
-        } while (SIN_PUNTO_Y_COMA(texto)|| !usuario_existente);
+
+            if (!usuario_existente)
+            {
+                Decoraciones.TEXTO_ROJO("El ID ingresado no existe.");
+            }
+        } while (!usuario_existente);
 
         return texto;
     }
@@ -285,37 +289,41 @@ class VALIDAR
             texto = Console.ReadLine();
             prestamo_existente = false;
 
-            if (String.IsNullOrWhiteSpace(texto))
+            if (string.IsNullOrWhiteSpace(texto))
             {
                 ALERTAS.VACIO();
+                continue;
             }
-            else
+
+            texto = texto.Trim();
+
+            if (SALIR(texto))
             {
-                texto = texto.Trim();
+                return texto;
+            }
 
-                if (File.Exists(prestamos))
+            if (File.Exists(prestamos))
+            {
+                string[] lineas = File.ReadAllLines(prestamos);
+
+                foreach (string linea in lineas.Skip(1))
                 {
-                    string [] lineas = File.ReadAllLines(prestamos);
+                    string[] datos = linea.Split(';');
 
-                    foreach (string linea in lineas.Skip(1))
-                    {
-                        string[] datos = linea.Split(';');
-
-                        if (datos.Length > 0 &&
+                    if (datos.Length > 0 &&
                         datos[0].Trim().Equals(texto, StringComparison.OrdinalIgnoreCase))
-                        {
-                            prestamo_existente = true;
-                            break;
-                        }
+                    {
+                        prestamo_existente = true;
+                        break;
                     }
                 }
-
-                if (!prestamo_existente)
-                {
-                    Decoraciones.TEXTO_ROJO("El ID ingresado no existe.");
-                }
             }
-        } while (String.IsNullOrWhiteSpace(texto) || !prestamo_existente);
+
+            if (!prestamo_existente)
+            {
+                Decoraciones.TEXTO_ROJO("El ID ingresado no existe.");
+            }
+        } while (!prestamo_existente);
 
         return texto;
     }
@@ -376,5 +384,10 @@ class VALIDAR
 
         } while ( SIN_PUNTO_Y_COMA(texto) || !texto.Any(char.IsLetter));
         return texto;
+    }
+
+    public static bool SALIR(string mensaje)
+    {
+        return mensaje.Trim().ToUpper() == "X";
     }
 }

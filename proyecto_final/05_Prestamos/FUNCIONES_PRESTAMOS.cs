@@ -12,7 +12,13 @@ class PRESTAMOS
         {
             Decoraciones.PRESTAR_LIBRO();
 
-            string[]? libro = BUSCAR_LIBRO();
+            var resultadoBusqueda = BUSCAR_LIBRO();
+            if (resultadoBusqueda.salir)
+            {
+                return;
+            }
+
+            string[]? libro = resultadoBusqueda.libro;
 
             if (libro == null)
             {
@@ -44,7 +50,18 @@ class PRESTAMOS
 
             if (resp == "S")
             {
-                string usuario = OBTENER_USUARIO(es_administrador);
+                var resultadoUsuario = OBTENER_USUARIO(es_administrador);
+                if (resultadoUsuario.salir)
+                {
+                    return;
+                }
+
+                string usuario = resultadoUsuario.usuario ?? "";
+                if (string.IsNullOrWhiteSpace(usuario))
+                {
+                    continue;
+                }
+
                 GUARDAR_PRESTAMO(libro[0], usuario);
                 Decoraciones.TEXTO_VERDE("¡Préstamo realizado con éxito!");
             }
@@ -68,12 +85,16 @@ class PRESTAMOS
     }
 
 
-    static string[]? BUSCAR_LIBRO()
+    static (string[]? libro, bool salir) BUSCAR_LIBRO()
     {
         string libros = ".//archivos//libros.csv";
         string prestamos = ".//archivos//prestamos.csv";
 
         string libroBuscado = VALIDAR.NO_VACIO("Ingrese el ID del libro: ");
+        if (VALIDAR.SALIR(libroBuscado))
+        {
+            return (null, true);
+        }
 
         string[] lineasLibros = File.ReadAllLines(libros);
 
@@ -97,7 +118,7 @@ class PRESTAMOS
         }
 
         if (libroEncontrado == null)
-            return null;
+            return (null, false);
 
         // Esto es para revisar historial de préstamos (último estado, si es está como "Disponible" o "Prestado")
         string estadoPrestamo = "Disponible";
@@ -126,20 +147,20 @@ class PRESTAMOS
         libroEncontrado.CopyTo(resultado, 0);
         resultado[^1] = estadoPrestamo;
 
-        return resultado;
+        return (resultado, false);
     }
 
-    static string OBTENER_USUARIO(bool es_administrador)
+    static (string? usuario, bool salir) OBTENER_USUARIO(bool es_administrador)
     {
         if (es_administrador)
         {
             return BUSCAR_USUARIO();
         }
 
-        return INICIAR_SESION.Sesion.IdUsuario;
+        return (INICIAR_SESION.Sesion.IdUsuario, false);
     }
 
-    public static string BUSCAR_USUARIO()
+    public static (string? usuario, bool salir) BUSCAR_USUARIO()
     {
         string usuarios = ".//archivos//usuarios.csv";
         string respuesta;
@@ -147,6 +168,10 @@ class PRESTAMOS
         do
         {
             string USUARIO_BUSCADO = VALIDAR.USERNAME_ID_VALIDO("\nIngrese el ID del usuario: ");
+            if (VALIDAR.SALIR(USUARIO_BUSCADO))
+            {
+                return (null, true);
+            }
 
             string[] lineas = File.ReadAllLines(usuarios);
 
@@ -180,7 +205,7 @@ class PRESTAMOS
 
             if (respuesta == "S")
             {
-                return ID_usuario;
+                return (ID_usuario, false);
             }
 
         } while (true);
@@ -246,7 +271,7 @@ class PRESTAMOS
             DateTime fecha;
             bool fechaValida = DateTime.TryParse(columnas[4], out fecha);
 
-            Console.Write($"| {columnas[0],-11} | {columnas[1],-8} | {columnas[2],-10} | {columnas[3],-14} | {(fechaValida ? fecha.ToString("dd/MM/yyyy") : columnas[4]),-14} | ");
+            Console.Write($"| {columnas[0],-11} | {columnas[1],-8} | {columnas[2],-10} | {columnas[3],-14} | {(fechaValida ? fecha.ToString("dd/MM/yyyy") : columnas[4].Substring(0, 10)),-14} | ");
 
             if (columnas[5].Trim().Equals("Pendiente", StringComparison.OrdinalIgnoreCase))
             {
@@ -255,7 +280,7 @@ class PRESTAMOS
             }
             else
             {
-                Console.Write($"{columnas[5].Trim(),-16} |");
+                Console.Write($"{columnas[5].Substring(0, 10),-16} |"); // el substring abarca los primeros 10 caracteres de la fecha que corresponden a dd/MM/yyyy
             }
 
             Console.WriteLine();
@@ -292,7 +317,7 @@ class PRESTAMOS
             DateTime fecha;
             bool fechaValida = DateTime.TryParse(columnas[4], out fecha);
 
-            Console.Write($"| {columnas[0],-11} | {columnas[1],-8} | {columnas[3],-14} | {(fechaValida ? fecha.ToString("dd/MM/yyyy") : columnas[4]),-14} | ");
+            Console.Write($"| {columnas[0],-11} | {columnas[1],-8} | {columnas[3],-14} | {(fechaValida ? fecha.ToString("dd/MM/yyyy") : columnas[4].Substring(0, 10)),-14} | ");
 
             if (columnas[5].Trim().Equals("Pendiente", StringComparison.OrdinalIgnoreCase))
             {
@@ -300,7 +325,7 @@ class PRESTAMOS
             }
             else
             {
-                Console.Write($"{columnas[5].Trim(),-16}");
+                Console.Write($"{columnas[5].Substring(0, 10),-16}");
             }
 
             Console.WriteLine(" |");
@@ -312,6 +337,8 @@ class PRESTAMOS
     {
         string prestamos = ".//archivos//prestamos.csv";
 
+        Decoraciones.DEVOLVER_LIBRO();
+
         if (!File.Exists(prestamos))
         {
             Decoraciones.TEXTO_VERDE("No hay préstamos registrados.");
@@ -320,6 +347,11 @@ class PRESTAMOS
 
         string[] lineas = File.ReadAllLines(prestamos);
         string idPrestamo = VALIDAR.PRESTAMO_ID_VALIDO("\nIngrese el ID del préstamo: ");
+
+        if (VALIDAR.SALIR(idPrestamo))
+        {
+            return;
+        }
 
         bool encontrado = false;
 
