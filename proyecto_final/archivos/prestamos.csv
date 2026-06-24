@@ -1,5 +1,0 @@
-IdPrestamo;IdLibro;UsuarioId;Disponibilidad;FechaPrestamo;FechaDevolucion
-001P;002L;001I001A;Disponible;6/24/2026 1:15:48 AM;24/06/2026 01:16:40 AM
-002P;003L;002I002A;Prestado;6/24/2026 1:18:56 AM;Pendiente
-003P;002L;006I003U;Prestado;6/24/2026 1:19:33 AM;Pendiente
-004P;005L;002I002A;Prestado;6/24/2026 1:36:37 AM;Pendiente

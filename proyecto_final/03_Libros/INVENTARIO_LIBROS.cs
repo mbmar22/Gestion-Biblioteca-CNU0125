@@ -6,18 +6,59 @@ class INVENTARIO_LIBROS
     {
         string[] lineas = File.ReadAllLines(libros);
 
+        // Anchos mínimos para los encabezados
+        int anchoID = 8;
+        int anchoTitulo = 32;
+        int anchoAutor = 24;
+        int anchoCategoria = 24;
+        int anchoEstado = 10;
+
+        // PRIMER RECORRIDO: calcular anchos
+        foreach (string linea in lineas)
+        {
+            string[] datos = linea.Split(';');
+
+            if (datos.Length < 6)
+                continue;
+
+            if (datos[0].Length > anchoID)
+                anchoID = datos[0].Length;
+
+            if (datos[1].Length > anchoTitulo)
+                anchoTitulo = datos[1].Length;
+
+            if (datos[2].Length > anchoAutor)
+                anchoAutor = datos[2].Length;
+
+            if (datos[3].Length > anchoCategoria)
+                anchoCategoria = datos[3].Length;
+
+            if (datos[5].Length > anchoEstado)
+                anchoEstado = datos[5].Length;
+        }
+
+        string separador =
+            "+" + new string('-', anchoID + 2) +
+            "+" + new string('-', anchoTitulo + 2) +
+            "+" + new string('-', anchoAutor + 2) +
+            "+" + new string('-', anchoCategoria + 2) +
+            "+" + new string('-', anchoEstado + 2) + "+";
+
         Decoraciones.ENCABEZADO();
-        Console.WriteLine("                                    MOSTRANDO EL INVENTARIO DE LIBROS");
+        Console.WriteLine("MOSTRANDO EL INVENTARIO DE LIBROS");
 
-        Console.WriteLine("\n+----------+----------------------------------+--------------------------+--------------------------+------------+");
-        Console.Write("| ");
-        Decoraciones.COLORES_TITULARES("ID", 8);
-        Decoraciones.COLORES_TITULARES("Título", 32);
-        Decoraciones.COLORES_TITULARES("Autor", 24);
-        Decoraciones.COLORES_TITULARES("Categoría",24);
-        Decoraciones.COLORES_TITULARES("Estado",10);
-        Console.WriteLine("\n+----------+----------------------------------+--------------------------+--------------------------+------------+");
+        Console.WriteLine(separador);
 
+        Decoraciones.TEXTO_CYAN(
+        "| " + "ID".PadRight(anchoID) +
+        " | " + "Título".PadRight(anchoTitulo) +
+        " | " + "Autor".PadRight(anchoAutor) +
+        " | " + "Categoría".PadRight(anchoCategoria) +
+        " | " + "Estado".PadRight(anchoEstado) + " |");
+
+        Console.WriteLine(separador);
+
+        // SEGUNDO RECORRIDO: para imprimir con formato
         foreach (string linea in lineas)
         {
             string[] datos = linea.Split(';');
@@ -28,10 +69,13 @@ class INVENTARIO_LIBROS
             }
 
             Console.WriteLine(
-                $"| {datos[0],-8} | {datos[1],-32} | {datos[2],-24} | {datos[3],-24} | {datos[5],-10} |"
-            );
-
-            Console.WriteLine("+----------+----------------------------------+--------------------------+--------------------------+------------+");
+            "| " + datos[0].PadRight(anchoID) +
+            " | " + datos[1].PadRight(anchoTitulo) +
+            " | " + datos[2].PadRight(anchoAutor) +
+            " | " + datos[3].PadRight(anchoCategoria) +
+            " | " + datos[5].PadRight(anchoEstado) + " |"
+        );
+            Console.WriteLine(separador);
         }
 
         Console.WriteLine();
