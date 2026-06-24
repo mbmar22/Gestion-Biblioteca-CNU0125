@@ -2,7 +2,7 @@ class ALERTAS
 {
     public static void VACIO()
     {
-        Decoraciones.TEXTO_ROJO("¡ ERROR ! Este campo no puede estar vacío.");
+        Decoraciones.TEXTO_ROJO("¡ ERROR ! Este campo no permite ' ; ' ni espacios vacíos.");
     }
 
     public static void ARCHIVO_NO_ENCONTRADO()

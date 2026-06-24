@@ -64,13 +64,15 @@ class Decoraciones
     public static void cargando()
     {
         Console.WriteLine("");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
 
-        for (int i = 0; i < 6; i++) // 3 segundos
+        for (int i = 0; i < 6; i++)
         {
             Thread.Sleep(500);
-            Decoraciones.TEXTO_CYAN(" . ");
+            Console.Write(" . ");
         }
 
+        Console.ResetColor();
         Console.WriteLine();
     }
     
@@ -244,6 +246,6 @@ class Decoraciones
     public static void PRESTAR_LIBRO()
     {
         Decoraciones.ENCABEZADO();
-        Decoraciones.TEXTO_CYAN("               PRESTAR LIBRO\n");
+        Decoraciones.TEXTO_CYAN("                              PRESTAR LIBRO\n");
     }
 }

@@ -3,6 +3,10 @@ class VALIDAR
     static String categorias = ".//archivos//categorias.csv";
     static String usuarios = ".//archivos//usuarios.csv";
 
+    public static bool SIN_PUNTO_Y_COMA(string texto)
+    {
+        return string.IsNullOrWhiteSpace(texto) || texto.Contains(';');
+    }
     public static string NO_VACIO(string mensaje)
     {
         string texto;
@@ -12,15 +16,12 @@ class VALIDAR
             Console.Write(mensaje);
             texto = Console.ReadLine();
 
-            if (String.IsNullOrWhiteSpace(texto))
+            if (SIN_PUNTO_Y_COMA(texto))
             {
                 ALERTAS.VACIO();
             }
 
-        } while (String.IsNullOrWhiteSpace(texto));
-
-        Console.ResetColor();
-        
+        } while (SIN_PUNTO_Y_COMA(texto));        
         return texto;
     }
 
@@ -31,7 +32,7 @@ class VALIDAR
         do
         {
             Console.Write(mensaje);
-            string? entrada = Console.ReadLine();
+            string entrada = Console.ReadLine();
 
             if (String.IsNullOrWhiteSpace(entrada))
             {
@@ -62,7 +63,7 @@ class VALIDAR
             Console.Write(mensaje);
             texto = Console.ReadLine();
 
-            if (String.IsNullOrWhiteSpace(texto))
+            if (SIN_PUNTO_Y_COMA(texto))
             {
                 ALERTAS.VACIO();
             }
@@ -71,7 +72,7 @@ class VALIDAR
                 Decoraciones.TEXTO_ROJO("¡ ERROR ! Solo se permiten letras.");
             }
 
-        } while (String.IsNullOrWhiteSpace(texto) || !texto.All(char.IsLetter));
+        } while (SIN_PUNTO_Y_COMA(texto) || !texto.All(char.IsLetter));
 
         return texto;
     }
@@ -86,8 +87,7 @@ class VALIDAR
             Console.Write(mensaje);
             texto = Console.ReadLine();
 
-            valido = !String.IsNullOrWhiteSpace(texto) &&
-                    texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
+            valido = !SIN_PUNTO_Y_COMA(texto) && texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
 
             if (String.IsNullOrWhiteSpace(texto))
             {
@@ -111,19 +111,18 @@ class VALIDAR
             Console.Write(mensaje);
             texto = Console.ReadLine();
 
-            if (String.IsNullOrWhiteSpace(texto))
+            if (SIN_PUNTO_Y_COMA(texto))
             {
                 ALERTAS.VACIO();
             }
-
-            // validar que solo sean letras y espacios, ese .All con el =>
+            // validar que solo sean letras, espacios yciertos caracteres 
 
             else if (!texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '.' || c == '\'' || c == '-'))
             {
                 Decoraciones.TEXTO_ROJO("¡ ERROR ! No se permiten números y ciertos caracteres especiales.");
             }
 
-        } while (String.IsNullOrWhiteSpace(texto) || !texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '.' ||  c == '\'' || c == '-'));
+        } while (SIN_PUNTO_Y_COMA(texto) || !texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '.' ||  c == '\'' || c == '-'));
 
         return texto;
     }
@@ -143,17 +142,16 @@ class VALIDAR
 
                 respuesta = Console.ReadLine();
 
-                if (String.IsNullOrWhiteSpace(respuesta))
+                if (SIN_PUNTO_Y_COMA(respuesta))
                 {
                     ALERTAS.VACIO();
                 }
 
-            } while (String.IsNullOrWhiteSpace(respuesta));
+            } while (SIN_PUNTO_Y_COMA(respuesta));
 
             // mostrar categorías
             if (respuesta == "1")
             {
-
                 Decoraciones.mostrar_categorias();
                 continue;
             }
@@ -194,7 +192,7 @@ class VALIDAR
             texto = Console.ReadLine();
             usuario_existente = false;
 
-            if (String.IsNullOrWhiteSpace(texto))
+            if (SIN_PUNTO_Y_COMA(texto))
             {
                 ALERTAS.VACIO();
             }
@@ -224,7 +222,7 @@ class VALIDAR
                 }
             }
 
-        } while (String.IsNullOrWhiteSpace(texto) || !texto.Any(char.IsLetter) || usuario_existente);
+        } while (SIN_PUNTO_Y_COMA(texto) || !texto.Any(char.IsLetter) || usuario_existente);
         return texto;
     }
 
@@ -240,7 +238,7 @@ class VALIDAR
             texto = Console.ReadLine();
             usuario_existente = false;
 
-            if (String.IsNullOrWhiteSpace(texto))
+            if (SIN_PUNTO_Y_COMA(texto))
             {
                 ALERTAS.VACIO();
             }
@@ -270,7 +268,7 @@ class VALIDAR
                     Decoraciones.TEXTO_ROJO("El ID ingresado no existe.");
                 }
             }
-        } while (String.IsNullOrWhiteSpace(texto) || !usuario_existente);
+        } while (SIN_PUNTO_Y_COMA(texto)|| !usuario_existente);
 
         return texto;
     }
@@ -316,13 +314,12 @@ class VALIDAR
     public static string AL_MENOS_UNA_LETRA(string mensaje)
     {
         string texto;
-
         do
         {
             Console.Write(mensaje);
             texto = Console.ReadLine();
 
-            if (String.IsNullOrWhiteSpace(texto))
+            if (SIN_PUNTO_Y_COMA(texto))
             {
                 ALERTAS.VACIO();
             }
@@ -331,11 +328,7 @@ class VALIDAR
                 ALERTAS.UNA_LETRA();
             }
 
-        } while (
-            String.IsNullOrWhiteSpace(texto) ||
-            !texto.Any(char.IsLetter)
-        );
-
+        } while ( SIN_PUNTO_Y_COMA(texto) || !texto.Any(char.IsLetter));
         return texto;
     }
 }
