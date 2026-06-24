@@ -23,6 +23,14 @@ class ADMINISTRACION_PRESTAMOS
         switch (respuesta)
         {
             case 1:
+            if (INICIAR_SESION.Sesion.Rol == "Administrador")
+                {
+                    PRESTAMOS.MOSTRAR_PRESTAMOS_ADMIN();
+                }
+                else
+                {
+                    PRESTAMOS.MOSTRAR_PRESTAMOS_USER();
+                }
                 break;
             case 2:
             if (INICIAR_SESION.Sesion.Rol == "Administrador")

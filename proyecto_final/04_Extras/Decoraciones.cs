@@ -209,12 +209,10 @@ class Decoraciones
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
 
-
     public static void MOSTRAR_PRESTAMOS_ADMIN(string[] datos)
     {
         string[] lineas = File.ReadAllLines(prestamos);  
-        
-        // acordarme de que la fecha de préstamo nada más se guarde nada más la fecha
+
         Console.WriteLine("ID Préstamo - ID Libro - ID Usuario - Disponibilidad - Fecha de Préstamo - Fecha de Devolución");
         Console.WriteLine(datos[0] + datos[1] + datos[2] + datos[3] + datos[4] + datos[5]); 
     }

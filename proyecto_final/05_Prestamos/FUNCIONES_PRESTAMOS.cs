@@ -193,4 +193,35 @@ class PRESTAMOS
             sw.WriteLine($"{idPrestamo};{idLibro};{idUsuario};Prestado;{DateTime.Now};Pendiente");
         }
     }
+
+    public static void MOSTRAR_PRESTAMOS_ADMIN()
+    {
+        String prestamos = ".//archivos//prestamos.csv";
+
+        String [] linea = File.ReadAllLines(prestamos);
+
+        Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
+        Console.Write("| ");
+        Decoraciones.COLORES_TITULARES("ID Préstamo");
+        Decoraciones.COLORES_TITULARES("ID Libro");
+        Decoraciones.COLORES_TITULARES("ID Usuario");
+        Decoraciones.COLORES_TITULARES("Disponibilidad");
+        Decoraciones.COLORES_TITULARES("Fecha Préstamo");
+        Decoraciones.COLORES_TITULARES(" Fecha Devolución");
+        Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
+
+        foreach (string lineas in linea.Skip(1)) // saltar la primera por que es el encabezado, y el encabezado ya lo estamos imprimiendo aparte.
+        {
+            string[] columnas = lineas.Split(";");
+            string fechaTexto = columnas[4];
+            DateTime fecha = DateTime.Parse(fechaTexto); // esto es para convertir la fecha que está guardada con el registro del tiempo
+
+            Console.WriteLine($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[2], -10} | {columnas[3], -14} | {fecha.ToString("dd/MM/yyyy"), -14} | {columnas[5], -17} |");
+        }
+    }
+
+    public static void MOSTRAR_PRESTAMOS_USER()
+    {
+        
+    }
 }
