@@ -2,6 +2,8 @@ class VALIDAR
 {
     static String categorias = ".//archivos//categorias.csv";
     static String usuarios = ".//archivos//usuarios.csv";
+    
+    static String prestamos = ".//archivos//prestamos.csv";
 
     public static bool SIN_PUNTO_Y_COMA(string texto)
     {
@@ -272,7 +274,51 @@ class VALIDAR
 
         return texto;
     }
+    public static string PRESTAMO_ID_VALIDO(string mensaje)
+    {
+        string texto;
+        bool prestamo_existente;
 
+        do
+        {
+            Console.Write(mensaje);
+            texto = Console.ReadLine();
+            prestamo_existente = false;
+
+            if (String.IsNullOrWhiteSpace(texto))
+            {
+                ALERTAS.VACIO();
+            }
+            else
+            {
+                texto = texto.Trim();
+
+                if (File.Exists(prestamos))
+                {
+                    string [] lineas = File.ReadAllLines(prestamos);
+
+                    foreach (string linea in lineas.Skip(1))
+                    {
+                        string[] datos = linea.Split(';');
+
+                        if (datos.Length > 0 &&
+                        datos[0].Trim().Equals(texto, StringComparison.OrdinalIgnoreCase))
+                        {
+                            prestamo_existente = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!prestamo_existente)
+                {
+                    Decoraciones.TEXTO_ROJO("El ID ingresado no existe.");
+                }
+            }
+        } while (String.IsNullOrWhiteSpace(texto) || !prestamo_existente);
+
+        return texto;
+    }
     public static string SI_NO(string mensaje)
     {
         string respuesta;
