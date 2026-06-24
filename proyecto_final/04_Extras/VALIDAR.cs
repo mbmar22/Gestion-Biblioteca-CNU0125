@@ -377,4 +377,24 @@ class VALIDAR
         } while ( SIN_PUNTO_Y_COMA(texto) || !texto.Any(char.IsLetter));
         return texto;
     }
+
+    public static bool SALIR(string mensaje)
+    {
+        mensaje.ToUpper();
+        if (mensaje.Trim().ToUpper() == "X")
+        {
+            if (INICIAR_SESION.Sesion.Rol == "Administrador")
+            {
+                MENUS.MENU_ADMIN();
+            }
+            else
+            {
+                MENUS.MENU_USUARIO();
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }

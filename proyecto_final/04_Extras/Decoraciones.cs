@@ -224,8 +224,9 @@ class Decoraciones
     public static void COLORES_TITULARES(string texto, int ancho)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write(texto.PadRight(ancho) + " | ");
+        Console.Write(texto.PadRight(ancho));
         Console.ResetColor();
+        Console.Write(" | ");
     }
 
     public static void PRESTAMO_PENDIENTE(string mensaje)

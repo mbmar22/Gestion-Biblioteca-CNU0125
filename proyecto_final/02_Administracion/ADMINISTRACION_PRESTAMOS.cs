@@ -1,5 +1,17 @@
 class ADMINISTRACION_PRESTAMOS
 {
+    public static void MENU_PRESTAMOS()
+    {
+        if (INICIAR_SESION.Sesion.Rol == "Administrador")
+        {
+            MENU_ADMIN_PRESTAMOS();
+        }
+        else
+        {
+            MENU_USUARIO_PRESTAMOS();
+        }
+    }
+
     public static void MENU_ADMIN_PRESTAMOS()
     {
         int respuesta;
@@ -40,9 +52,11 @@ class ADMINISTRACION_PRESTAMOS
 
         } while (true);
     }
+
     public static void MENU_USUARIO_PRESTAMOS()
     {
         int respuesta;
+
         do
         {
             Decoraciones.ENCABEZADO();
@@ -52,6 +66,7 @@ class ADMINISTRACION_PRESTAMOS
                 "1. Ver préstamos realizados\n" +
                 "2. Prestar libro\n" +
                 "3. Regresar\n");
+
             respuesta = VALIDAR.OPCION("Seleccione una opción: ", 1, 3);
 
             switch (respuesta)
@@ -61,14 +76,14 @@ class ADMINISTRACION_PRESTAMOS
                     Decoraciones.SALIR_AL_PANEL();
                     break;
 
-                    case 2:
+                case 2:
                     PRESTAMOS.PRESTAR_LIBRO(false);
                     Decoraciones.SALIR_AL_PANEL();
                     break;
 
-                    case 3:
+                case 3:
                     return;
-                }
-            } while (respuesta != 3);
-        }
+            }
+        } while (true);
     }
+}
