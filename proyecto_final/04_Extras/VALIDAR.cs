@@ -273,7 +273,6 @@ class VALIDAR
         return texto;
     }
 
-
     public static string SI_NO(string mensaje)
     {
         string respuesta;

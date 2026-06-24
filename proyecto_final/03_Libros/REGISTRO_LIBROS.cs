@@ -3,11 +3,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 class REGISTRO_LIBROS
 {
-
     static String libros = ".//archivos//libros.csv";
-    static String categorias = ".//archivos//categorias.csv";
-
-    // cambié el struct a class para trabajar con clases heredadas. No sé qué estoy haciendo la verdad, jaja
     public class LIBROS
     {
         public string ID = "ID Libro";

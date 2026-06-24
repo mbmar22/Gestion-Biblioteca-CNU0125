@@ -99,7 +99,7 @@ class MENUS
             
             Decoraciones.OPCIONES_USER();
             
-            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,6);
+            respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1,5);
 
             switch (respuesta)
             {
@@ -118,12 +118,10 @@ class MENUS
                     do
                     {
                         ADMINISTRACION_PRESTAMOS.MENU_PRESTAMOS();
-                        repetir = VALIDAR.SI_NO("¿Desea realizar algún préstamo, devolución o visualizar el registro de préstamos? (S/N): ");
+                        repetir = VALIDAR.SI_NO("¿Desea realizar otra operación de préstamos? (S/N): ");
                     } while (repetir == "S");
                     break;
                 case 4:
-                    break;
-                case 5:
                     if (VALIDAR.CONFIRMAR(confirmacion))
                     {
                         bool cerrar_sesion = CAMBIO_CLAVE.MODIFICAR_CLAVE();
@@ -133,12 +131,12 @@ class MENUS
                         }
                     }
                     break;
-                case 6:
+                case 5:
                     Decoraciones.despedida();
                     break;
                 default:
                     break;
             }
-        } while (respuesta != 6);
+        } while (respuesta != 5);
     }
 }

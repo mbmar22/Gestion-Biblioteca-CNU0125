@@ -45,8 +45,7 @@ class ADMINISTRACION_PRESTAMOS
             case 3:
                 break;
             case 4:
-                MENUS.MENU_ADMIN();
-                break;
+                return;
         }
         Console.WriteLine();
     }

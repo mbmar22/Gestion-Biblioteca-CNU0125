@@ -127,10 +127,10 @@ class Decoraciones
         Console.WriteLine("Como administrador, puede realizar las siguientes acciones en el sistema \n" +
             "                       de gestión de biblioteca:\n");
         Console.WriteLine(
-                "1. Ver todos los libros \n" +
+                "1. Ver inventario de libros \n" +
                 "2. Registrar libro nuevo \n" + 
                 "3. Buscar libro \n" +
-                "4. Administración de préstamos \n" +
+                "4. Gestionar préstamos \n" +
                 "5. Modificar información del libro \n" +
                 "6. Registrar nuevo usuario \n" +
                 "7. Administrar usuarios \n" +
@@ -144,12 +144,11 @@ class Decoraciones
         Console.WriteLine("Como usuario estándar, puede realizar las siguientes acciones en el sistema \n" +
             "                       de gestión de biblioteca:\n");
         Console.WriteLine(
-                "1. Ver libros \n" +
+                "1. Ver inventario de libros \n" +
                 "2. Buscar libro\n" +
-                "3. Prestar libro \n" +
-                "4. Ver mi historial de préstamos \n" +
-                "5. Cambiar contraseña \n" +
-                "6. Salir");
+                "3. Gestionar préstamos \n" +
+                "4. Cambiar contraseña \n" +
+                "5. Salir");
         Console.WriteLine("");
     }
 
