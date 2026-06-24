@@ -262,5 +262,4 @@ class Decoraciones
         Console.ResetColor();
         Console.Write(" | ");
     }
-
 }

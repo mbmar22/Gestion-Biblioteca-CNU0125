@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 class PRESTAMOS
 {
     public static void PRESTAR_LIBRO(bool es_administrador)
@@ -217,11 +219,36 @@ class PRESTAMOS
             DateTime fecha = DateTime.Parse(fechaTexto); // esto es para convertir la fecha que está guardada con el registro del tiempo
 
             Console.WriteLine($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[2], -10} | {columnas[3], -14} | {fecha.ToString("dd/MM/yyyy"), -14} | {columnas[5], -17} |");
+            Console.WriteLine("+-------------+----------+------------+----------------+----------------+-------------------+");
         }
     }
 
     public static void MOSTRAR_PRESTAMOS_USER()
     {
-        
+        String prestamos = ".//archivos//prestamos.csv";
+
+        String [] linea = File.ReadAllLines(prestamos);
+
+        Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
+        Console.Write("| ");
+        Decoraciones.COLORES_TITULARES("ID Préstamo");
+        Decoraciones.COLORES_TITULARES("ID Libro");
+        Decoraciones.COLORES_TITULARES("Disponibilidad");
+        Decoraciones.COLORES_TITULARES("Fecha Préstamo");
+        Decoraciones.COLORES_TITULARES("Fecha Devolución");
+        Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
+
+        foreach (string lineas in linea.Skip(1))
+        {
+            string[] columnas = lineas.Split(";");
+            string fechaTexto = columnas[4];
+            DateTime fecha = DateTime.Parse(fechaTexto);
+
+            if (columnas[2] == INICIAR_SESION.Sesion.IdUsuario)
+            {
+                Console.WriteLine($"| {columnas[0], -11} | {columnas[1], -8} | {columnas[3], -14} | {fecha.ToString("dd/MM/yyyy"), -14} | {columnas[5], -16} |");
+                Console.WriteLine("+-------------+----------+----------------+----------------+------------------+");
+            }
+        }
     }
 }
