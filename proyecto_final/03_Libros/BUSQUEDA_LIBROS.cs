@@ -5,16 +5,10 @@ class BUSQUEDA_LIBROS
     public static void BUSCAR_LIBROS()
     {
         Decoraciones.ENCABEZADO();
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.WriteLine("                         PANEL DE BÚSQUEDA DE LIBROS");
-        Console.ResetColor();
-        Console.WriteLine("");
+        Decoraciones.TEXTO_CYAN("                         PANEL DE BÚSQUEDA DE LIBROS\n");
         Console.WriteLine(
             "1. Buscar un libro por su nombre\n" +
-            "2. Buscar un libro por categoría");
-            
-        Console.WriteLine("");
-
+            "2. Buscar un libro por categoría\n");
         int respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1, 2);
 
         switch (respuesta)
@@ -46,7 +40,7 @@ class BUSQUEDA_LIBROS
         {
             String[] datos = lineas[i].Split(';');
 
-            if (datos.Length > 7) // para evitar el out of index range
+            if (datos.Length >= 6) // para evitar el out of index range
             {
                 if (datos[1].Contains(nombre_buscado, StringComparison.OrdinalIgnoreCase))
                 {
@@ -83,7 +77,7 @@ class BUSQUEDA_LIBROS
         {
             String[] datos = lineas[i].Split(';');
 
-            if (datos.Length > 7) // para evitar el out of index range
+            if (datos.Length >= 6) // para evitar el out of index range
             {
                 if (datos[3].Contains(categoria_buscada, StringComparison.OrdinalIgnoreCase))
                 {
@@ -111,7 +105,7 @@ class BUSQUEDA_LIBROS
         {
             string[] datos = lineas[i].Split(';');
 
-            if (datos.Length > 7)
+            if (datos.Length >= 6)
             {
                 if (datos[0].Equals(id_buscado, StringComparison.OrdinalIgnoreCase))
                 {

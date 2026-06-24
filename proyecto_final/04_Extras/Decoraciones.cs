@@ -173,41 +173,18 @@ class Decoraciones
         Console.Write("│ ");
         Console.WriteLine(("Categoría: " + datos[3]).PadRight(60) + " │");
 
-        // Corregir esto, lo puse así para mientras, como comentario.
-        //Console.Write("│ ");
-        //Console.WriteLine(("Disponibilidad: " + datos[5]).PadRight(60) + " │");
+        Console.Write("│ ");
+        Console.WriteLine(("Estado: " + datos[5]).PadRight(60) + " │");
 
-        //Console.Write("│ ");
-        //Console.WriteLine(("Estado: " + datos[6]).PadRight(60) + " │");
-
-        //Console.Write("│ ");
-        //Console.WriteLine(("Registrado: " + datos[7]).PadRight(60) + " │");
+        Console.Write("│ ");
+        Console.WriteLine(("Registrado: " + datos[6]).PadRight(60) + " │");
 
         Console.Write("│ ");
         Console.WriteLine(("Descripción: " + datos[4]).PadRight(60) + " │");
 
         Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
     }
-
-    static string usuarios = ".//archivos//usuarios";
     static string prestamos = ".//archivos//prestamos.csv";
-
-    public static void MOSTRAR_USUARIO(string[] datos)
-    {
-
-        Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
-
-        Console.Write("│ ");
-        Console.WriteLine(("ID: " + datos[0]).PadRight(60) + " │");
-
-        Console.Write("│ ");
-        Console.WriteLine(("Nombre: " + datos[1]).PadRight(60) + " │");
-
-        Console.Write("│ ");
-        Console.WriteLine(("Apellido: " + datos[2]).PadRight(60) + " │");
-
-        Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
-    }
 
     public static void MOSTRAR_PRESTAMOS_ADMIN(string[] datos)
     {
@@ -255,11 +232,10 @@ class Decoraciones
         Decoraciones.TEXTO_CYAN("                              PRESTAR LIBRO\n");
     }
 
-    public static void COLORES_TITULARES(string mensaje)
+    public static void COLORES_TITULARES(string texto, int ancho)
     {
-        Console.ForegroundColor = ConsoleColor.DarkBlue;
-        Console.Write(mensaje);
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.Write(texto.PadRight(ancho) + " | ");
         Console.ResetColor();
-        Console.Write(" | ");
     }
 }

@@ -204,12 +204,12 @@ class PRESTAMOS
 
         Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
         Console.Write("| ");
-        Decoraciones.COLORES_TITULARES("ID Préstamo");
-        Decoraciones.COLORES_TITULARES("ID Libro");
-        Decoraciones.COLORES_TITULARES("ID Usuario");
-        Decoraciones.COLORES_TITULARES("Disponibilidad");
-        Decoraciones.COLORES_TITULARES("Fecha Préstamo");
-        Decoraciones.COLORES_TITULARES(" Fecha Devolución");
+        Decoraciones.COLORES_TITULARES("ID Préstamo", 11);
+        Decoraciones.COLORES_TITULARES("ID Libro", 8 );
+        Decoraciones.COLORES_TITULARES("ID Usuario", 10);
+        Decoraciones.COLORES_TITULARES("Disponibilidad", 14);
+        Decoraciones.COLORES_TITULARES("Fecha Préstamo", 14);
+        Decoraciones.COLORES_TITULARES("Fecha Devolución", 16);
         Console.WriteLine("\n+-------------+----------+------------+----------------+----------------+-------------------+");
 
         foreach (string lineas in linea.Skip(1)) // saltar la primera por que es el encabezado, y el encabezado ya lo estamos imprimiendo aparte.
@@ -231,11 +231,11 @@ class PRESTAMOS
 
         Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
         Console.Write("| ");
-        Decoraciones.COLORES_TITULARES("ID Préstamo");
-        Decoraciones.COLORES_TITULARES("ID Libro");
-        Decoraciones.COLORES_TITULARES("Disponibilidad");
-        Decoraciones.COLORES_TITULARES("Fecha Préstamo");
-        Decoraciones.COLORES_TITULARES("Fecha Devolución");
+        Decoraciones.COLORES_TITULARES("ID Préstamo", 11);
+        Decoraciones.COLORES_TITULARES("ID Libro", 8 );
+        Decoraciones.COLORES_TITULARES("Disponibilidad", 14);
+        Decoraciones.COLORES_TITULARES("Fecha Préstamo", 14);
+        Decoraciones.COLORES_TITULARES("Fecha Devolución", 16);
         Console.WriteLine("\n+-------------+----------+----------------+----------------+------------------+");
 
         foreach (string lineas in linea.Skip(1))

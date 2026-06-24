@@ -4,31 +4,34 @@ class INVENTARIO_LIBROS
 
     public static void MOSTRAR_INVENTARIO()
     {
-        String[] lineas = File.ReadAllLines(libros);
+        string[] lineas = File.ReadAllLines(libros);
 
         Decoraciones.ENCABEZADO();
-        Decoraciones.TEXTO_CYAN("MOSTRANDO EL INVENTARIO DE LIBROS");
+        Console.WriteLine("                                    MOSTRANDO EL INVENTARIO DE LIBROS");
 
-        Decoraciones.TEXTO_CYAN("\nID       TÍTULO                          AUTOR                  CATEGORÍA              ESTADO");
-        Decoraciones.SEPARADOR();
+        Console.WriteLine("\n+----------+----------------------------------+--------------------------+--------------------------+------------+");
+        Console.Write("| ");
+        Decoraciones.COLORES_TITULARES("ID", 8);
+        Decoraciones.COLORES_TITULARES("Título", 32);
+        Decoraciones.COLORES_TITULARES("Autor", 24);
+        Decoraciones.COLORES_TITULARES("Categoría",24);
+        Decoraciones.COLORES_TITULARES("Estado",10);
+        Console.WriteLine("\n+----------+----------------------------------+--------------------------+--------------------------+------------+");
 
-        for (int i = 0; i < lineas.Length; i++)
+        foreach (string linea in lineas)
         {
-            String[] datos = lineas[i].Split(';');
+            string[] datos = linea.Split(';');
 
-            if (datos.Length < 8)
+            if (datos.Length < 6)
             {
                 continue;
             }
-            Console.WriteLine("{0,-8}{1,-32}{2,-24}{3,-24}{4,-10}{5,-16}",
-            datos[0],
-            datos[1],
-            datos[2],
-            datos[3],
-            datos[6],
-            datos[5]);
 
-            Decoraciones.SEPARADOR();
+            Console.WriteLine(
+                $"| {datos[0],-8} | {datos[1],-32} | {datos[2],-24} | {datos[3],-24} | {datos[5],-10} |"
+            );
+
+            Console.WriteLine("+----------+----------------------------------+--------------------------+--------------------------+------------+");
         }
 
         Console.WriteLine();
