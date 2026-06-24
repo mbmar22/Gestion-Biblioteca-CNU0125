@@ -221,17 +221,30 @@ class PRESTAMOS
         }
 
         string[] lineas = File.ReadAllLines(prestamos);
-        int contador = 0;
+        int maxId = 0;
 
         foreach (string linea in lineas.Skip(1))
         {
-            if (!string.IsNullOrWhiteSpace(linea))
+            if (string.IsNullOrWhiteSpace(linea))
             {
-                contador++;
+                continue;
+            }
+
+            string[] columnas = linea.Split(';');
+            if (columnas.Length == 0)
+            {
+                continue;
+            }
+
+            string idPrestamo = columnas[0].Trim();
+            if (idPrestamo.EndsWith("P", StringComparison.Ordinal) &&
+                int.TryParse(idPrestamo[..^1], out int numeroPrestamo))
+            {
+                maxId = Math.Max(maxId, numeroPrestamo);
             }
         }
 
-        return $"{contador + 1:D3}P";
+        return $"{maxId + 1:D3}P";
     }
 
     static void GUARDAR_PRESTAMO(string idLibro, string idUsuario)
@@ -363,6 +376,15 @@ class PRESTAMOS
 
             if (columnas[0].Trim().Equals(idPrestamo.Trim(), StringComparison.OrdinalIgnoreCase))
             {
+                bool yaDevuelto = columnas[3].Trim().Equals("Disponible", StringComparison.OrdinalIgnoreCase) ||
+                                  !columnas[5].Trim().Equals("Pendiente", StringComparison.OrdinalIgnoreCase);
+
+                if (yaDevuelto)
+                {
+                    Decoraciones.TEXTO_VERDE("Ese libro ya fue devuelto.");
+                    return;
+                }
+
                 columnas[3] = "Disponible";
                 columnas[5] = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
                 lineas[i] = string.Join(";", columnas);
