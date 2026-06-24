@@ -34,8 +34,7 @@ class Decoraciones
                     claveO.Remove(claveO.Length - 1, 1);
                     Console.Write("\b \b");
                 }
-                else if (password.Key != ConsoleKey.Enter &&
-                        password.Key != ConsoleKey.Backspace)
+                else if (password.Key != ConsoleKey.Enter && password.Key != ConsoleKey.Backspace)
                 {
                     claveO.Append(password.KeyChar);
                     Console.Write("•");
@@ -104,7 +103,7 @@ class Decoraciones
         {
             string[] datos = lineas[i].Split(';');
 
-            if (datos.Length > 1) // para evitar el out of index range
+            if (datos.Length >= 1) // para evitar el out of index range
             {
                 Console.Write(datos[1].PadRight(25));
                 contador++;
@@ -120,15 +119,13 @@ class Decoraciones
         {
             Console.WriteLine();
         }
-
         Console.WriteLine();
     }
 
     public static void OPCIONES_ADMIN()
     {
         Console.WriteLine("Como administrador, puede realizar las siguientes acciones en el sistema \n" +
-            "                       de gestión de biblioteca: ");
-        Console.WriteLine("");
+            "                       de gestión de biblioteca:\n");
         Console.WriteLine(
                 "1. Ver todos los libros \n" +
                 "2. Registrar libro nuevo \n" + 
@@ -145,8 +142,7 @@ class Decoraciones
     public static void OPCIONES_USER()
     {
         Console.WriteLine("Como usuario estándar, puede realizar las siguientes acciones en el sistema \n" +
-            "                       de gestión de biblioteca: ");
-        Console.WriteLine("");
+            "                       de gestión de biblioteca:\n");
         Console.WriteLine(
                 "1. Ver libros \n" +
                 "2. Buscar libro\n" +
@@ -196,16 +192,10 @@ class Decoraciones
 
     public static void SALIR_AL_PANEL()
     {
-        Decoraciones.TEXTO_CYAN("Presione cualquier tecla para regresar al panel: ");
+        Console.Write("Presione cualquier tecla para regresar al panel: ");
         Console.ReadKey();
     }
 
-    public static void SEPARADOR()
-    {
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine("────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-        Console.ResetColor();
-    }
     public static void TEXTO_CYAN(string mensaje)
     {
         Console.ForegroundColor = ConsoleColor.DarkCyan;

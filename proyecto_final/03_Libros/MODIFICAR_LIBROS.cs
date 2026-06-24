@@ -77,7 +77,7 @@ class MODIFICAR_LIBROS()
         Decoraciones.TEXTO_CYAN("                      EDITAR ESTADO DEL LIBRO");
 
         Console.WriteLine($"\n{datos[1]}  -  {datos[2]}");
-        Console.WriteLine($"Estado actual: {datos[6]}");
+        Console.WriteLine($"Estado actual: {datos[5]}");
 
         Decoraciones.cargando();
 

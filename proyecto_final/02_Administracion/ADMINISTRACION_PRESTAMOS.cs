@@ -18,12 +18,12 @@ class ADMINISTRACION_PRESTAMOS
 
         Console.WriteLine("");
 
-        int respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1, 3);
+        int respuesta = VALIDAR.OPCION("Digite el número de la acción que desea realizar: ", 1, 4);
 
         switch (respuesta)
         {
             case 1:
-            if (INICIAR_SESION.Sesion.Rol == "Administrador")
+                if (INICIAR_SESION.Sesion.Rol == "Administrador")
                 {
                     PRESTAMOS.MOSTRAR_PRESTAMOS_ADMIN();
                 }
@@ -33,7 +33,7 @@ class ADMINISTRACION_PRESTAMOS
                 }
                 break;
             case 2:
-            if (INICIAR_SESION.Sesion.Rol == "Administrador")
+                if (INICIAR_SESION.Sesion.Rol == "Administrador")
                 {
                     PRESTAMOS.PRESTAR_LIBRO(true);
                 }
@@ -45,10 +45,9 @@ class ADMINISTRACION_PRESTAMOS
             case 3:
                 break;
             case 4:
-            MENUS.MENU_ADMIN();
+                MENUS.MENU_ADMIN();
                 break;
         }
-
         Console.WriteLine();
     }
 }

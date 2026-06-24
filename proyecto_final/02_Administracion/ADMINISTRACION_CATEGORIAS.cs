@@ -53,9 +53,7 @@ class ADMINISTRACION_CATEGORIAS
                     {
                         string[] datos = linea.Split(';');
 
-                        if (datos.Length > 1 &&
-                            datos[1].Equals(category.nombreCategoria,
-                            StringComparison.OrdinalIgnoreCase))
+                        if (datos.Length >= 1 && datos[1].Equals(category.nombreCategoria, StringComparison.OrdinalIgnoreCase))
                         {
                             categoria_existente = true;
 
