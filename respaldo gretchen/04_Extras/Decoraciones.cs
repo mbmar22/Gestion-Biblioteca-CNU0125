@@ -93,7 +93,9 @@ class Decoraciones
             return;
         }
 
-        Decoraciones.TEXTO_GRIS("\n 𓂃🖋   CATEGORÍAS DISPONIBLES");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("\n 𓂃🖋   CATEGORÍAS DISPONIBLES");
+        Console.ResetColor();
 
         int contador = 0;
 
@@ -125,16 +127,16 @@ class Decoraciones
         Console.WriteLine("Como administrador, puede realizar las siguientes acciones en el sistema \n" +
             "                       de gestión de biblioteca:\n");
         Console.WriteLine(
-                "[1]  Ver inventario de libros \n" +
-                "[2]  Registrar libro nuevo \n" + 
-                "[3]  Buscar libro \n" +
-                "[4]  Gestionar préstamos \n" +
-                "[5]  Modificar información del libro \n" +
-                "[6]  Registrar nuevo usuario \n" +
-                "[7]  Administrar usuarios \n" +
-                "[8]  Registrar nueva categoría \n" +
-                "[9]  Cambiar contraseña\n" +
-                "[10] Salir\n");
+                "1. Ver inventario de libros \n" +
+                "2. Registrar libro nuevo \n" + 
+                "3. Buscar libro \n" +
+                "4. Gestionar préstamos \n" +
+                "5. Modificar información del libro \n" +
+                "6. Registrar nuevo usuario \n" +
+                "7. Administrar usuarios \n" +
+                "8. Registrar nueva categoría \n" +
+                "9. Cambiar contraseña\n" +
+                "10. Salir\n");
     }
 
     public static void OPCIONES_USER()
@@ -142,11 +144,12 @@ class Decoraciones
         Console.WriteLine("Como usuario estándar, puede realizar las siguientes acciones en el sistema \n" +
             "                       de gestión de biblioteca:\n");
         Console.WriteLine(
-                "[1]  Ver inventario de libros \n" +
-                "[2]  Buscar libro\n" +
-                "[3]  Gestionar préstamos \n" +
-                "[4]  Cambiar contraseña \n" +
-                "[5]  Salir\n");
+                "1. Ver inventario de libros \n" +
+                "2. Buscar libro\n" +
+                "3. Gestionar préstamos \n" +
+                "4. Cambiar contraseña \n" +
+                "5. Salir");
+        Console.WriteLine("");
     }
 
     public static void MOSTRAR_LIBRO(string[] datos)
@@ -169,7 +172,7 @@ class Decoraciones
         Console.WriteLine(("Estado: " + datos[5]).PadRight(60) + " │");
 
         Console.Write("│ ");
-        Decoraciones.TEXTO_GRIS(("Registrado: " + datos[6]).PadRight(60) + " │");
+        Console.WriteLine(("Registrado: " + datos[6]).PadRight(60) + " │");
 
         Console.Write("│ ");
         Console.WriteLine(("Descripción: " + datos[4]).PadRight(60) + " │");
@@ -188,7 +191,7 @@ class Decoraciones
 
     public static void SALIR_AL_PANEL()
     {
-        Console.Write("\nPresione cualquier tecla para regresar...");
+        Console.Write("Presione cualquier tecla para regresar...");
         Console.ReadKey();
     }
 
@@ -205,15 +208,10 @@ class Decoraciones
         Console.WriteLine(mensaje);
         Console.ResetColor();
     }
+
     public static void TEXTO_VERDE(string mensaje)
     {
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine(mensaje);
-        Console.ResetColor();
-    }
-    public static void TEXTO_GRIS(string mensaje)
-    {
-        Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(mensaje);
         Console.ResetColor();
     }
@@ -221,27 +219,17 @@ class Decoraciones
     {
         Decoraciones.ENCABEZADO();
         Decoraciones.TEXTO_CYAN("                              PRESTAR LIBRO\n");
-        Console.WriteLine("Si desea salir, presione 'X'");
-    }
-
-    public static void DEVOLVER_LIBRO()
-    {
-        Decoraciones.ENCABEZADO();
-        Decoraciones.TEXTO_CYAN("                              DEVOLVER LIBRO\n");
-        Console.WriteLine("Si desea salir, presione 'X'");
     }
 
     public static void COLORES_TITULARES(string texto, int ancho)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write(texto.PadRight(ancho));
+        Console.Write(texto.PadRight(ancho) + " | ");
         Console.ResetColor();
-        Console.Write(" | ");
     }
 
     public static void PRESTAMO_PENDIENTE(string mensaje)
     {
-        // Es diferente de TEXTO_ROJO porque texto rojo es Console.WriteLine, mientras que aquí se mantiene como Console.Write ya que falta el último "|" para cerrar la tabla.
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.Write(mensaje);
         Console.ResetColor();
